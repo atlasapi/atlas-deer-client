@@ -2,31 +2,32 @@ package org.atlasapi.deer.client.http;
 
 import java.io.IOException;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpResponse;
+import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonObjectParser;
+import com.google.api.client.json.gson.GsonFactory;
 
 public class AtlasHttpClient {
 
     private final HttpRequestFactory httpRequestFactory;
-    private final ObjectMapper objectMapper;
 
     public AtlasHttpClient() {
-        this(new NetHttpTransport().createRequestFactory());
+        this(new NetHttpTransport());
     }
 
-    AtlasHttpClient(HttpRequestFactory httpRequestFactory) {
-        this.httpRequestFactory = httpRequestFactory;
-        this.objectMapper = new ObjectMapper();
+    AtlasHttpClient(HttpTransport httpTransport) {
+        this.httpRequestFactory = httpTransport.createRequestFactory(
+                request -> request.setParser(new JsonObjectParser(new GsonFactory()))
+        );
     }
 
     public <T> T get(GenericUrl url, Class<T> responseContentClazz) {
         try {
             HttpResponse response = httpRequestFactory.buildGetRequest(url).execute();
-            return objectMapper.readValue(response.getContent(), responseContentClazz);
+            return response.parseAs(responseContentClazz);
         }
         catch (IOException e) {
             throw new RuntimeException("Failed to execute GET request to " + url, e);

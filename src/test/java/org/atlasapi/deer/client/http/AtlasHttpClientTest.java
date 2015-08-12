@@ -5,7 +5,6 @@ import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -15,10 +14,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpResponseException;
 import com.google.api.client.testing.http.MockHttpTransport;
 import com.google.api.client.testing.http.MockLowLevelHttpResponse;
+import com.google.gson.Gson;
 
 public class AtlasHttpClientTest {
 
@@ -57,14 +56,13 @@ public class AtlasHttpClientTest {
         MockLowLevelHttpResponse successfulResponse = new MockLowLevelHttpResponse()
                 .setStatusCode(200)
                 .setContentType("application/json")
-                .setContent(new ObjectMapper().writeValueAsString(expectedResponse));
+                .setContent(new Gson().toJson(expectedResponse));
 
-        HttpRequestFactory successFactory = new MockHttpTransport.Builder()
+        MockHttpTransport successTransport = new MockHttpTransport.Builder()
                 .setLowLevelHttpResponse(successfulResponse)
-                .build()
-                .createRequestFactory();
+                .build();
 
-        return new AtlasHttpClient(successFactory);
+        return new AtlasHttpClient(successTransport);
     }
 
     private AtlasHttpClient getFailureClient() {
@@ -72,12 +70,11 @@ public class AtlasHttpClientTest {
                 .setStatusCode(400)
                 .setZeroContent();
 
-        HttpRequestFactory failureFactory = new MockHttpTransport.Builder()
+        MockHttpTransport failureTransport = new MockHttpTransport.Builder()
                 .setLowLevelHttpResponse(failedResponse)
-                .build()
-                .createRequestFactory();
+                .build();
 
-        return new AtlasHttpClient(failureFactory);
+        return new AtlasHttpClient(failureTransport);
     }
 
     private Matcher<HttpResponseException> matches(int expectedStatusCode) {
