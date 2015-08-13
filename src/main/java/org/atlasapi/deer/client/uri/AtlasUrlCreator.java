@@ -1,5 +1,6 @@
 package org.atlasapi.deer.client.uri;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Map;
@@ -12,13 +13,17 @@ public class AtlasUrlCreator {
 
     public static final String KEY_PARAM = "key";
 
+    private final String schema;
     private final HostSpecifier host;
     private final String apiKey;
 
 
-    public AtlasUrlCreator(HostSpecifier host, String apiKey) {
+    public AtlasUrlCreator(String schema, HostSpecifier host, String apiKey) {
+        this.schema = checkNotNull(schema);
         this.host = checkNotNull(host);
         this.apiKey = checkNotNull(apiKey);
+
+        checkArgument(this.schema.equals("http") || this.schema.equals("https"));
     }
 
     public PathStep getBuilder() {
@@ -41,7 +46,7 @@ public class AtlasUrlCreator {
 
         private Builder() {
             url = new GenericUrl();
-            url.setScheme("https");
+            url.setScheme(schema);
             url.setHost(host.toString());
             url.set(KEY_PARAM, apiKey);
         }

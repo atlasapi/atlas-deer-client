@@ -15,8 +15,11 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
     private final AtlasHttpClient httpClient;
     private final AtlasUrlCreator urlCreator;
 
-    public AtlasClient(HostSpecifier host, String apiKey) {
-        this(new AtlasHttpClient(), new AtlasUrlCreator(checkNotNull(host), checkNotNull(apiKey)));
+    public AtlasClient(String schema, HostSpecifier host, String apiKey) {
+        this(
+                new AtlasHttpClient(),
+                new AtlasUrlCreator(checkNotNull(schema), checkNotNull(host), checkNotNull(apiKey))
+        );
     }
 
     AtlasClient(AtlasHttpClient httpClient, AtlasUrlCreator urlCreator) {

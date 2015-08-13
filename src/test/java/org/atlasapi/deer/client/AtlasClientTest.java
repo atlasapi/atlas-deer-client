@@ -41,7 +41,7 @@ public class AtlasClientTest {
     public void setUp() throws Exception {
         String host = "stage.atlas.metabroadcast.com";
         String apikey = "apikey";
-        urlCreator = new AtlasUrlCreator(HostSpecifier.fromValid(host), apikey);
+        urlCreator = new AtlasUrlCreator("https", HostSpecifier.fromValid(host), apikey);
 
         atlasClient = new AtlasClient(atlasHttpClient, urlCreator);
     }

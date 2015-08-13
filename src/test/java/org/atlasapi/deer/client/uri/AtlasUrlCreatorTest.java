@@ -14,15 +14,17 @@ public class AtlasUrlCreatorTest {
 
     private AtlasUrlCreator urlCreator;
 
+    private String schema;
     private String host;
     private String apiKey;
 
     @Before
     public void setUp() throws Exception {
+        schema = "http";
         host = "stage.atlas.metabroadcast.com";
         apiKey = "key";
         urlCreator = new AtlasUrlCreator(
-                HostSpecifier.fromValid(host), apiKey
+                schema, HostSpecifier.fromValid(host), apiKey
         );
     }
 
@@ -34,7 +36,7 @@ public class AtlasUrlCreatorTest {
 
         assertThat(
                 url.build(),
-                is("https://" + host + "/4/content/contentId.json?key=" + apiKey)
+                is(schema + "://" + host + "/4/content/contentId.json?key=" + apiKey)
         );
     }
 
@@ -46,7 +48,7 @@ public class AtlasUrlCreatorTest {
 
         assertThat(
                 url.build(),
-                is("https://" + host + "/4/content.json?key=" + apiKey)
+                is(schema + "://" + host + "/4/content.json?key=" + apiKey)
         );
     }
 
@@ -59,7 +61,7 @@ public class AtlasUrlCreatorTest {
 
         assertThat(
                 url.build(),
-                is("https://" + host + "/4/content.json?key=" + apiKey +
+                is(schema + "://" + host + "/4/content.json?key=" + apiKey +
                         "&keyA=valueA&keyB=valueB")
         );
 
