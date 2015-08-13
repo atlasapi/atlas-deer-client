@@ -1,7 +1,8 @@
 package org.atlasapi.deer.client.uri;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.Map;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.common.collect.Lists;
@@ -10,18 +11,14 @@ import com.google.common.net.HostSpecifier;
 public class AtlasUrlCreator {
 
     public static final String KEY_PARAM = "key";
-    public static final String ID_PARAM = "id";
-    public static final String ANNOTATIONS_PARAM = "annotations";
-    public static final String ALIASES_NAMESPACE_PARAM = "aliases.namespace";
-    public static final String ALIASES_VALUE_PARAM = "aliases.value";
 
     private final HostSpecifier host;
     private final String apiKey;
 
 
     public AtlasUrlCreator(HostSpecifier host, String apiKey) {
-        this.host = host;
-        this.apiKey = apiKey;
+        this.host = checkNotNull(host);
+        this.apiKey = checkNotNull(apiKey);
     }
 
     public PathStep getBuilder() {
@@ -34,9 +31,7 @@ public class AtlasUrlCreator {
     }
 
     public interface FinalStep {
-        FinalStep addIds(String... ids);
-        FinalStep addAnnotations(Annotation... annotations);
-        FinalStep addAlias(String namespace, String value);
+        FinalStep addParams(Map<String, String> params);
         GenericUrl build();
     }
 
@@ -59,29 +54,17 @@ public class AtlasUrlCreator {
 
         @Override
         public FinalStep content(String contentId) {
-            url.setPathParts(Lists.newArrayList("", "4", "content", contentId + ".json"));
+            url.setPathParts(Lists.newArrayList(
+                    "", "4", "content", checkNotNull(contentId) + ".json"
+            ));
             return this;
         }
 
         @Override
-        public FinalStep addIds(String... ids) {
-            url.set(ID_PARAM, String.join(",", ids));
-            return this;
-        }
-
-        @Override
-        public FinalStep addAnnotations(Annotation... annotations) {
-            String joinedAnnotations = Arrays.stream(annotations)
-                    .map(Annotation::toKey)
-                    .collect(Collectors.joining(","));
-            url.set(ANNOTATIONS_PARAM, joinedAnnotations);
-            return this;
-        }
-
-        @Override
-        public FinalStep addAlias(String namespace, String value) {
-            url.set(ALIASES_NAMESPACE_PARAM, namespace);
-            url.set(ALIASES_VALUE_PARAM, value);
+        public FinalStep addParams(Map<String, String> params) {
+            for (Map.Entry<String, String> entry : checkNotNull(params).entrySet()) {
+                url.set(checkNotNull(entry.getKey()), entry.getValue());
+            }
             return this;
         }
 

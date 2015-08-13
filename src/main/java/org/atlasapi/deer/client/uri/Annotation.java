@@ -8,11 +8,16 @@ import com.google.common.collect.HashBiMap;
 
 public enum Annotation {
     DESCRIPTION,
+    EXTENDED_DESCRIPTION,
     BROADCASTS,
     CHANNEL,
+    CHANNELS,
+    CHANNEL_SUMMARY,
     PUBLISHER,
     SUB_ITEMS,
-    AUDIT
+    AUDIT,
+    BRAND_REFERENCE,
+    BRAND_SUMMARY
     ;
 
     private static final BiMap<String, Annotation> LOOKUP =
