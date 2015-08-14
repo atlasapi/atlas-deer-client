@@ -4,7 +4,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.atlasapi.deer.client.http.AtlasHttpClient;
 import org.atlasapi.deer.client.model.ContentResponse;
+import org.atlasapi.deer.client.model.ScheduleResponse;
 import org.atlasapi.deer.client.query.ContentQuery;
+import org.atlasapi.deer.client.query.Query;
+import org.atlasapi.deer.client.query.ScheduleQuery;
 import org.atlasapi.deer.client.uri.AtlasUrlCreator;
 
 import com.google.api.client.http.GenericUrl;
@@ -28,6 +31,16 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
     }
 
     public ContentResponse getContent(ContentQuery query) {
+        GenericUrl url = getUrl(query);
+        return httpClient.get(url, ContentResponse.class);
+    }
+
+    public ScheduleResponse getSchedule(ScheduleQuery query) {
+        GenericUrl url = getUrl(query);
+        return httpClient.get(url, ScheduleResponse.class);
+    }
+
+    private GenericUrl getUrl(Query query) {
         GenericUrl url;
         if(query.getId().isPresent()) {
             url = urlCreator.getBuilder()
@@ -41,7 +54,7 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
                     .addParams(query.getParams())
                     .build();
         }
-
-        return httpClient.get(url, ContentResponse.class);
+        return url;
     }
+
 }
