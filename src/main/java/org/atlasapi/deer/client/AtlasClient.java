@@ -30,11 +30,13 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
         this.urlCreator = urlCreator;
     }
 
+    @Override
     public ContentResponse getContent(ContentQuery query) {
         GenericUrl url = getUrl(query);
         return httpClient.get(url, ContentResponse.class);
     }
 
+    @Override
     public ScheduleResponse getSchedule(ScheduleQuery query) {
         GenericUrl url = getUrl(query);
         return httpClient.get(url, ScheduleResponse.class);

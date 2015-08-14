@@ -13,12 +13,20 @@ public class ScheduleQuery extends Query {
     public static final String FROM_PARAM = "from";
     public static final String TO_PARAM = "to";
 
+    public ScheduleQuery() {
+        super();
+    }
+
     public ScheduleQuery(String id) {
         super(id);
     }
 
     public ScheduleQuery(String... ids) {
         super(ids);
+    }
+
+    public static ScheduleQuery get() {
+        return new ScheduleQuery();
     }
 
     public static ScheduleQuery get(String id) {

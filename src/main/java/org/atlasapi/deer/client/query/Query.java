@@ -15,6 +15,11 @@ public abstract class Query {
     protected final Optional<String> id;
     protected final Map<String, String> params;
 
+    public Query() {
+        this.id = Optional.empty();
+        this.params = new HashMap<>();
+    }
+
     public Query(String id) {
         this.id = Optional.of(checkNotNull(id));
         this.params = new HashMap<>();

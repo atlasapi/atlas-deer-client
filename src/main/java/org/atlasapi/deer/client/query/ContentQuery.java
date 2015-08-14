@@ -14,6 +14,10 @@ public class ContentQuery extends Query {
     public static final String LIMIT_PARAM = "limit";
     public static final String OFFSET_PARAM = "offset";
     public static final String TYPE_PARAM = "type";
+
+    private ContentQuery() {
+        super();
+    }
     
     private ContentQuery(String id) {
         super(id);
@@ -21,6 +25,10 @@ public class ContentQuery extends Query {
     
     private ContentQuery(String... ids) {
         super(ids);
+    }
+
+    public static ContentQuery get() {
+        return new ContentQuery();
     }
 
     public static ContentQuery get(String id) {
