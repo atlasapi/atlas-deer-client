@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.api.client.util.Key;
 
-public class Episode {
+public class Content {
 
     @Key
     private String id;

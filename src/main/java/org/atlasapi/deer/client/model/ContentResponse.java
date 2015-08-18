@@ -1,6 +1,8 @@
 package org.atlasapi.deer.client.model;
 
-import org.atlasapi.deer.client.model.types.Episode;
+import java.util.List;
+
+import org.atlasapi.deer.client.model.types.Content;
 import org.atlasapi.deer.client.model.types.Request;
 import org.atlasapi.deer.client.model.types.TermsAndConditions;
 
@@ -9,7 +11,7 @@ import com.google.api.client.util.Key;
 public class ContentResponse {
 
     @Key
-    private Episode episode;
+    private List<Content> content;
 
     @Key("terms_and_conditions")
     private TermsAndConditions termsAndConditions;
@@ -20,8 +22,8 @@ public class ContentResponse {
     @Key
     private Request request;
 
-    public Episode getEpisode() {
-        return episode;
+    public List<Content> getContent() {
+        return content;
     }
 
     public TermsAndConditions getTermsAndConditions() {
