@@ -1,4 +1,4 @@
-# README #
+# Atlas Deer Client #
 
 This is the Atlas Deer Client Java SDK for making requests to atlas.metabroadcast.com
 
