@@ -90,8 +90,8 @@
     </dependencies>
 
     <scm>
-        <connection></connection>
-        <developerConnection></developerConnection>
+        <connection>git@bitbucket.org:mbst/atlas-deer-client.git</connection>
+        <developerConnection>git@bitbucket.org:mbst/atlas-deer-client.git</developerConnection>
     </scm>
 
     <distributionManagement>
