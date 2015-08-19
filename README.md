@@ -18,6 +18,7 @@ In order to use this add the following to your maven dependencies:
 ### What has been done? ###
 
 Warning: This version of the client is WIP.
+
 It does not support all endpoints and HTTP verbs and it is not guaranteed to work correctly for all applications.
 
 The following endpoints have been implemented:
