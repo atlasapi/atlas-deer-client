@@ -1,6 +1,6 @@
 # README #
 
-This is the Atlas Deer Client
+This is the Atlas Deer Client Java SDK for making requests to atlas.metabroadcast.com
 
 ### How do I get set up? ###
 
@@ -15,7 +15,6 @@ In order to use this add the following to your maven dependencies:
 
 ```
 
-
 ### What has been done? ###
 
 Warning: This version of the client is WIP. It does not support all endpoints and HTTP verbs and it is not guaranteed to work correctly for all applications.
@@ -23,3 +22,22 @@ Warning: This version of the client is WIP. It does not support all endpoints an
 The following endpoints have been implemented:
 
 * /content.json
+
+
+### Example Usage ###
+
+
+```
+#!java
+
+AtlasReadClient client = new AtlasClient(
+        "https", HostSpecifier.fromValid("atlas.metabroadcast.com"), "api-key"
+);
+
+ContentQuery query = ContentQuery.get()
+        .addAnnotations(Annotation.DESCRIPTION)
+        .addSource("source")
+        .addLimit(10);
+
+ContentResponse contentResponse = client.getContent(query);
+```
