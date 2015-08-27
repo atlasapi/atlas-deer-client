@@ -81,6 +81,9 @@ public class Content {
     @Key
     private Series series;
 
+    @Key
+    private List<Broadcast> broadcasts;
+
     public String getId() {
         return id;
     }
@@ -179,5 +182,9 @@ public class Content {
 
     public Series getSeries() {
         return series;
+    }
+
+    public List<Broadcast> getBroadcasts() {
+        return broadcasts;
     }
 }
