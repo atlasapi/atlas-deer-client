@@ -4,6 +4,8 @@ This is the Atlas Deer Client Java SDK for making requests to atlas.metabroadcas
 
 ### How do I get set up? ###
 
+This is current WIP and has not yet been deployed to the Maven repos. When it is you will be able to import it as follows.
+
 In order to use this add the following to your maven dependencies:
 
 ```
