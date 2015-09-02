@@ -11,6 +11,7 @@ import org.atlasapi.deer.client.query.ScheduleQuery;
 import org.atlasapi.deer.client.uri.AtlasUrlCreator;
 
 import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpTransport;
 import com.google.common.net.HostSpecifier;
 
 public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
@@ -18,9 +19,10 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
     private final AtlasHttpClient httpClient;
     private final AtlasUrlCreator urlCreator;
 
-    public AtlasClient(String schema, HostSpecifier host, String apiKey) {
+    public AtlasClient(HttpTransport httpTransport, String schema, HostSpecifier host,
+            String apiKey) {
         this(
-                new AtlasHttpClient(),
+                new AtlasHttpClient(checkNotNull(httpTransport)),
                 new AtlasUrlCreator(checkNotNull(schema), checkNotNull(host), checkNotNull(apiKey))
         );
     }

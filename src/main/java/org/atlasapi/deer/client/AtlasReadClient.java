@@ -5,6 +5,9 @@ import org.atlasapi.deer.client.model.ScheduleResponse;
 import org.atlasapi.deer.client.query.ContentQuery;
 import org.atlasapi.deer.client.query.ScheduleQuery;
 
+import com.google.common.annotations.Beta;
+
+@Beta
 public interface AtlasReadClient {
 
     ContentResponse getContent(ContentQuery query);

@@ -6,7 +6,6 @@ import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.json.gson.GsonFactory;
 
@@ -14,11 +13,7 @@ public class AtlasHttpClient {
 
     private final HttpRequestFactory httpRequestFactory;
 
-    public AtlasHttpClient() {
-        this(new NetHttpTransport());
-    }
-
-    AtlasHttpClient(HttpTransport httpTransport) {
+    public AtlasHttpClient(HttpTransport httpTransport) {
         this.httpRequestFactory = httpTransport.createRequestFactory(
                 request -> request.setParser(new JsonObjectParser(new GsonFactory()))
         );
