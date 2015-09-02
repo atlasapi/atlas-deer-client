@@ -4,8 +4,6 @@ This is the Atlas Deer Client Java SDK for making requests to atlas.metabroadcas
 
 ### How do I get set up? ###
 
-This is current WIP and has not yet been deployed to the Maven repos. When it is you will be able to import it as follows.
-
 In order to use this add the following to your maven dependencies:
 
 ```
@@ -14,6 +12,21 @@ In order to use this add the following to your maven dependencies:
     <artifactId>atlas-deer-client</artifactId>
     <version>${atlas-deer-client.version}</version>
 </dependency>
+
+<repositories>
+    <repository>
+        <id>metabroadcast-mvn</id>
+        <name>Metabroadcast</name>
+        <url>http://mvn.metabroadcast.com/all</url>
+        <layout>default</layout>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+    </repository>
+</repositories>
 
 ```
 
