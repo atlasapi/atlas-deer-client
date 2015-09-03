@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpResponseException;
 import com.google.api.client.testing.http.MockHttpTransport;
 import com.google.api.client.testing.http.MockLowLevelHttpResponse;
@@ -52,11 +53,25 @@ public class AtlasHttpClientTest {
         failureClient.get(url, String.class);
     }
 
+    @Test
+    public void testSuccessfulHead() throws Exception {
+        HttpHeaders headers = successClient.head(url);
+
+        assertThat(headers.getETag(), is("tag-id"));
+    }
+
+    @Test
+    public void testFailedHeadThrowsException() throws Exception {
+        exception.expectCause(matches(400));
+        failureClient.head(url);
+    }
+
     private AtlasHttpClient getSuccessClient() throws IOException {
         MockLowLevelHttpResponse successfulResponse = new MockLowLevelHttpResponse()
                 .setStatusCode(200)
                 .setContentType("application/json")
-                .setContent(new Gson().toJson(expectedResponse));
+                .setContent(new Gson().toJson(expectedResponse))
+                .addHeader("ETag", "tag-id");
 
         MockHttpTransport successTransport = new MockHttpTransport.Builder()
                 .setLowLevelHttpResponse(successfulResponse)

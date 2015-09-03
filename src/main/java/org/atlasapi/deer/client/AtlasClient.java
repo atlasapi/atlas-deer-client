@@ -11,6 +11,7 @@ import org.atlasapi.deer.client.query.ScheduleQuery;
 import org.atlasapi.deer.client.uri.AtlasUrlCreator;
 
 import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpTransport;
 import com.google.common.net.HostSpecifier;
 
@@ -36,6 +37,12 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
     public ContentResponse getContent(ContentQuery query) {
         GenericUrl url = getUrl(query);
         return httpClient.get(url, ContentResponse.class);
+    }
+
+    @Override
+    public HttpHeaders headContent(ContentQuery query) {
+        GenericUrl url = getUrl(query);
+        return httpClient.head(url);
     }
 
     @Override
