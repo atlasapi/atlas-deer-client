@@ -7,6 +7,10 @@ public class Container {
     @Key
     private String id;
 
+    public Container(String id) {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }

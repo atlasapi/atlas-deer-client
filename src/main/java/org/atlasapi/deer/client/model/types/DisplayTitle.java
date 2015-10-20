@@ -10,6 +10,11 @@ public class DisplayTitle {
     @Key
     private String subtitle;
 
+    public DisplayTitle(String title, String subtitle) {
+        this.title = title;
+        this.subtitle = subtitle;
+    }
+
     public String getTitle() {
         return title;
     }

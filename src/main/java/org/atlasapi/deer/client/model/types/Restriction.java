@@ -16,6 +16,13 @@ public class Restriction {
     @Key
     private String message;
 
+    public Restriction(String authority, String rating, String minimumAge, String message) {
+        this.authority = authority;
+        this.rating = rating;
+        this.minimumAge = minimumAge;
+        this.message = message;
+    }
+
     public String getAuthority() {
         return authority;
     }

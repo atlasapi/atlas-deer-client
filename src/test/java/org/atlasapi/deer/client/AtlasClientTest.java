@@ -51,7 +51,7 @@ public class AtlasClientTest {
         ContentQuery query = ContentQuery.get("id")
                 .addType("item");
 
-        ContentResponse expectedResponse = new ContentResponse();
+        ContentResponse expectedResponse = ContentResponse.builder().build();
         when(atlasHttpClient.get(any(GenericUrl.class), eq(ContentResponse.class)))
                 .thenReturn(expectedResponse);
 
@@ -75,7 +75,7 @@ public class AtlasClientTest {
         ContentQuery query = ContentQuery.get("idA", "idB")
                 .addType("item");
 
-        ContentResponse expectedResponse = new ContentResponse();
+        ContentResponse expectedResponse = ContentResponse.builder().build();
         when(atlasHttpClient.get(any(GenericUrl.class), eq(ContentResponse.class)))
                 .thenReturn(expectedResponse);
 
