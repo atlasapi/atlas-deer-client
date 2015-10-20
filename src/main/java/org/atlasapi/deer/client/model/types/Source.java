@@ -13,6 +13,12 @@ public class Source {
     @Key
     private String country;
 
+    public Source(String key, String name, String country) {
+        this.key = key;
+        this.name = name;
+        this.country = country;
+    }
+
     public String getKey() {
         return key;
     }

@@ -12,6 +12,11 @@ public class Request {
     @Key
     private Map<String, String> parameters;
 
+    public Request(String path, Map<String, String> parameters) {
+        this.path = path;
+        this.parameters = parameters;
+    }
+
     public String getPath() {
         return path;
     }

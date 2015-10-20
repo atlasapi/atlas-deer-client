@@ -7,6 +7,10 @@ public class TermsAndConditions {
     @Key
     private String text;
 
+    public TermsAndConditions(String text) {
+        this.text = text;
+    }
+
     public String getText() {
         return text;
     }

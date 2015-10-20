@@ -16,6 +16,16 @@ public class ScheduleResponse {
     @Key
     private Request request;
 
+    public ScheduleResponse(
+            TermsAndConditions termsAndConditions,
+            Integer results,
+            Request request
+    ) {
+        this.termsAndConditions = termsAndConditions;
+        this.results = results;
+        this.request = request;
+    }
+
     public TermsAndConditions getTermsAndConditions() {
         return termsAndConditions;
     }
