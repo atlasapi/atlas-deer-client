@@ -16,6 +16,7 @@
         <guava.version>18.0</guava.version>
         <gson.version>2.3.1</gson.version>
         <google-http-client.version>1.20.0</google-http-client.version>
+        <common.version>1.0-SNAPSHOT</common.version>
 
         <!-- Testing Dependencies -->
         <mockito-core.version>1.9.5</mockito-core.version>
@@ -111,6 +112,11 @@
             <groupId>com.google.http-client</groupId>
             <artifactId>google-http-client-gson</artifactId>
             <version>${google-http-client.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.metabroadcast.common</groupId>
+            <artifactId>common</artifactId>
+            <version>${common.version}</version>
         </dependency>
 
         <!-- Testing Dependencies -->
