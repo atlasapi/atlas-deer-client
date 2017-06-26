@@ -1,16 +1,20 @@
 package org.atlasapi.deer.client.model.types;
 
-import com.google.api.client.util.Key;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Container {
 
-    @Key
-    private String id;
+    private final String id;
 
-    public Container(String id) {
+    @JsonCreator
+    public Container(
+            @JsonProperty("id") String id
+    ) {
         this.id = id;
     }
 
+    @JsonProperty
     public String getId() {
         return id;
     }

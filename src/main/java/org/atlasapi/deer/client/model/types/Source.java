@@ -1,32 +1,40 @@
 package org.atlasapi.deer.client.model.types;
 
-import com.google.api.client.util.Key;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Source {
 
-    @Key
-    private String key;
+    private final String key;
 
-    @Key
-    private String name;
+    private final String name;
 
-    @Key
-    private String country;
+    private final String country;
 
-    public Source(String key, String name, String country) {
+    @JsonCreator
+    public Source(
+            @JsonProperty("key") String key,
+            @JsonProperty("name") String name,
+            @JsonProperty("country") String country
+    ) {
         this.key = key;
         this.name = name;
         this.country = country;
     }
 
+    @JsonProperty
     public String getKey() {
         return key;
     }
 
+    @JsonProperty
     public String getName() {
         return name;
     }
 
+    @JsonProperty
     public String getCountry() {
         return country;
     }

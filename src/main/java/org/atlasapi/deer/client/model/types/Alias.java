@@ -1,26 +1,34 @@
 package org.atlasapi.deer.client.model.types;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.api.client.util.Key;
 
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Alias {
 
-    @Key
-    private String namespace;
+    private final String namespace;
 
-    @Key
-    private String value;
+    private final String value;
 
-    public Alias(String namespace, String value) {
+    @JsonCreator
+    public Alias(
+            @JsonProperty("namespace") String namespace,
+            @JsonProperty("value") String value
+    ) {
         this.namespace = namespace;
         this.value = value;
     }
 
+    @JsonProperty
     public String getNamespace() {
         return namespace;
     }
 
+    @JsonProperty
     public String getValue() {
         return value;
     }

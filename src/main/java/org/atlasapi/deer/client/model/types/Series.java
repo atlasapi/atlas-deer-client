@@ -1,17 +1,24 @@
 package org.atlasapi.deer.client.model.types;
 
-import com.google.api.client.util.Key;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Series {
 
-    @Key
-    private String id;
+    private final String id;
 
-    public Series(String id) {
+    @JsonCreator
+    public Series(
+            @JsonProperty("id") String id
+    ) {
         this.id = id;
     }
 
+    @JsonProperty
     public String getId() {
         return id;
     }
+
 }

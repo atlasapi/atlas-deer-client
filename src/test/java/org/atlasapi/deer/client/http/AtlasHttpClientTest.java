@@ -5,6 +5,7 @@ import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -18,12 +19,13 @@ import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpResponseException;
 import com.google.api.client.testing.http.MockHttpTransport;
 import com.google.api.client.testing.http.MockLowLevelHttpResponse;
-import com.google.gson.Gson;
 
 public class AtlasHttpClientTest {
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
+
+    private ObjectMapper mapper;
 
     private AtlasHttpClient successClient;
     private AtlasHttpClient failureClient;
@@ -33,6 +35,8 @@ public class AtlasHttpClientTest {
 
     @Before
     public void setUp() throws Exception {
+        mapper = new ObjectMapper();
+
         url = new GenericUrl("http://fake.metabroadcast.com");
         expectedResponse = "content";
 
@@ -70,14 +74,14 @@ public class AtlasHttpClientTest {
         MockLowLevelHttpResponse successfulResponse = new MockLowLevelHttpResponse()
                 .setStatusCode(200)
                 .setContentType("application/json")
-                .setContent(new Gson().toJson(expectedResponse))
+                .setContent(mapper.writeValueAsString(expectedResponse))
                 .addHeader("ETag", "tag-id");
 
         MockHttpTransport successTransport = new MockHttpTransport.Builder()
                 .setLowLevelHttpResponse(successfulResponse)
                 .build();
 
-        return new AtlasHttpClient(successTransport);
+        return new AtlasHttpClient(successTransport, new ObjectMapper());
     }
 
     private AtlasHttpClient getFailureClient() {
@@ -89,7 +93,7 @@ public class AtlasHttpClientTest {
                 .setLowLevelHttpResponse(failedResponse)
                 .build();
 
-        return new AtlasHttpClient(failureTransport);
+        return new AtlasHttpClient(failureTransport, new ObjectMapper());
     }
 
     private Matcher<HttpResponseException> matches(int expectedStatusCode) {

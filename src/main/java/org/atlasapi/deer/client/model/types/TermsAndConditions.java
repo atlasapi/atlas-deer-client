@@ -1,13 +1,19 @@
 package org.atlasapi.deer.client.model.types;
 
-import com.google.api.client.util.Key;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TermsAndConditions {
 
-    @Key
-    private String text;
+    @JsonProperty
+    private final String text;
 
-    public TermsAndConditions(String text) {
+    @JsonCreator
+    public TermsAndConditions(
+            @JsonProperty("text") String text
+    ) {
         this.text = text;
     }
 
