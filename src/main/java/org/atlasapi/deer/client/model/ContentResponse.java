@@ -83,12 +83,6 @@ public class ContentResponse {
             return this;
         }
 
-        @JsonProperty
-        public Builder item(Content val) {
-            content = ImmutableList.of(val);
-            return this;
-        }
-
         @JsonProperty("terms_and_conditions")
         public Builder termsAndConditions(TermsAndConditions val) {
             termsAndConditions = val;

@@ -36,6 +36,7 @@ public class AtlasUrlCreator {
     }
 
     public interface FinalStep {
+        FinalStep addParam(String key, String value);
         FinalStep addParams(Map<String, String> params);
         GenericUrl build();
     }
@@ -62,16 +63,19 @@ public class AtlasUrlCreator {
 
         @Override
         public FinalStep content(String contentId) {
-            url.setPathParts(Lists.newArrayList(
-                    "", "4", "content", checkNotNull(contentId) + ".json"
-            ));
+            return content().addParam("id", contentId);
+        }
+
+        @Override
+        public FinalStep addParam(String key, String value) {
+            url.set(checkNotNull(key), value);
             return this;
         }
 
         @Override
         public FinalStep addParams(Map<String, String> params) {
             for (Map.Entry<String, String> entry : checkNotNull(params).entrySet()) {
-                url.set(checkNotNull(entry.getKey()), entry.getValue());
+                addParam(entry.getKey(), entry.getValue());
             }
             return this;
         }
