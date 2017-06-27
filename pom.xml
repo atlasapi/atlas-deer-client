@@ -168,8 +168,8 @@
   </dependencies>
 
   <scm>
-    <connection>git@bitbucket.org:mbst/atlas-deer-client.git</connection>
-    <developerConnection>git@bitbucket.org:mbst/atlas-deer-client.git</developerConnection>
+    <connection>git@github.com:atlasapi/atlas-deer-client.git</connection>
+    <developerConnection>git@github.com:atlasapi/atlas-deer-client.git</developerConnection>
   </scm>
 
   <distributionManagement>

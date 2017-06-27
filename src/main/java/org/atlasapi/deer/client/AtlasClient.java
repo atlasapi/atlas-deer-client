@@ -21,19 +21,7 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
     private final AtlasHttpClient httpClient;
     private final AtlasUrlCreator urlCreator;
 
-    public AtlasClient(
-            HttpTransport httpTransport,
-            String schema,
-            HostAndPort host,
-            String apiKey,
-            ObjectMapper objectMapper
-    ) {
-        this(
-                new AtlasHttpClient(checkNotNull(httpTransport), checkNotNull(objectMapper)),
-                new AtlasUrlCreator(checkNotNull(schema), checkNotNull(host), checkNotNull(apiKey))
-        );
-    }
-
+    /* Package-private for tests */
     AtlasClient(AtlasHttpClient httpClient, AtlasUrlCreator urlCreator) {
         this.httpClient = httpClient;
         this.urlCreator = urlCreator;
@@ -72,6 +60,53 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
                     .build();
         }
         return url;
+    }
+
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private HttpTransport httpTransport;
+        private String scheme;
+        private HostAndPort host;
+        private String apiKey;
+        private ObjectMapper objectMapper;
+
+        public Builder() { }
+
+        public Builder withHttpTransport(HttpTransport httpTransport) {
+            this.httpTransport = httpTransport;
+            return this;
+        }
+
+        public Builder withScheme(String scheme) {
+            this.scheme = scheme;
+            return this;
+        }
+
+        public Builder withHost(HostAndPort host) {
+            this.host = host;
+            return this;
+        }
+
+        public Builder withApiKey(String apiKey) {
+            this.apiKey = apiKey;
+            return this;
+        }
+
+        public Builder withObjectMapper(ObjectMapper objectMapper) {
+            this.objectMapper = objectMapper;
+            return this;
+        }
+
+        public AtlasClient build() {
+            return new AtlasClient(
+                new AtlasHttpClient(checkNotNull(httpTransport), checkNotNull(objectMapper)),
+                new AtlasUrlCreator(checkNotNull(scheme), checkNotNull(host), checkNotNull(apiKey))
+            );
+        }
     }
 
 }
