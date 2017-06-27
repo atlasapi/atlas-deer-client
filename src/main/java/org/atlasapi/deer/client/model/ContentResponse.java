@@ -42,7 +42,7 @@ public class ContentResponse {
         return content;
     }
 
-    @JsonIgnore   // TODO
+    @JsonIgnore
     public Content getItem() {
         return Iterables.getFirst(content, null);
     }
