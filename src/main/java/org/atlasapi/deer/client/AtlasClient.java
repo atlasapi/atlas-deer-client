@@ -2,6 +2,8 @@ package org.atlasapi.deer.client;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.net.HostAndPort;
 import org.atlasapi.deer.client.http.AtlasHttpClient;
 import org.atlasapi.deer.client.model.ContentResponse;
 import org.atlasapi.deer.client.model.ScheduleResponse;
@@ -13,21 +15,13 @@ import org.atlasapi.deer.client.uri.AtlasUrlCreator;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpTransport;
-import com.google.common.net.HostSpecifier;
 
 public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
 
     private final AtlasHttpClient httpClient;
     private final AtlasUrlCreator urlCreator;
 
-    public AtlasClient(HttpTransport httpTransport, String schema, HostSpecifier host,
-            String apiKey) {
-        this(
-                new AtlasHttpClient(checkNotNull(httpTransport)),
-                new AtlasUrlCreator(checkNotNull(schema), checkNotNull(host), checkNotNull(apiKey))
-        );
-    }
-
+    /* Package-private for tests */
     AtlasClient(AtlasHttpClient httpClient, AtlasUrlCreator urlCreator) {
         this.httpClient = httpClient;
         this.urlCreator = urlCreator;
@@ -66,6 +60,53 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
                     .build();
         }
         return url;
+    }
+
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private HttpTransport httpTransport;
+        private String scheme;
+        private HostAndPort host;
+        private String apiKey;
+        private ObjectMapper objectMapper;
+
+        public Builder() { }
+
+        public Builder withHttpTransport(HttpTransport httpTransport) {
+            this.httpTransport = httpTransport;
+            return this;
+        }
+
+        public Builder withScheme(String scheme) {
+            this.scheme = scheme;
+            return this;
+        }
+
+        public Builder withHost(HostAndPort host) {
+            this.host = host;
+            return this;
+        }
+
+        public Builder withApiKey(String apiKey) {
+            this.apiKey = apiKey;
+            return this;
+        }
+
+        public Builder withObjectMapper(ObjectMapper objectMapper) {
+            this.objectMapper = objectMapper;
+            return this;
+        }
+
+        public AtlasClient build() {
+            return new AtlasClient(
+                new AtlasHttpClient(checkNotNull(httpTransport), checkNotNull(objectMapper)),
+                new AtlasUrlCreator(checkNotNull(scheme), checkNotNull(host), checkNotNull(apiKey))
+            );
+        }
     }
 
 }

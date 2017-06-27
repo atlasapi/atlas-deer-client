@@ -2,88 +2,68 @@ package org.atlasapi.deer.client.model.types;
 
 import java.util.List;
 
-import com.google.api.client.util.Key;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.common.collect.ImmutableList;
+import org.atlasapi.deer.client.model.Utils;
 
-
+@JsonDeserialize(builder = Content.Builder.class)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Content {
 
-    @Key
-    private String id;
+    private final String id;
 
-    @Key
-    private String type;
+    private final String type;
 
-    @Key
-    private List<Alias> aliases;
+    private final List<Alias> aliases;
 
-    @Key("display_title")
-    private DisplayTitle displayTitle;
+    private final DisplayTitle displayTitle;
 
-    @Key("episode_number")
-    private Integer episodeNumber;
+    private final Integer episodeNumber;
 
-    @Key("series_number")
-    private Integer seriesNumber;
+    private final Integer seriesNumber;
 
-    @Key("media_type")
-    private String mediaType;
+    private final String mediaType;
 
-    @Key
-    private String specialization;
+    private final String specialization;
 
-    @Key
-    private Source source;
+    private final Source source;
 
-    @Key
-    private String title;
+    private final String title;
 
-    @Key
-    private String description;
+    private final String description;
 
-    @Key
-    private String image;
+    private final String image;
 
-    @Key
-    private String thumbnail;
+    private final String thumbnail;
 
-    @Key
-    private List<String> genres;
+    private final List<String> genres;
 
-    @Key("presentation_channel")
-    private String presentationChannel;
+    private final String presentationChannel;
 
-    @Key
-    private String priority;
+    private final String priority;
 
-    @Key("long_description")
-    private String longDescription;
+    private final String longDescription;
 
-    @Key("black_and_white")
-    private Boolean blackAndWhite;
+    private final Boolean blackAndWhite;
 
-    @Key("countries_of_origin")
-    private List<String> countriesOfOrigin;
+    private final List<String> countriesOfOrigin;
 
-    @Key("schedule_only")
-    private Boolean scheduleOnly;
+    private final Boolean scheduleOnly;
 
-    @Key
-    private List<Restriction> restrictions;
+    private final List<Restriction> restrictions;
 
-    @Key
-    private List<String> certificates;
+    private final List<String> certificates;
 
-    @Key
-    private List<String> languages;
+    private final List<String> languages;
 
-    @Key
-    private Container container;
+    private final Container container;
 
-    @Key
-    private Series series;
+    private final Series series;
 
-    @Key
-    private List<Broadcast> broadcasts;
+    private final List<Broadcast> broadcasts;
 
     private Content(
             String id,
@@ -115,7 +95,7 @@ public class Content {
     ) {
         this.id = id;
         this.type = type;
-        this.aliases = aliases;
+        this.aliases = Utils.immutableCopyOfOrEmpty(aliases);
         this.displayTitle = displayTitle;
         this.episodeNumber = episodeNumber;
         this.seriesNumber = seriesNumber;
@@ -126,129 +106,158 @@ public class Content {
         this.description = description;
         this.image = image;
         this.thumbnail = thumbnail;
-        this.genres = genres;
+        this.genres = Utils.immutableCopyOfOrEmpty(genres);
         this.presentationChannel = presentationChannel;
         this.priority = priority;
         this.longDescription = longDescription;
         this.blackAndWhite = blackAndWhite;
-        this.countriesOfOrigin = countriesOfOrigin;
+        this.countriesOfOrigin = Utils.immutableCopyOfOrEmpty(countriesOfOrigin);
         this.scheduleOnly = scheduleOnly;
-        this.restrictions = restrictions;
-        this.certificates = certificates;
-        this.languages = languages;
+        this.restrictions = Utils.immutableCopyOfOrEmpty(restrictions);
+        this.certificates = Utils.immutableCopyOfOrEmpty(certificates);
+        this.languages = Utils.immutableCopyOfOrEmpty(languages);
         this.container = container;
         this.series = series;
-        this.broadcasts = broadcasts;
+        this.broadcasts = Utils.immutableCopyOfOrEmpty(broadcasts);
     }
 
+    @JsonProperty
     public String getId() {
         return id;
     }
 
+    @JsonProperty
     public String getType() {
         return type;
     }
 
+    @JsonProperty
     public List<Alias> getAliases() {
         return aliases;
     }
 
+    @JsonProperty("display_title")
     public DisplayTitle getDisplayTitle() {
         return displayTitle;
     }
 
+    @JsonProperty("episode_number")
     public Integer getEpisodeNumber() {
         return episodeNumber;
     }
 
+    @JsonProperty("series_number")
     public Integer getSeriesNumber() {
         return seriesNumber;
     }
 
+    @JsonProperty("media_type")
     public String getMediaType() {
         return mediaType;
     }
 
+    @JsonProperty
     public String getSpecialization() {
         return specialization;
     }
 
+    @JsonProperty
     public Source getSource() {
         return source;
     }
 
+    @JsonProperty
     public String getTitle() {
         return title;
     }
 
+    @JsonProperty
     public String getDescription() {
         return description;
     }
 
+    @JsonProperty
     public String getImage() {
         return image;
     }
 
+    @JsonProperty
     public String getThumbnail() {
         return thumbnail;
     }
 
+    @JsonProperty
     public List<String> getGenres() {
         return genres;
     }
 
+    @JsonProperty("presentation_channel")
     public String getPresentationChannel() {
         return presentationChannel;
     }
 
+    @JsonProperty
     public String getPriority() {
         return priority;
     }
 
+    @JsonProperty("long_description")
     public String getLongDescription() {
         return longDescription;
     }
 
+    @JsonProperty("black_and_white")
     public Boolean getBlackAndWhite() {
         return blackAndWhite;
     }
 
+    @JsonProperty("countries_of_origin")
     public List<String> getCountriesOfOrigin() {
         return countriesOfOrigin;
     }
 
+    @JsonProperty("schedule_only")
     public Boolean getScheduleOnly() {
         return scheduleOnly;
     }
 
+    @JsonProperty
     public List<Restriction> getRestrictions() {
         return restrictions;
     }
 
+    @JsonProperty
     public List<String> getCertificates() {
         return certificates;
     }
 
+    @JsonProperty
     public List<String> getLanguages() {
         return languages;
     }
 
+    @JsonProperty
     public Container getContainer() {
         return container;
     }
 
+    @JsonProperty
     public Series getSeries() {
         return series;
     }
 
+    @JsonProperty
     public List<Broadcast> getBroadcasts() {
         return broadcasts;
     }
+
 
     public static Builder builder() {
         return new Builder();
     }
 
+    @JsonPOJOBuilder(withPrefix = "")
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class Builder {
         private String id;
         private String type;

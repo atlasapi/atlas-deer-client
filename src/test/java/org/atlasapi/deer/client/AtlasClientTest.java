@@ -8,6 +8,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.google.common.net.HostAndPort;
 import org.atlasapi.deer.client.http.AtlasHttpClient;
 import org.atlasapi.deer.client.model.ContentResponse;
 import org.atlasapi.deer.client.query.ContentQuery;
@@ -22,7 +23,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.net.HostSpecifier;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AtlasClientTest {
@@ -41,7 +41,7 @@ public class AtlasClientTest {
     public void setUp() throws Exception {
         String host = "stage.atlas.metabroadcast.com";
         String apikey = "apikey";
-        urlCreator = new AtlasUrlCreator("https", HostSpecifier.fromValid(host), apikey);
+        urlCreator = new AtlasUrlCreator("https", HostAndPort.fromString(host), apikey);
 
         atlasClient = new AtlasClient(atlasHttpClient, urlCreator);
     }
