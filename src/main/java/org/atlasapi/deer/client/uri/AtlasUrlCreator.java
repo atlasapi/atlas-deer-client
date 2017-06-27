@@ -7,23 +7,23 @@ import java.util.Map;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.common.collect.Lists;
-import com.google.common.net.HostSpecifier;
+import com.google.common.net.HostAndPort;
 
 public class AtlasUrlCreator {
 
     public static final String KEY_PARAM = "key";
 
-    private final String schema;
-    private final HostSpecifier host;
+    private final String scheme;
+    private final HostAndPort host;
     private final String apiKey;
 
 
-    public AtlasUrlCreator(String schema, HostSpecifier host, String apiKey) {
-        this.schema = checkNotNull(schema);
+    public AtlasUrlCreator(String scheme, HostAndPort host, String apiKey) {
+        this.scheme = checkNotNull(scheme);
         this.host = checkNotNull(host);
         this.apiKey = checkNotNull(apiKey);
 
-        checkArgument(this.schema.equals("http") || this.schema.equals("https"));
+        checkArgument(this.scheme.equals("http") || this.scheme.equals("https"));
     }
 
     public PathStep getBuilder() {
@@ -46,8 +46,11 @@ public class AtlasUrlCreator {
 
         private Builder() {
             url = new GenericUrl();
-            url.setScheme(schema);
-            url.setHost(host.toString());
+            url.setScheme(scheme);
+            url.setHost(host.getHostText());
+            if (host.hasPort()) {
+                url.setPort(host.getPort());
+            }
             url.set(KEY_PARAM, apiKey);
         }
 

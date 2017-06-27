@@ -2,8 +2,8 @@ package org.atlasapi.deer.client;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.net.HostAndPort;
 import org.atlasapi.deer.client.http.AtlasHttpClient;
 import org.atlasapi.deer.client.model.ContentResponse;
 import org.atlasapi.deer.client.model.ScheduleResponse;
@@ -15,7 +15,6 @@ import org.atlasapi.deer.client.uri.AtlasUrlCreator;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpTransport;
-import com.google.common.net.HostSpecifier;
 
 public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
 
@@ -25,7 +24,7 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
     public AtlasClient(
             HttpTransport httpTransport,
             String schema,
-            HostSpecifier host,
+            HostAndPort host,
             String apiKey,
             ObjectMapper objectMapper
     ) {
