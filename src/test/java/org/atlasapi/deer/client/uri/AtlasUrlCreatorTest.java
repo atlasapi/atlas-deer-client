@@ -36,7 +36,7 @@ public class AtlasUrlCreatorTest {
 
         assertThat(
                 url.build(),
-                is(schema + "://" + host + "/4/content/contentId.json?key=" + apiKey)
+                is(schema + "://" + host + "/4/content.json?key=" + apiKey + "&id=contentId")
         );
     }
 
