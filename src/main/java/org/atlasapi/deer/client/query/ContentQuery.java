@@ -3,7 +3,9 @@ package org.atlasapi.deer.client.query;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.atlasapi.deer.client.uri.Annotation;
 
@@ -39,12 +41,22 @@ public class ContentQuery extends Query {
         return new ContentQuery(ids);
     }
 
+    public ContentQuery addAnnotations(Collection<Annotation> annotations) {
+        return addAnnotations(checkNotNull(annotations).stream());
+    }
+
     public ContentQuery addAnnotations(Annotation... annotations) {
-        String joinedAnnotations = Arrays.stream(checkNotNull(annotations))
-                .distinct()
-                .map(Annotation::toKey)
-                .collect(Collectors.joining(","));
-        params.put(ANNOTATIONS_PARAM, joinedAnnotations);
+        return addAnnotations(Arrays.stream(checkNotNull(annotations)));
+    }
+
+    private ContentQuery addAnnotations(Stream<Annotation> annotations) {
+        params.put(
+                ANNOTATIONS_PARAM,
+                annotations
+                        .distinct()
+                        .map(Annotation::toKey)
+                        .collect(Collectors.joining(","))
+        );
         return this;
     }
 
