@@ -8,9 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Source {
 
     private final String key;
-
     private final String name;
-
     private final String country;
 
     @JsonCreator

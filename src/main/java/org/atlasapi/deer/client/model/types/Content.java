@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.google.common.collect.ImmutableList;
 import org.atlasapi.deer.client.model.Utils;
 
 @JsonDeserialize(builder = Content.Builder.class)
@@ -14,111 +13,59 @@ import org.atlasapi.deer.client.model.Utils;
 public class Content {
 
     private final String id;
-
     private final String type;
-
     private final List<Alias> aliases;
-
     private final DisplayTitle displayTitle;
-
     private final Integer episodeNumber;
-
     private final Integer seriesNumber;
-
     private final String mediaType;
-
     private final String specialization;
-
     private final Source source;
-
     private final String title;
-
     private final String description;
-
     private final String image;
-
     private final String thumbnail;
-
     private final List<String> genres;
-
     private final String presentationChannel;
-
     private final String priority;
-
     private final String longDescription;
-
     private final Boolean blackAndWhite;
-
     private final List<String> countriesOfOrigin;
-
     private final Boolean scheduleOnly;
-
     private final List<Restriction> restrictions;
-
     private final List<String> certificates;
-
     private final List<String> languages;
-
     private final Container container;
-
     private final Series series;
-
     private final List<Broadcast> broadcasts;
 
-    private Content(
-            String id,
-            String type,
-            List<Alias> aliases,
-            DisplayTitle displayTitle,
-            Integer episodeNumber,
-            Integer seriesNumber,
-            String mediaType,
-            String specialization,
-            Source source,
-            String title,
-            String description,
-            String image,
-            String thumbnail,
-            List<String> genres,
-            String presentationChannel,
-            String priority,
-            String longDescription,
-            Boolean blackAndWhite,
-            List<String> countriesOfOrigin,
-            Boolean scheduleOnly,
-            List<Restriction> restrictions,
-            List<String> certificates,
-            List<String> languages,
-            Container container,
-            Series series,
-            List<Broadcast> broadcasts
-    ) {
-        this.id = id;
-        this.type = type;
-        this.aliases = Utils.immutableCopyOfOrEmpty(aliases);
-        this.displayTitle = displayTitle;
-        this.episodeNumber = episodeNumber;
-        this.seriesNumber = seriesNumber;
-        this.mediaType = mediaType;
-        this.specialization = specialization;
-        this.source = source;
-        this.title = title;
-        this.description = description;
-        this.image = image;
-        this.thumbnail = thumbnail;
-        this.genres = Utils.immutableCopyOfOrEmpty(genres);
-        this.presentationChannel = presentationChannel;
-        this.priority = priority;
-        this.longDescription = longDescription;
-        this.blackAndWhite = blackAndWhite;
-        this.countriesOfOrigin = Utils.immutableCopyOfOrEmpty(countriesOfOrigin);
-        this.scheduleOnly = scheduleOnly;
-        this.restrictions = Utils.immutableCopyOfOrEmpty(restrictions);
-        this.certificates = Utils.immutableCopyOfOrEmpty(certificates);
-        this.languages = Utils.immutableCopyOfOrEmpty(languages);
-        this.container = container;
-        this.series = series;
-        this.broadcasts = Utils.immutableCopyOfOrEmpty(broadcasts);
+    private Content(Builder builder) {
+        this.id = builder.id;
+        this.type = builder.type;
+        this.aliases = Utils.immutableCopyOfOrEmpty(builder.aliases);
+        this.displayTitle = builder.displayTitle;
+        this.episodeNumber = builder.episodeNumber;
+        this.seriesNumber = builder.seriesNumber;
+        this.mediaType = builder.mediaType;
+        this.specialization = builder.specialization;
+        this.source = builder.source;
+        this.title = builder.title;
+        this.description = builder.description;
+        this.image = builder.image;
+        this.thumbnail = builder.thumbnail;
+        this.genres = Utils.immutableCopyOfOrEmpty(builder.genres);
+        this.presentationChannel = builder.presentationChannel;
+        this.priority = builder.priority;
+        this.longDescription = builder.longDescription;
+        this.blackAndWhite = builder.blackAndWhite;
+        this.countriesOfOrigin = Utils.immutableCopyOfOrEmpty(builder.countriesOfOrigin);
+        this.scheduleOnly = builder.scheduleOnly;
+        this.restrictions = Utils.immutableCopyOfOrEmpty(builder.restrictions);
+        this.certificates = Utils.immutableCopyOfOrEmpty(builder.certificates);
+        this.languages = Utils.immutableCopyOfOrEmpty(builder.languages);
+        this.container = builder.container;
+        this.series = builder.series;
+        this.broadcasts = Utils.immutableCopyOfOrEmpty(builder.broadcasts);
     }
 
     @JsonProperty
@@ -289,144 +236,164 @@ public class Content {
         public Builder() {
         }
 
+        @JsonProperty
         public Builder id(String val) {
-            id = val;
+            this.id = val;
             return this;
         }
 
+        @JsonProperty
         public Builder type(String val) {
-            type = val;
+            this.type = val;
             return this;
         }
 
+        @JsonProperty
         public Builder aliases(List<Alias> val) {
-            aliases = val;
+            this.aliases = val;
             return this;
         }
 
+        @JsonProperty("display_title")
         public Builder displayTitle(DisplayTitle val) {
-            displayTitle = val;
+            this.displayTitle = val;
             return this;
         }
 
+        @JsonProperty("episode_number")
         public Builder episodeNumber(Integer val) {
-            episodeNumber = val;
+            this.episodeNumber = val;
             return this;
         }
 
+        @JsonProperty("series_number")
         public Builder seriesNumber(Integer val) {
-            seriesNumber = val;
+            this.seriesNumber = val;
             return this;
         }
 
+        @JsonProperty
         public Builder specialization(String val) {
-            specialization = val;
+            this.specialization = val;
             return this;
         }
 
+        @JsonProperty("media_type")
         public Builder mediaType(String val) {
-            mediaType = val;
+            this.mediaType = val;
             return this;
         }
 
+        @JsonProperty
         public Builder source(Source val) {
-            source = val;
+            this.source = val;
             return this;
         }
 
+        @JsonProperty
         public Builder title(String val) {
-            title = val;
+            this.title = val;
             return this;
         }
 
+        @JsonProperty
         public Builder description(String val) {
-            description = val;
+            this.description = val;
             return this;
         }
 
+        @JsonProperty
         public Builder image(String val) {
-            image = val;
+            this.image = val;
             return this;
         }
 
+        @JsonProperty
         public Builder thumbnail(String val) {
-            thumbnail = val;
+            this.thumbnail = val;
             return this;
         }
 
+        @JsonProperty
         public Builder genres(List<String> val) {
-            genres = val;
+            this.genres = val;
             return this;
         }
 
+        @JsonProperty("presentation_channel")
         public Builder presentationChannel(String val) {
-            presentationChannel = val;
+            this.presentationChannel = val;
             return this;
         }
 
+        @JsonProperty
         public Builder priority(String val) {
-            priority = val;
+            this.priority = val;
             return this;
         }
 
+        @JsonProperty("long_description")
         public Builder longDescription(String val) {
-            longDescription = val;
+            this.longDescription = val;
             return this;
         }
 
+        @JsonProperty("black_and_white")
         public Builder blackAndWhite(Boolean val) {
-            blackAndWhite = val;
+            this.blackAndWhite = val;
             return this;
         }
 
+        @JsonProperty("countries_of_origin")
         public Builder countriesOfOrigin(List<String> val) {
-            countriesOfOrigin = val;
+            this.countriesOfOrigin = val;
             return this;
         }
 
+        @JsonProperty("schedule_only")
         public Builder scheduleOnly(Boolean val) {
-            scheduleOnly = val;
+            this.scheduleOnly = val;
             return this;
         }
 
+        @JsonProperty
         public Builder restrictions(List<Restriction> val) {
-            restrictions = val;
+            this.restrictions = val;
             return this;
         }
 
+        @JsonProperty
         public Builder certificates(List<String> val) {
-            certificates = val;
+            this.certificates = val;
             return this;
         }
 
+        @JsonProperty
         public Builder languages(List<String> val) {
-            languages = val;
+            this.languages = val;
             return this;
         }
 
+        @JsonProperty
         public Builder container(Container val) {
-            container = val;
+            this.container = val;
             return this;
         }
 
+        @JsonProperty
         public Builder series(Series val) {
-            series = val;
+            this.series = val;
             return this;
         }
 
+        @JsonProperty
         public Builder broadcasts(List<Broadcast> val) {
-            broadcasts = val;
+            this.broadcasts = val;
             return this;
         }
 
         public Content build() {
-            return new Content(
-                    id, type, aliases, displayTitle, episodeNumber, seriesNumber, mediaType,
-                    specialization, source, title, description, image, thumbnail, genres,
-                    presentationChannel, priority, longDescription, blackAndWhite,
-                    countriesOfOrigin, scheduleOnly, restrictions, certificates, languages,
-                    container, series, broadcasts
-            );
+            return new Content(this);
         }
     }
 }

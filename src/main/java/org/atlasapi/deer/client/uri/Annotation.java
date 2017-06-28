@@ -17,7 +17,9 @@ public enum Annotation {
     SUB_ITEMS,
     AUDIT,
     BRAND_REFERENCE,
-    BRAND_SUMMARY
+    BRAND_SUMMARY,
+    SERIES_REFERENCE,
+    SERIES_SUMMARY,
     ;
 
     private static final BiMap<String, Annotation> LOOKUP =
