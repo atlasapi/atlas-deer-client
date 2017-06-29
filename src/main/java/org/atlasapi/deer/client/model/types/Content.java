@@ -84,6 +84,10 @@ public class Content {
         return aliases;
     }
 
+    public List<SameAs> getSameAs() {
+        return sameAs;
+    }
+
     public DisplayTitle getDisplayTitle() {
         return displayTitle;
     }
