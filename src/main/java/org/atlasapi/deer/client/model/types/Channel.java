@@ -1,14 +1,16 @@
 package org.atlasapi.deer.client.model.types;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import org.atlasapi.deer.client.model.Utils;
 
 import java.util.List;
 
 @JsonDeserialize(builder = Channel.Builder.class)
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Channel {
 
@@ -24,22 +26,18 @@ public class Channel {
         this.aliases = Utils.immutableCopyOfOrEmpty(builder.aliases);
     }
 
-    @JsonProperty
     public String getId() {
         return id;
     }
 
-    @JsonProperty
     public String getTitle() {
         return title;
     }
 
-    @JsonProperty
     public Source getSource() {
         return source;
     }
 
-    @JsonProperty
     public List<Alias> getAliases() {
         return aliases;
     }
@@ -50,6 +48,7 @@ public class Channel {
     }
 
     @JsonPOJOBuilder(withPrefix = "")
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class Builder {
         private String id;

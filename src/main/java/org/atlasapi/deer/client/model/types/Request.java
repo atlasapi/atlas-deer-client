@@ -5,8 +5,11 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.atlasapi.deer.client.model.Utils;
 
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Request {
 
@@ -23,12 +26,10 @@ public class Request {
         this.parameters = Utils.immutableCopyOfOrEmpty(parameters);
     }
 
-    @JsonProperty
     public String getPath() {
         return path;
     }
 
-    @JsonProperty
     public Map<String, String> getParameters() {
         return parameters;
     }

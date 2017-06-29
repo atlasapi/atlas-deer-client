@@ -3,10 +3,13 @@ package org.atlasapi.deer.client.model.types;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.api.client.util.Key;
 
 import java.util.Objects;
 
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Alias {
 
@@ -23,12 +26,10 @@ public class Alias {
         this.value = value;
     }
 
-    @JsonProperty
     public String getNamespace() {
         return namespace;
     }
 
-    @JsonProperty
     public String getValue() {
         return value;
     }

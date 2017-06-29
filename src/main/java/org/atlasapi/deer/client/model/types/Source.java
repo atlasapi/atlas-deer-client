@@ -1,9 +1,13 @@
 package org.atlasapi.deer.client.model.types;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
+@JsonDeserialize(builder = Source.Builder.class)
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Source {
 
@@ -11,29 +15,57 @@ public class Source {
     private final String name;
     private final String country;
 
-    @JsonCreator
-    public Source(
-            @JsonProperty("key") String key,
-            @JsonProperty("name") String name,
-            @JsonProperty("country") String country
-    ) {
-        this.key = key;
-        this.name = name;
-        this.country = country;
+    private Source(Builder builder) {
+        this.key = builder.key;
+        this.name = builder.name;
+        this.country = builder.country;
     }
 
-    @JsonProperty
     public String getKey() {
         return key;
     }
 
-    @JsonProperty
     public String getName() {
         return name;
     }
 
-    @JsonProperty
     public String getCountry() {
         return country;
     }
+
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    @JsonPOJOBuilder(withPrefix = "")
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Builder {
+        private String key;
+        private String name;
+        private String country;
+
+        public Builder() { }
+
+        public Builder key(String key) {
+            this.key = key;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder country(String country) {
+            this.country = country;
+            return this;
+        }
+
+        public Source build() {
+            return new Source(this);
+        }
+    }
+
 }

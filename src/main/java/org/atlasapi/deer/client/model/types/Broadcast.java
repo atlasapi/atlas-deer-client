@@ -2,10 +2,13 @@ package org.atlasapi.deer.client.model.types;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 @JsonDeserialize(builder = Broadcast.Builder.class)
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Broadcast {
 
@@ -28,22 +31,18 @@ public class Broadcast {
         return transmissionStartTime;
     }
 
-    @JsonProperty("transmission_end_time")
     public String getTransmissionEndTime() {
         return transmissionEndTime;
     }
 
-    @JsonProperty("broadcast_duration")
     public Integer getBroadcastDuration() {
         return broadcastDuration;
     }
 
-    @JsonProperty("broadcast_on")
     public String getBroadcastOn() {
         return broadcastOn;
     }
 
-    @JsonProperty
     public Channel getChannel() {
         return channel;
     }
@@ -54,6 +53,7 @@ public class Broadcast {
     }
 
     @JsonPOJOBuilder(withPrefix = "")
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
         private String transmissionStartTime;
@@ -70,25 +70,21 @@ public class Broadcast {
             return this;
         }
 
-        @JsonProperty("transmission_end_time")
         public Builder transmissionEndTime(String transmissionEndTime) {
             this.transmissionEndTime = transmissionEndTime;
             return this;
         }
 
-        @JsonProperty("broadcast_duration")
         public Builder broadcastDuration(Integer broadcastDuration) {
             this.broadcastDuration = broadcastDuration;
             return this;
         }
 
-        @JsonProperty("broadcast_on")
         public Builder broadcastOn(String broadcastOn) {
             this.broadcastOn = broadcastOn;
             return this;
         }
 
-        @JsonProperty
         public Builder channel(Channel channel) {
             this.channel = channel;
             return this;

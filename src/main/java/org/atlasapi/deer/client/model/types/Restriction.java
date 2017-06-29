@@ -1,50 +1,82 @@
 package org.atlasapi.deer.client.model.types;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
+@JsonDeserialize(builder = Restriction.Builder.class)
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Restriction {
 
-    private String authority;
+    private final String authority;
+    private final String rating;
+    private final String minimumAge;
+    private final String message;
 
-    private String rating;
-
-    private String minimumAge;
-
-    private String message;
-
-    @JsonCreator
-    public Restriction(
-            @JsonProperty("authority") String authority,
-            @JsonProperty("rating") String rating,
-            @JsonProperty("minimum_age") String minimumAge,
-            @JsonProperty("message") String message
-    ) {
-        this.authority = authority;
-        this.rating = rating;
-        this.minimumAge = minimumAge;
-        this.message = message;
+    private Restriction(Builder builder) {
+        this.authority = builder.authority;
+        this.rating = builder.rating;
+        this.minimumAge = builder.minimumAge;
+        this.message = builder.message;
     }
 
-    @JsonProperty
     public String getAuthority() {
         return authority;
     }
 
-    @JsonProperty
     public String getRating() {
         return rating;
     }
 
-    @JsonProperty("minimum_age")
     public String getMinimumAge() {
         return minimumAge;
     }
 
-    @JsonProperty
     public String getMessage() {
         return message;
+    }
+
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    @JsonPOJOBuilder(withPrefix = "")
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Builder {
+        private String authority;
+        private String rating;
+        private String minimumAge;
+        private String message;
+
+        public Builder() { }
+
+        public Builder authority(String authority) {
+            this.authority = authority;
+            return this;
+        }
+
+        public Builder rating(String rating) {
+            this.rating = rating;
+            return this;
+        }
+
+        public Builder minimumAge(String minimumAge) {
+            this.minimumAge = minimumAge;
+            return this;
+        }
+
+        public Builder message(String message) {
+            this.message = message;
+            return this;
+        }
+
+        public Restriction build() {
+            return new Restriction(this);
+        }
     }
 }
