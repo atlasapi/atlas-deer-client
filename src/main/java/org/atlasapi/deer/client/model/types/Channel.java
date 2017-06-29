@@ -16,13 +16,17 @@ public class Channel {
 
     private final String id;
     private final String title;
+    private final List<Broadcaster> availableFrom;
     private final Source source;
+    private final Broadcaster broadcaster;
     private final List<Alias> aliases;
 
     private Channel(Builder builder) {
         this.id = builder.id;
         this.title = builder.title;
+        this.availableFrom = Utils.immutableCopyOfOrEmpty(builder.availableFrom);
         this.source = builder.source;
+        this.broadcaster = builder.broadcaster;
         this.aliases = Utils.immutableCopyOfOrEmpty(builder.aliases);
     }
 
@@ -30,8 +34,16 @@ public class Channel {
         return id;
     }
 
+    public List<Broadcaster> getAvailableFrom() {
+        return availableFrom;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public Broadcaster getBroadcaster() {
+        return broadcaster;
     }
 
     public Source getSource() {
@@ -53,7 +65,9 @@ public class Channel {
     public static final class Builder {
         private String id;
         private String title;
+        private List<Broadcaster> availableFrom;
         private Source source;
+        private Broadcaster broadcaster;
         private List<Alias> aliases;
 
         public Builder() { }
@@ -68,8 +82,18 @@ public class Channel {
             return this;
         }
 
+        public Builder availableFrom(List<Broadcaster> availableFrom) {
+            this.availableFrom = availableFrom;
+            return this;
+        }
+
         public Builder source(Source source) {
             this.source = source;
+            return this;
+        }
+
+        public Builder broadcaster(Broadcaster broadcaster) {
+            this.broadcaster = broadcaster;
             return this;
         }
 
