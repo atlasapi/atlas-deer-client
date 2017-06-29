@@ -17,6 +17,7 @@ public class Content {
     private final String id;
     private final String type;
     private final List<Alias> aliases;
+    private final List<SameAs> sameAs;
     private final DisplayTitle displayTitle;
     private final Integer episodeNumber;
     private final Integer seriesNumber;
@@ -45,6 +46,7 @@ public class Content {
         this.id = builder.id;
         this.type = builder.type;
         this.aliases = Utils.immutableCopyOfOrEmpty(builder.aliases);
+        this.sameAs = Utils.immutableCopyOfOrEmpty(builder.sameAs);
         this.displayTitle = builder.displayTitle;
         this.episodeNumber = builder.episodeNumber;
         this.seriesNumber = builder.seriesNumber;
@@ -186,6 +188,7 @@ public class Content {
         private String id;
         private String type;
         private List<Alias> aliases;
+        private List<SameAs> sameAs;
         private DisplayTitle displayTitle;
         private Integer episodeNumber;
         private Integer seriesNumber;
@@ -228,6 +231,10 @@ public class Content {
             return this;
         }
 
+        public Builder sameAs(List<SameAs> val) {
+            this.sameAs = val;
+            return this;
+        }
         public Builder displayTitle(DisplayTitle val) {
             this.displayTitle = val;
             return this;

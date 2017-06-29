@@ -5,45 +5,44 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.google.api.client.util.Key;
 
 import java.util.Objects;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Alias {
+public class SameAs {
 
-    private final String namespace;
-    private final String value;
+    private final String id;
+    private final String source;
 
     @JsonCreator
-    public Alias(
-            @JsonProperty("namespace") String namespace,
-            @JsonProperty("value") String value
+    public SameAs(
+            @JsonProperty("id") String id,
+            @JsonProperty("source") String source
     ) {
-        this.namespace = namespace;
-        this.value = value;
+        this.id = id;
+        this.source = source;
     }
 
-    public String getNamespace() {
-        return namespace;
+    public String getId() {
+        return id;
     }
 
-    public String getValue() {
-        return value;
+    public String getSource() {
+        return source;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Alias alias = (Alias) o;
-        return Objects.equals(namespace, alias.namespace) &&
-                Objects.equals(value, alias.value);
+        SameAs sameAs = (SameAs) o;
+        return Objects.equals(id, sameAs.id) &&
+                Objects.equals(source, sameAs.source);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(namespace, value);
+        return Objects.hash(id, source);
     }
 }

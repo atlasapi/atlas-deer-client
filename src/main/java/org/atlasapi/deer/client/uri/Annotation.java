@@ -7,6 +7,8 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
 public enum Annotation {
+    ID,
+    EXTENDED_ID,
     DESCRIPTION,
     EXTENDED_DESCRIPTION,
     BROADCASTS,
