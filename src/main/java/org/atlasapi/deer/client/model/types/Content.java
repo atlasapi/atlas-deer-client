@@ -41,6 +41,7 @@ public class Content {
     private final Container container;
     private final Series series;
     private final List<Broadcast> broadcasts;
+    private final List<Person> people;
 
     private Content(Builder builder) {
         this.id = builder.id;
@@ -70,6 +71,7 @@ public class Content {
         this.container = builder.container;
         this.series = builder.series;
         this.broadcasts = Utils.immutableCopyOfOrEmpty(builder.broadcasts);
+        this.people = Utils.immutableCopyOfOrEmpty(builder.people);
     }
 
     public String getId() {
@@ -180,6 +182,10 @@ public class Content {
         return broadcasts;
     }
 
+    public List<Person> getPeople() {
+        return people;
+    }
+
 
     public static Builder builder() {
         return new Builder();
@@ -216,141 +222,147 @@ public class Content {
         private Container container;
         private Series series;
         private List<Broadcast> broadcasts;
+        private List<Person> people;
 
         public Builder() {
         }
 
-        public Builder id(String val) {
-            this.id = val;
+        public Builder id(String id) {
+            this.id = id;
             return this;
         }
 
-        public Builder type(String val) {
-            this.type = val;
+        public Builder type(String type) {
+            this.type = type;
             return this;
         }
 
-        public Builder aliases(List<Alias> val) {
-            this.aliases = val;
+        public Builder aliases(List<Alias> aliases) {
+            this.aliases = aliases;
             return this;
         }
 
-        public Builder sameAs(List<SameAs> val) {
-            this.sameAs = val;
+        public Builder sameAs(List<SameAs> sameAs) {
+            this.sameAs = sameAs;
             return this;
         }
-        public Builder displayTitle(DisplayTitle val) {
-            this.displayTitle = val;
-            return this;
-        }
-
-        public Builder episodeNumber(Integer val) {
-            this.episodeNumber = val;
+        public Builder displayTitle(DisplayTitle displayTitle) {
+            this.displayTitle = displayTitle;
             return this;
         }
 
-        public Builder seriesNumber(Integer val) {
-            this.seriesNumber = val;
+        public Builder episodeNumber(Integer episodeNumber) {
+            this.episodeNumber = episodeNumber;
             return this;
         }
 
-        public Builder specialization(String val) {
-            this.specialization = val;
+        public Builder seriesNumber(Integer seriesNumber) {
+            this.seriesNumber = seriesNumber;
             return this;
         }
 
-        public Builder mediaType(String val) {
-            this.mediaType = val;
+        public Builder specialization(String specialization) {
+            this.specialization = specialization;
             return this;
         }
 
-        public Builder source(Source val) {
-            this.source = val;
+        public Builder mediaType(String mediaType) {
+            this.mediaType = mediaType;
             return this;
         }
 
-        public Builder title(String val) {
-            this.title = val;
+        public Builder source(Source source) {
+            this.source = source;
             return this;
         }
 
-        public Builder description(String val) {
-            this.description = val;
+        public Builder title(String title) {
+            this.title = title;
             return this;
         }
 
-        public Builder image(String val) {
-            this.image = val;
+        public Builder description(String description) {
+            this.description = description;
             return this;
         }
 
-        public Builder thumbnail(String val) {
-            this.thumbnail = val;
+        public Builder image(String image) {
+            this.image = image;
             return this;
         }
 
-        public Builder genres(List<String> val) {
-            this.genres = val;
+        public Builder thumbnail(String thumbnail) {
+            this.thumbnail = thumbnail;
             return this;
         }
 
-        public Builder presentationChannel(String val) {
-            this.presentationChannel = val;
+        public Builder genres(List<String> genres) {
+            this.genres = genres;
             return this;
         }
 
-        public Builder priority(String val) {
-            this.priority = val;
+        public Builder presentationChannel(String presentationChannel) {
+            this.presentationChannel = presentationChannel;
             return this;
         }
 
-        public Builder longDescription(String val) {
-            this.longDescription = val;
+        public Builder priority(String priority) {
+            this.priority = priority;
             return this;
         }
 
-        public Builder blackAndWhite(Boolean val) {
-            this.blackAndWhite = val;
+        public Builder longDescription(String longDescription) {
+            this.longDescription = longDescription;
             return this;
         }
 
-        public Builder countriesOfOrigin(List<String> val) {
-            this.countriesOfOrigin = val;
+        public Builder blackAndWhite(Boolean blackAndWhite) {
+            this.blackAndWhite = blackAndWhite;
             return this;
         }
 
-        public Builder scheduleOnly(Boolean val) {
-            this.scheduleOnly = val;
+        public Builder countriesOfOrigin(List<String> countriesOfOrigin) {
+            this.countriesOfOrigin = countriesOfOrigin;
             return this;
         }
 
-        public Builder restrictions(List<Restriction> val) {
-            this.restrictions = val;
+        public Builder scheduleOnly(Boolean scheduleOnly) {
+            this.scheduleOnly = scheduleOnly;
             return this;
         }
 
-        public Builder certificates(List<String> val) {
-            this.certificates = val;
+        public Builder restrictions(List<Restriction> restrictions) {
+            this.restrictions = restrictions;
             return this;
         }
 
-        public Builder languages(List<String> val) {
-            this.languages = val;
+        public Builder certificates(List<String> certificates) {
+            this.certificates = certificates;
             return this;
         }
 
-        public Builder container(Container val) {
-            this.container = val;
+        public Builder languages(List<String> languages) {
+            this.languages = languages;
             return this;
         }
 
-        public Builder series(Series val) {
-            this.series = val;
+        public Builder container(Container container) {
+            this.container = container;
             return this;
         }
 
-        public Builder broadcasts(List<Broadcast> val) {
-            this.broadcasts = val;
+        public Builder series(Series series) {
+            this.series = series;
+            return this;
+        }
+
+        public Builder broadcasts(List<Broadcast> broadcasts) {
+            this.broadcasts = broadcasts;
+            return this;
+        }
+
+        public Builder people(List<Person> people) {
+            this.people = people;
             return this;
         }
 
