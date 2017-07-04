@@ -3,6 +3,7 @@ package org.atlasapi.deer.client.query;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -26,6 +27,12 @@ public abstract class Query {
     }
 
     public Query(String... ids) {
+        this.id = Optional.empty();
+        this.params = new HashMap<>();
+        this.params.put(ID_PARAM, String.join(",", checkNotNull(ids)));
+    }
+
+    public Query(List<String> ids) {
         this.id = Optional.empty();
         this.params = new HashMap<>();
         this.params.put(ID_PARAM, String.join(",", checkNotNull(ids)));

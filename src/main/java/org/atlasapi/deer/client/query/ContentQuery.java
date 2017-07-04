@@ -4,6 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -29,6 +30,10 @@ public class ContentQuery extends Query {
         super(ids);
     }
 
+    private ContentQuery(List<String> ids) {
+        super(ids);
+    }
+
     public static ContentQuery get() {
         return new ContentQuery();
     }
@@ -38,6 +43,10 @@ public class ContentQuery extends Query {
     }
 
     public static ContentQuery get(String... ids) {
+        return new ContentQuery(ids);
+    }
+
+    public static ContentQuery get(List<String> ids) {
         return new ContentQuery(ids);
     }
 

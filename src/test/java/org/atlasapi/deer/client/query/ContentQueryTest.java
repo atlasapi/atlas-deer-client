@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import com.google.common.collect.ImmutableList;
 import org.atlasapi.deer.client.uri.Annotation;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +33,17 @@ public class ContentQueryTest {
     @Test
     public void testQueryOnMultipleIds() throws Exception {
         ContentQuery query = ContentQuery.get("idA", "idB");
+
+        assertFalse(query.getId().isPresent());
+        assertThat(
+                query.getParams().get("id"),
+                is("idA,idB")
+        );
+    }
+
+    @Test
+    public void testQueryOnListIds() throws Exception {
+        ContentQuery query = ContentQuery.get(ImmutableList.of("idA", "idB"));
 
         assertFalse(query.getId().isPresent());
         assertThat(
