@@ -1,12 +1,25 @@
 package org.atlasapi.deer.client.model.types;
 
+import java.io.IOException;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.util.Converter;
+import com.google.common.collect.ImmutableList;
 import org.atlasapi.deer.client.model.Utils;
 
 @JsonDeserialize(builder = Content.Builder.class)
@@ -39,7 +52,9 @@ public class Content {
     private final List<String> certificates;
     private final List<String> languages;
     private final Container container;
-    private final Series series;
+    private final List<Series> series;
+    private final List<SubItem> content;
+    private final List<SubItemSummary> subItemSummaries;
     private final List<Broadcast> broadcasts;
     private final List<Person> people;
 
@@ -69,7 +84,9 @@ public class Content {
         this.certificates = Utils.immutableCopyOfOrEmpty(builder.certificates);
         this.languages = Utils.immutableCopyOfOrEmpty(builder.languages);
         this.container = builder.container;
-        this.series = builder.series;
+        this.series = Utils.immutableCopyOfOrEmpty(builder.series);
+        this.content = Utils.immutableCopyOfOrEmpty(builder.content);
+        this.subItemSummaries = Utils.immutableCopyOfOrEmpty(builder.subItemSummaries);
         this.broadcasts = Utils.immutableCopyOfOrEmpty(builder.broadcasts);
         this.people = Utils.immutableCopyOfOrEmpty(builder.people);
     }
@@ -174,8 +191,16 @@ public class Content {
         return container;
     }
 
-    public Series getSeries() {
+    public List<Series> getSeries() {
         return series;
+    }
+
+    public List<SubItem> getContent() {
+        return content;
+    }
+
+    public List<SubItemSummary> getSubItemSummaries() {
+        return subItemSummaries;
     }
 
     public List<Broadcast> getBroadcasts() {
@@ -220,7 +245,9 @@ public class Content {
         private List<String> certificates;
         private List<String> languages;
         private Container container;
-        private Series series;
+        private List<Series> series;
+        private List<SubItem> content;
+        private List<SubItemSummary> subItemSummaries;
         private List<Broadcast> broadcasts;
         private List<Person> people;
 
@@ -351,8 +378,27 @@ public class Content {
             return this;
         }
 
+        // episode has series singular
+        @JsonIgnore
         public Builder series(Series series) {
+            this.series = series == null ? null : ImmutableList.of(series);
+            return this;
+        }
+
+        // brand has series plural
+        @JsonDeserialize(using = SeriesDeserializer.class)
+        public Builder series(List<Series> series) {
             this.series = series;
+            return this;
+        }
+
+        public Builder content(List<SubItem> content) {
+            this.content = content;
+            return this;
+        }
+
+        public Builder subItemSummaries(List<SubItemSummary> subItemSummaries) {
+            this.subItemSummaries = subItemSummaries;
             return this;
         }
 
@@ -368,6 +414,24 @@ public class Content {
 
         public Content build() {
             return new Content(this);
+        }
+
+
+        protected static class SeriesDeserializer extends JsonDeserializer<List<Series>> {
+            @Override public List<Series> deserialize(
+                    JsonParser jsonParser,
+                    DeserializationContext deserializationContext
+            ) throws IOException {
+                switch (jsonParser.currentToken()) {
+                case START_ARRAY:
+                    ImmutableList.Builder<Series> builder = ImmutableList.builder();
+                    jsonParser.nextToken();
+                    builder.addAll(jsonParser.readValuesAs(Series.class));
+                    return builder.build();
+                default:
+                    return ImmutableList.of(jsonParser.readValueAs(Series.class));
+                }
+            }
         }
     }
 }

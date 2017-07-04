@@ -1,38 +1,34 @@
 package org.atlasapi.deer.client.model.types;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
-@JsonDeserialize(builder = Series.Builder.class)
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonDeserialize(builder = SubItemSummary.Builder.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Series {
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+public class SubItemSummary {
 
-    private final String id;
-    private final String type;
+    private final SubItem item;
     private final String title;
     private final String description;
-    private final Integer seriesNumber;
-    private final Integer totalEpisodes;
+    private final String image;
+    private final Integer episodeNumber;
 
-    private Series(Builder builder) {
-        this.id = builder.id;
-        this.type = builder.type;
+    @JsonCreator
+    public SubItemSummary(Builder builder) {
+        this.item = builder.item;
         this.title = builder.title;
         this.description = builder.description;
-        this.seriesNumber = builder.seriesNumber;
-        this.totalEpisodes = builder.totalEpisodes;
+        this.image = builder.image;
+        this.episodeNumber = builder.episodeNumber;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getType() {
-        return type;
+    public SubItem getItem() {
+        return item;
     }
 
     public String getTitle() {
@@ -43,12 +39,12 @@ public class Series {
         return description;
     }
 
-    public Integer getSeriesNumber() {
-        return seriesNumber;
+    public String getImage() {
+        return image;
     }
 
-    public Integer getTotalEpisodes() {
-        return totalEpisodes;
+    public Integer getEpisodeNumber() {
+        return episodeNumber;
     }
 
 
@@ -60,22 +56,16 @@ public class Series {
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
-        private String id;
-        private String type = "series";
+        private SubItem item;
         private String title;
         private String description;
-        private Integer seriesNumber;
-        private Integer totalEpisodes;
+        private String image;
+        private Integer episodeNumber;
 
-        public Builder() {}
+        public Builder() { }
 
-        public Builder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder type(String type) {
-            this.type = type;
+        public Builder item(SubItem item) {
+            this.item = item;
             return this;
         }
 
@@ -89,18 +79,18 @@ public class Series {
             return this;
         }
 
-        public Builder seriesNumber(Integer seriesNumber) {
-            this.seriesNumber = seriesNumber;
+        public Builder image(String image) {
+            this.image = image;
             return this;
         }
 
-        public Builder totalEpisodes(Integer totalEpisodes) {
-            this.totalEpisodes = totalEpisodes;
+        public Builder episodeNumber(Integer episodeNumber) {
+            this.episodeNumber = episodeNumber;
             return this;
         }
 
-        public Series build() {
-            return new Series(this);
+        public SubItemSummary build() {
+            return new SubItemSummary(this);
         }
     }
 }

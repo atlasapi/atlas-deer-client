@@ -15,6 +15,8 @@ public class ContentQuery extends Query {
     public static final String ALIASES_NAMESPACE_PARAM = "aliases.namespace";
     public static final String ALIASES_VALUE_PARAM = "aliases.value";
     public static final String LIMIT_PARAM = "limit";
+    public static final String SUB_ITEMS_LIMIT_PARAM = "sub_items.limit";
+    public static final String SUB_ITEMS_SUMMARIES_LIMIT_PARAM = "sub_items_summaries.limit";
     public static final String OFFSET_PARAM = "offset";
     public static final String TYPE_PARAM = "type";
 
@@ -76,7 +78,10 @@ public class ContentQuery extends Query {
     }
 
     public ContentQuery addLimit(Integer limit) {
-        params.put(LIMIT_PARAM, checkNotNull(limit).toString());
+        String sLimit = checkNotNull(limit).toString();
+        params.put(LIMIT_PARAM, sLimit);
+        params.put(SUB_ITEMS_LIMIT_PARAM, sLimit);
+        params.put(SUB_ITEMS_SUMMARIES_LIMIT_PARAM, sLimit);
         return this;
     }
 

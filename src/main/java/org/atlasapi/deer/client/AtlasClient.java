@@ -30,6 +30,7 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
     @Override
     public ContentResponse getContent(ContentQuery query) {
         GenericUrl url = getUrl(query);
+        org.slf4j.LoggerFactory.getLogger(getClass()).info("GET {}", url);
         return httpClient.get(url, ContentResponse.class);
     }
 
