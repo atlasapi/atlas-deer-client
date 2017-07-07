@@ -14,16 +14,30 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Person {
 
-    private final String role;
+    private final String uri;
+    private final String curie;
+    private final String type;
     private final String name;
-    private final String publisher;
-    private final List<String> profileLinks;
+    private final String role;
 
     private Person(Builder builder) {
+        this.uri = builder.uri;
+        this.curie = builder.curie;
+        this.type = builder.type;
         this.role = builder.role;
         this.name = builder.name;
-        this.publisher = builder.publisher;
-        this.profileLinks = Utils.immutableCopyOfOrEmpty(builder.profileLinks);
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public String getCurie() {
+        return curie;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getRole() {
@@ -32,14 +46,6 @@ public class Person {
 
     public String getName() {
         return name;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public List<String> getProfileLinks() {
-        return profileLinks;
     }
 
 
@@ -51,30 +57,36 @@ public class Person {
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
+        private String uri;
+        private String curie;
+        private String type;
         private String role;
         private String name;
-        private String publisher;
-        private List<String> profileLinks;
 
         public Builder() { }
 
-        public Builder withRole(String role) {
+        public Builder uri(String uri) {
+            this.uri = uri;
+            return this;
+        }
+
+        public Builder curie(String curie) {
+            this.curie = curie;
+            return this;
+        }
+
+        public Builder type(String type) {
+            this.type = type;
+            return this;
+        }
+
+        public Builder role(String role) {
             this.role = role;
             return this;
         }
 
-        public Builder withName(String name) {
+        public Builder name(String name) {
             this.name = name;
-            return this;
-        }
-
-        public Builder withPublisher(String publisher) {
-            this.publisher = publisher;
-            return this;
-        }
-
-        public Builder withProfileLinks(List<String> profileLinks) {
-            this.profileLinks = profileLinks;
             return this;
         }
 

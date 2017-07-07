@@ -8,8 +8,12 @@ import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpTransport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AtlasHttpClient {
+
+    private static final Logger log = LoggerFactory.getLogger(AtlasHttpClient.class);
 
     private final HttpRequestFactory httpRequestFactory;
 
@@ -24,6 +28,7 @@ public class AtlasHttpClient {
 
     public <T> T get(GenericUrl url, Class<T> responseContentClazz) {
         try {
+            log.trace("GET {}", url);
             HttpResponse response = httpRequestFactory.buildGetRequest(url).execute();
             return response.parseAs(responseContentClazz);
         } catch (IOException e) {
@@ -33,10 +38,10 @@ public class AtlasHttpClient {
 
     public HttpHeaders head(GenericUrl url) {
         try {
+            log.trace("HEAD {}", url);
             HttpResponse response = httpRequestFactory.buildHeadRequest(url).execute();
             return response.getHeaders();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Failed to execute HEAD request to " + url, e);
         }
     }
