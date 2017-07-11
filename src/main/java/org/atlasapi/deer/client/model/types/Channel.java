@@ -16,9 +16,9 @@ public class Channel {
 
     private final String id;
     private final String title;
-    private final List<Broadcaster> availableFrom;
+    private final List<Source> availableFrom;
     private final Source source;
-    private final Broadcaster broadcaster;
+    private final Source broadcaster;
     private final List<Alias> aliases;
 
     private Channel(Builder builder) {
@@ -34,7 +34,7 @@ public class Channel {
         return id;
     }
 
-    public List<Broadcaster> getAvailableFrom() {
+    public List<Source> getAvailableFrom() {
         return availableFrom;
     }
 
@@ -42,7 +42,7 @@ public class Channel {
         return title;
     }
 
-    public Broadcaster getBroadcaster() {
+    public Source getBroadcaster() {
         return broadcaster;
     }
 
@@ -65,9 +65,9 @@ public class Channel {
     public static final class Builder {
         private String id;
         private String title;
-        private List<Broadcaster> availableFrom;
+        private List<Source> availableFrom;
         private Source source;
-        private Broadcaster broadcaster;
+        private Source broadcaster;
         private List<Alias> aliases;
 
         public Builder() { }
@@ -82,7 +82,7 @@ public class Channel {
             return this;
         }
 
-        public Builder availableFrom(List<Broadcaster> availableFrom) {
+        public Builder availableFrom(List<Source> availableFrom) {
             this.availableFrom = availableFrom;
             return this;
         }
@@ -92,7 +92,7 @@ public class Channel {
             return this;
         }
 
-        public Builder broadcaster(Broadcaster broadcaster) {
+        public Builder broadcaster(Source broadcaster) {
             this.broadcaster = broadcaster;
             return this;
         }
