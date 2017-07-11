@@ -40,16 +40,24 @@ public class JacksonParser implements ObjectParser {
             Reader reader,
             Class<T> aClass
     ) throws IOException {
-        return mapper.readValue(reader, aClass);
+        try {
+            return mapper.readValue(reader, aClass);
+        } finally {
+            reader.close();
+        }
     }
 
     @Override public Object parseAndClose(
             Reader reader,
             Type type
     ) throws IOException {
-        return mapper.readValue(
-                reader,
-                mapper.getTypeFactory().constructType(type)
-        );
+        try {
+            return mapper.readValue(
+                    reader,
+                    mapper.getTypeFactory().constructType(type)
+            );
+        } finally {
+            reader.close();
+        }
     }
 }
