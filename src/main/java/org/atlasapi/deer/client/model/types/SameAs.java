@@ -32,17 +32,25 @@ public class SameAs {
         return source;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    @Override public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SameAs sameAs = (SameAs) o;
-        return Objects.equals(id, sameAs.id) &&
-                Objects.equals(source, sameAs.source);
+        SameAs that = (SameAs) o;
+        return Objects.equals(this.id, that.id);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, source);
+    @Override public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    private transient String str = null;
+    @Override public String toString() {
+        String str = this.str;
+        if (str == null) {
+            this.str = str = getClass().getSimpleName()
+                    + "@" + System.identityHashCode(this)
+                    + "{" + id + "|" + source + "}";
+        }
+        return str;
     }
 }

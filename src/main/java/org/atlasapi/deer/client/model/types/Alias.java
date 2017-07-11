@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.google.api.client.util.Key;
 
 import java.util.Objects;
 
@@ -33,8 +32,7 @@ public class Alias {
         return value;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    @Override public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Alias alias = (Alias) o;
@@ -42,8 +40,23 @@ public class Alias {
                 Objects.equals(value, alias.value);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(namespace, value);
+    private transient int hash = 0;
+    @Override public int hashCode() {
+        int hash = this.hash;
+        if (hash == 0) {
+            this.hash = hash = Objects.hash(namespace, value);
+        }
+        return hash;
+    }
+
+    private transient String str = null;
+    @Override public String toString() {
+        String str = this.str;
+        if (str == null) {
+            this.str = str = getClass().getSimpleName()
+                    + "@" + System.identityHashCode(this)
+                    + "{" + namespace + "|" + value + "}";
+        }
+        return str;
     }
 }
