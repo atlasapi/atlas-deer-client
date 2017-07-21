@@ -42,7 +42,7 @@ public class Content {
     private final List<String> countriesOfOrigin;
     private final Boolean scheduleOnly;
     private final List<Restriction> restrictions;
-    private final List<String> certificates;
+    private final List<Certificate> certificates;
     private final List<String> languages;
     private final Container container;
     private final List<Series> series;
@@ -172,7 +172,7 @@ public class Content {
         return restrictions;
     }
 
-    public List<String> getCertificates() {
+    public List<Certificate> getCertificates() {
         return certificates;
     }
 
@@ -235,7 +235,7 @@ public class Content {
         private List<String> countriesOfOrigin;
         private Boolean scheduleOnly;
         private List<Restriction> restrictions;
-        private List<String> certificates;
+        private List<Certificate> certificates;
         private List<String> languages;
         private Container container;
         private List<Series> series;
@@ -356,7 +356,7 @@ public class Content {
             return this;
         }
 
-        public Builder certificates(List<String> certificates) {
+        public Builder certificates(List<Certificate> certificates) {
             this.certificates = certificates;
             return this;
         }
