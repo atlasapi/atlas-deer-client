@@ -43,7 +43,8 @@ public class Content {
     private final Boolean scheduleOnly;
     private final List<Restriction> restrictions;
     private final List<Certificate> certificates;
-    private final List<String> languages;
+    private final List<Language> languages;
+    private final List<ReleaseDate> releaseDates;
     private final Container container;
     private final List<Series> series;
     private final List<SubItem> content;
@@ -76,6 +77,7 @@ public class Content {
         this.restrictions = Utils.immutableCopyOfOrEmpty(builder.restrictions);
         this.certificates = Utils.immutableCopyOfOrEmpty(builder.certificates);
         this.languages = Utils.immutableCopyOfOrEmpty(builder.languages);
+        this.releaseDates = Utils.immutableCopyOfOrEmpty(builder.releaseDates);
         this.container = builder.container;
         this.series = Utils.immutableCopyOfOrEmpty(builder.series);
         this.content = Utils.immutableCopyOfOrEmpty(builder.content);
@@ -176,8 +178,12 @@ public class Content {
         return certificates;
     }
 
-    public List<String> getLanguages() {
+    public List<Language> getLanguages() {
         return languages;
+    }
+
+    public List<ReleaseDate> getReleaseDates() {
+        return releaseDates;
     }
 
     public Container getContainer() {
@@ -236,7 +242,8 @@ public class Content {
         private Boolean scheduleOnly;
         private List<Restriction> restrictions;
         private List<Certificate> certificates;
-        private List<String> languages;
+        private List<Language> languages;
+        private List<ReleaseDate> releaseDates;
         private Container container;
         private List<Series> series;
         private List<SubItem> content;
@@ -361,8 +368,13 @@ public class Content {
             return this;
         }
 
-        public Builder languages(List<String> languages) {
+        public Builder languages(List<Language> languages) {
             this.languages = languages;
+            return this;
+        }
+
+        public Builder releaseDates(List<ReleaseDate> releaseDates) {
+            this.releaseDates = releaseDates;
             return this;
         }
 
