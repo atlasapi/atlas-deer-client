@@ -1,14 +1,13 @@
 package org.atlasapi.deer.client.uri;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
+import com.google.api.client.http.GenericUrl;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.net.HostAndPort;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.api.client.http.GenericUrl;
-import com.google.common.collect.ImmutableMap;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class AtlasUrlCreatorTest {
 

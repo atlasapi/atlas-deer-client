@@ -2,6 +2,10 @@ package org.atlasapi.deer.client.model;
 
 import java.util.List;
 
+import org.atlasapi.deer.client.model.types.Content;
+import org.atlasapi.deer.client.model.types.Request;
+import org.atlasapi.deer.client.model.types.TermsAndConditions;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -9,9 +13,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.google.common.collect.Iterables;
-import org.atlasapi.deer.client.model.types.Content;
-import org.atlasapi.deer.client.model.types.Request;
-import org.atlasapi.deer.client.model.types.TermsAndConditions;
 
 @JsonDeserialize(builder = ContentResponse.Builder.class)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -56,7 +57,7 @@ public class ContentResponse {
         return new Builder();
     }
 
-    @JsonPOJOBuilder(withPrefix = "")
+    @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class Builder {
@@ -67,22 +68,22 @@ public class ContentResponse {
 
         public Builder() { }
 
-        public Builder content(List<Content> val) {
+        public Builder withContent(List<Content> val) {
             content = val;
             return this;
         }
 
-        public Builder termsAndConditions(TermsAndConditions val) {
+        public Builder withTermsAndConditions(TermsAndConditions val) {
             termsAndConditions = val;
             return this;
         }
 
-        public Builder results(Integer val) {
+        public Builder withResults(Integer val) {
             results = val;
             return this;
         }
 
-        public Builder request(Request val) {
+        public Builder withRequest(Request val) {
             request = val;
             return this;
         }

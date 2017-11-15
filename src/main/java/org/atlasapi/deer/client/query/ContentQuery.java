@@ -1,7 +1,5 @@
 package org.atlasapi.deer.client.query;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +7,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.atlasapi.deer.client.uri.Annotation;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ContentQuery extends Query {
 

@@ -1,20 +1,21 @@
 package org.atlasapi.deer.client;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.net.HostAndPort;
 import org.atlasapi.deer.client.http.AtlasHttpClient;
 import org.atlasapi.deer.client.model.ContentResponse;
 import org.atlasapi.deer.client.model.ScheduleResponse;
+import org.atlasapi.deer.client.model.types.Schedule;
 import org.atlasapi.deer.client.query.ContentQuery;
 import org.atlasapi.deer.client.query.Query;
 import org.atlasapi.deer.client.query.ScheduleQuery;
 import org.atlasapi.deer.client.uri.AtlasUrlCreator;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpTransport;
+import com.google.common.net.HostAndPort;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
 
@@ -29,36 +30,50 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
 
     @Override
     public ContentResponse getContent(ContentQuery query) {
-        GenericUrl url = getUrl(query);
+        GenericUrl url = getUrl(query, QueryType.Content);
         return httpClient.get(url, ContentResponse.class);
     }
 
     @Override
     public HttpHeaders headContent(ContentQuery query) {
-        GenericUrl url = getUrl(query);
+        GenericUrl url = getUrl(query, QueryType.Content);
         return httpClient.head(url);
     }
 
     @Override
     public ScheduleResponse getSchedule(ScheduleQuery query) {
-        GenericUrl url = getUrl(query);
+        GenericUrl url = getUrl(query, QueryType.Schedule);
         return httpClient.get(url, ScheduleResponse.class);
     }
 
-    private GenericUrl getUrl(Query query) {
+    private GenericUrl getUrl(Query query, QueryType type) {
         GenericUrl url;
-        if(query.getId().isPresent()) {
-            url = urlCreator.getBuilder()
-                    .content(query.getId().get())
-                    .addParams(query.getParams())
-                    .build();
+
+        switch(type){
+            case Content:
+                if(query.getId().isPresent()) {
+                    url = urlCreator.getBuilder()
+                            .content(query.getId().get())
+                            .addParams(query.getParams())
+                            .build();
+                }
+                else {
+                    url = urlCreator.getBuilder()
+                            .content()
+                            .addParams(query.getParams())
+                            .build();
+                }
+                break;
+            case Schedule:
+                url = urlCreator.getBuilder()
+                        .schedule(query.getId().get())
+                        .addParams(query.getParams())
+                        .build();
+                break;
+            default:
+                throw new IllegalArgumentException("Unexpected query type: " + type);
         }
-        else {
-            url = urlCreator.getBuilder()
-                    .content()
-                    .addParams(query.getParams())
-                    .build();
-        }
+
         return url;
     }
 
@@ -107,6 +122,11 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
                 new AtlasUrlCreator(checkNotNull(scheme), checkNotNull(host), checkNotNull(apiKey))
             );
         }
+    }
+
+    private enum QueryType {
+        Content,
+        Schedule
     }
 
 }

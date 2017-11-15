@@ -32,7 +32,7 @@ public class Language {
         return new Builder();
     }
 
-    @JsonPOJOBuilder(withPrefix = "")
+    @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
@@ -41,12 +41,12 @@ public class Language {
 
         public Builder() { }
 
-        public Builder display(String display) {
+        public Builder withDisplay(String display) {
             this.display = display;
             return this;
         }
 
-        public Builder code(String code) {
+        public Builder withCode(String code) {
             this.code = code;
             return this;
         }

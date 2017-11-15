@@ -1,11 +1,13 @@
 package org.atlasapi.deer.client.http;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
 import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpHeaders;
+import com.google.api.client.http.HttpResponseException;
+import com.google.api.client.testing.http.MockHttpTransport;
+import com.google.api.client.testing.http.MockLowLevelHttpResponse;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -14,11 +16,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpHeaders;
-import com.google.api.client.http.HttpResponseException;
-import com.google.api.client.testing.http.MockHttpTransport;
-import com.google.api.client.testing.http.MockLowLevelHttpResponse;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class AtlasHttpClientTest {
 

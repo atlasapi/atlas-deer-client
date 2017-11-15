@@ -44,7 +44,7 @@ public class Restriction {
         return new Builder();
     }
 
-    @JsonPOJOBuilder(withPrefix = "")
+    @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
@@ -55,22 +55,22 @@ public class Restriction {
 
         public Builder() { }
 
-        public Builder authority(String authority) {
+        public Builder withAuthority(String authority) {
             this.authority = authority;
             return this;
         }
 
-        public Builder rating(String rating) {
+        public Builder withRating(String rating) {
             this.rating = rating;
             return this;
         }
 
-        public Builder minimumAge(String minimumAge) {
+        public Builder withMinimumAge(String minimumAge) {
             this.minimumAge = minimumAge;
             return this;
         }
 
-        public Builder message(String message) {
+        public Builder withMessage(String message) {
             this.message = message;
             return this;
         }

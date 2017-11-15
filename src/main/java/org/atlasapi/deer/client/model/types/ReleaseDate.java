@@ -38,7 +38,7 @@ public class ReleaseDate {
         return new Builder();
     }
 
-    @JsonPOJOBuilder(withPrefix = "")
+    @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
@@ -48,17 +48,17 @@ public class ReleaseDate {
 
         public Builder() { }
 
-        public Builder releaseDate(String releaseDate) {
+        public Builder withReleaseDate(String releaseDate) {
             this.releaseDate = releaseDate;
             return this;
         }
 
-        public Builder country(String country) {
+        public Builder withCountry(String country) {
             this.country = country;
             return this;
         }
 
-        public Builder type(String type) {
+        public Builder withType(String type) {
             this.type = type;
             return this;
         }

@@ -52,7 +52,7 @@ public class SubItemSummary {
         return new Builder();
     }
 
-    @JsonPOJOBuilder(withPrefix = "")
+    @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
@@ -64,27 +64,27 @@ public class SubItemSummary {
 
         public Builder() { }
 
-        public Builder item(SubItem item) {
+        public Builder withItem(SubItem item) {
             this.item = item;
             return this;
         }
 
-        public Builder title(String title) {
+        public Builder withTitle(String title) {
             this.title = title;
             return this;
         }
 
-        public Builder description(String description) {
+        public Builder withDescription(String description) {
             this.description = description;
             return this;
         }
 
-        public Builder image(String image) {
+        public Builder withImage(String image) {
             this.image = image;
             return this;
         }
 
-        public Builder episodeNumber(Integer episodeNumber) {
+        public Builder withEpisodeNumber(Integer episodeNumber) {
             this.episodeNumber = episodeNumber;
             return this;
         }

@@ -1,12 +1,13 @@
 package org.atlasapi.deer.client.query;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import org.atlasapi.deer.client.uri.Annotation;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ScheduleQuery extends Query {
 
@@ -52,12 +53,12 @@ public class ScheduleQuery extends Query {
     }
 
     public ScheduleQuery addFrom(ZonedDateTime fromDateTime) {
-        params.put(FROM_PARAM, fromDateTime.toString());
+        params.put(FROM_PARAM, fromDateTime.format(DateTimeFormatter.ISO_INSTANT));
         return this;
     }
 
     public ScheduleQuery addTo(ZonedDateTime toDateTime) {
-        params.put(TO_PARAM, toDateTime.toString());
+        params.put(TO_PARAM, toDateTime.format(DateTimeFormatter.ISO_INSTANT));
         return this;
     }
 }

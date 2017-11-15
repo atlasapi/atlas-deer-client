@@ -1,14 +1,14 @@
 package org.atlasapi.deer.client.http;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.api.client.util.ObjectParser;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.api.client.util.ObjectParser;
 
 /** A parser implementation that uses jackson 2, as google-http-client-jackson2 doesn't work. */
 public class JacksonParser implements ObjectParser {

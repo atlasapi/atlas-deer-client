@@ -38,7 +38,7 @@ public class Source {
         return new Builder();
     }
 
-    @JsonPOJOBuilder(withPrefix = "")
+    @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
@@ -48,17 +48,17 @@ public class Source {
 
         public Builder() { }
 
-        public Builder key(String key) {
+        public Builder withKey(String key) {
             this.key = key;
             return this;
         }
 
-        public Builder name(String name) {
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder country(String country) {
+        public Builder withCountry(String country) {
             this.country = country;
             return this;
         }

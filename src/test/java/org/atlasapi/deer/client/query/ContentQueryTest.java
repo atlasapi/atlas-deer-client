@@ -1,14 +1,15 @@
 package org.atlasapi.deer.client.query;
 
+import org.atlasapi.deer.client.uri.Annotation;
+
+import com.google.common.collect.ImmutableList;
+import org.junit.Before;
+import org.junit.Test;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-
-import com.google.common.collect.ImmutableList;
-import org.atlasapi.deer.client.uri.Annotation;
-import org.junit.Before;
-import org.junit.Test;
 
 public class ContentQueryTest {
 

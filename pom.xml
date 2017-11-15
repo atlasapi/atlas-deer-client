@@ -6,7 +6,7 @@
 
   <groupId>org.atlasapi.deer.client</groupId>
   <artifactId>atlas-deer-client</artifactId>
-  <version>0.3.4-SNAPSHOT</version>
+  <version>0.4.0-SNAPSHOT</version>
   <name>Java Client for Atlas Deer API</name>
 
   <properties>

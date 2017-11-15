@@ -52,7 +52,7 @@ public class Broadcast {
         return new Builder();
     }
 
-    @JsonPOJOBuilder(withPrefix = "")
+    @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
@@ -65,27 +65,27 @@ public class Broadcast {
         public Builder() {}
 
         @JsonProperty("transmission_time")
-        public Builder transmissionStartTime(String transmissionStartTime) {
+        public Builder withTransmissionStartTime(String transmissionStartTime) {
             this.transmissionStartTime = transmissionStartTime;
             return this;
         }
 
-        public Builder transmissionEndTime(String transmissionEndTime) {
+        public Builder withTransmissionEndTime(String transmissionEndTime) {
             this.transmissionEndTime = transmissionEndTime;
             return this;
         }
 
-        public Builder broadcastDuration(Integer broadcastDuration) {
+        public Builder withBroadcastDuration(Integer broadcastDuration) {
             this.broadcastDuration = broadcastDuration;
             return this;
         }
 
-        public Builder broadcastOn(String broadcastOn) {
+        public Builder withBroadcastOn(String broadcastOn) {
             this.broadcastOn = broadcastOn;
             return this;
         }
 
-        public Builder channel(Channel channel) {
+        public Builder withChannel(Channel channel) {
             this.channel = channel;
             return this;
         }

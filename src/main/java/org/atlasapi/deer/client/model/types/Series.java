@@ -56,7 +56,7 @@ public class Series {
         return new Builder();
     }
 
-    @JsonPOJOBuilder(withPrefix = "")
+    @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
@@ -69,32 +69,32 @@ public class Series {
 
         public Builder() {}
 
-        public Builder id(String id) {
+        public Builder withId(String id) {
             this.id = id;
             return this;
         }
 
-        public Builder type(String type) {
+        public Builder withType(String type) {
             this.type = type;
             return this;
         }
 
-        public Builder title(String title) {
+        public Builder withTitle(String title) {
             this.title = title;
             return this;
         }
 
-        public Builder description(String description) {
+        public Builder withDescription(String description) {
             this.description = description;
             return this;
         }
 
-        public Builder seriesNumber(Integer seriesNumber) {
+        public Builder withSeriesNumber(Integer seriesNumber) {
             this.seriesNumber = seriesNumber;
             return this;
         }
 
-        public Builder totalEpisodes(Integer totalEpisodes) {
+        public Builder withTotalEpisodes(Integer totalEpisodes) {
             this.totalEpisodes = totalEpisodes;
             return this;
         }

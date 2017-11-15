@@ -1,12 +1,13 @@
 package org.atlasapi.deer.client.model;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Map;
 
 public abstract class Utils {
 

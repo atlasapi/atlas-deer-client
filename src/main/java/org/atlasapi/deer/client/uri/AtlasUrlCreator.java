@@ -1,17 +1,21 @@
 package org.atlasapi.deer.client.uri;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.util.Map;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.common.collect.Lists;
 import com.google.common.net.HostAndPort;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public class AtlasUrlCreator {
 
+    public static final String API_VERSION = "4";
+    public static final String CONTENT_JSON = "content.json";
+    public static final String SCHEDULE_JSON = "schedules.json";
     public static final String KEY_PARAM = "key";
+    public static final String ID_PARAM = "id";
 
     private final String scheme;
     private final HostAndPort host;
@@ -33,6 +37,7 @@ public class AtlasUrlCreator {
     public interface PathStep {
         FinalStep content();
         FinalStep content(String contentId);
+        FinalStep schedule(String channdlId);
     }
 
     public interface FinalStep {
@@ -57,13 +62,23 @@ public class AtlasUrlCreator {
 
         @Override
         public FinalStep content() {
-            url.setPathParts(Lists.newArrayList("", "4", "content.json"));
+            url.setPathParts(Lists.newArrayList("", API_VERSION, CONTENT_JSON));
+            return this;
+        }
+
+        public FinalStep schedule() {
+            url.setPathParts(Lists.newArrayList("", API_VERSION, SCHEDULE_JSON));
             return this;
         }
 
         @Override
         public FinalStep content(String contentId) {
-            return content().addParam("id", contentId);
+            return content().addParam(ID_PARAM, contentId);
+        }
+
+        @Override
+        public FinalStep schedule(String channelId) {
+            return schedule().addParam(ID_PARAM, channelId);
         }
 
         @Override

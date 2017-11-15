@@ -5,9 +5,6 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import org.atlasapi.deer.client.model.Utils;
-
-import java.util.List;
 
 @JsonDeserialize(builder = Person.Builder.class)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -53,7 +50,7 @@ public class Person {
         return new Builder();
     }
 
-    @JsonPOJOBuilder(withPrefix = "")
+    @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
@@ -65,27 +62,27 @@ public class Person {
 
         public Builder() { }
 
-        public Builder uri(String uri) {
+        public Builder withUri(String uri) {
             this.uri = uri;
             return this;
         }
 
-        public Builder curie(String curie) {
+        public Builder withCurie(String curie) {
             this.curie = curie;
             return this;
         }
 
-        public Builder type(String type) {
+        public Builder withType(String type) {
             this.type = type;
             return this;
         }
 
-        public Builder role(String role) {
+        public Builder withRole(String role) {
             this.role = role;
             return this;
         }
 
-        public Builder name(String name) {
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }

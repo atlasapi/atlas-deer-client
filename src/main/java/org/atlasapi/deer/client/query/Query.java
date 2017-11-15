@@ -1,11 +1,11 @@
 package org.atlasapi.deer.client.query;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public abstract class Query {
 

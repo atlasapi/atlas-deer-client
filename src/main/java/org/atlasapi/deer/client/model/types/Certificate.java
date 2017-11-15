@@ -32,7 +32,7 @@ public class Certificate {
         return new Builder();
     }
 
-    @JsonPOJOBuilder(withPrefix = "")
+    @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
@@ -41,12 +41,12 @@ public class Certificate {
 
         public Builder() { }
 
-        public Builder classification(String classification) {
+        public Builder withClassification(String classification) {
             this.classification = classification;
             return this;
         }
 
-        public Builder code(String code) {
+        public Builder withCode(String code) {
             this.code = code;
             return this;
         }

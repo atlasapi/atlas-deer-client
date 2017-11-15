@@ -3,6 +3,8 @@ package org.atlasapi.deer.client.model.types;
 import java.io.IOException;
 import java.util.List;
 
+import org.atlasapi.deer.client.model.Utils;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonParser;
@@ -13,7 +15,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.google.common.collect.ImmutableList;
-import org.atlasapi.deer.client.model.Utils;
 
 @JsonDeserialize(builder = Content.Builder.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -215,7 +216,7 @@ public class Content {
         return new Builder();
     }
 
-    @JsonPOJOBuilder(withPrefix = "")
+    @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class Builder {
@@ -254,165 +255,165 @@ public class Content {
         public Builder() {
         }
 
-        public Builder id(String id) {
+        public Builder withId(String id) {
             this.id = id;
             return this;
         }
 
-        public Builder type(String type) {
+        public Builder withType(String type) {
             this.type = type;
             return this;
         }
 
-        public Builder aliases(List<Alias> aliases) {
+        public Builder withAliases(List<Alias> aliases) {
             this.aliases = aliases;
             return this;
         }
 
-        public Builder sameAs(List<SameAs> sameAs) {
+        public Builder withSameAs(List<SameAs> sameAs) {
             this.sameAs = sameAs;
             return this;
         }
-        public Builder displayTitle(DisplayTitle displayTitle) {
+        public Builder withDisplayTitle(DisplayTitle displayTitle) {
             this.displayTitle = displayTitle;
             return this;
         }
 
-        public Builder episodeNumber(Integer episodeNumber) {
+        public Builder withEpisodeNumber(Integer episodeNumber) {
             this.episodeNumber = episodeNumber;
             return this;
         }
 
-        public Builder seriesNumber(Integer seriesNumber) {
+        public Builder withSeriesNumber(Integer seriesNumber) {
             this.seriesNumber = seriesNumber;
             return this;
         }
 
-        public Builder specialization(String specialization) {
+        public Builder withSpecialization(String specialization) {
             this.specialization = specialization;
             return this;
         }
 
-        public Builder mediaType(String mediaType) {
+        public Builder withMediaType(String mediaType) {
             this.mediaType = mediaType;
             return this;
         }
 
-        public Builder source(Source source) {
+        public Builder withSource(Source source) {
             this.source = source;
             return this;
         }
 
-        public Builder title(String title) {
+        public Builder withTitle(String title) {
             this.title = title;
             return this;
         }
 
-        public Builder description(String description) {
+        public Builder withDescription(String description) {
             this.description = description;
             return this;
         }
 
-        public Builder image(String image) {
+        public Builder withImage(String image) {
             this.image = image;
             return this;
         }
 
-        public Builder thumbnail(String thumbnail) {
+        public Builder withThumbnail(String thumbnail) {
             this.thumbnail = thumbnail;
             return this;
         }
 
-        public Builder genres(List<String> genres) {
+        public Builder withGenres(List<String> genres) {
             this.genres = genres;
             return this;
         }
 
-        public Builder presentationChannel(String presentationChannel) {
+        public Builder withPresentationChannel(String presentationChannel) {
             this.presentationChannel = presentationChannel;
             return this;
         }
 
-        public Builder priority(String priority) {
+        public Builder withPriority(String priority) {
             this.priority = priority;
             return this;
         }
 
-        public Builder longDescription(String longDescription) {
+        public Builder withLongDescription(String longDescription) {
             this.longDescription = longDescription;
             return this;
         }
 
-        public Builder blackAndWhite(Boolean blackAndWhite) {
+        public Builder withBlackAndWhite(Boolean blackAndWhite) {
             this.blackAndWhite = blackAndWhite;
             return this;
         }
 
-        public Builder countriesOfOrigin(List<String> countriesOfOrigin) {
+        public Builder withCountriesOfOrigin(List<String> countriesOfOrigin) {
             this.countriesOfOrigin = countriesOfOrigin;
             return this;
         }
 
-        public Builder scheduleOnly(Boolean scheduleOnly) {
+        public Builder withScheduleOnly(Boolean scheduleOnly) {
             this.scheduleOnly = scheduleOnly;
             return this;
         }
 
-        public Builder restrictions(List<Restriction> restrictions) {
+        public Builder withRestrictions(List<Restriction> restrictions) {
             this.restrictions = restrictions;
             return this;
         }
 
-        public Builder certificates(List<Certificate> certificates) {
+        public Builder withCertificates(List<Certificate> certificates) {
             this.certificates = certificates;
             return this;
         }
 
-        public Builder languages(List<Language> languages) {
+        public Builder withLanguages(List<Language> languages) {
             this.languages = languages;
             return this;
         }
 
-        public Builder releaseDates(List<ReleaseDate> releaseDates) {
+        public Builder withReleaseDates(List<ReleaseDate> releaseDates) {
             this.releaseDates = releaseDates;
             return this;
         }
 
-        public Builder container(Container container) {
+        public Builder withContainer(Container container) {
             this.container = container;
             return this;
         }
 
         // episode has series singular
         @JsonIgnore
-        public Builder series(Series series) {
+        public Builder withSeries(Series series) {
             this.series = series == null ? null : ImmutableList.of(series);
             return this;
         }
 
         // brand has series plural
         @JsonDeserialize(using = SeriesDeserializer.class)
-        public Builder series(List<Series> series) {
+        public Builder withSeries(List<Series> series) {
             this.series = series;
             return this;
         }
 
-        public Builder content(List<SubItem> content) {
+        public Builder withContent(List<SubItem> content) {
             this.content = content;
             return this;
         }
 
-        public Builder subItemSummaries(List<SubItemSummary> subItemSummaries) {
+        public Builder withSubItemSummaries(List<SubItemSummary> subItemSummaries) {
             this.subItemSummaries = subItemSummaries;
             return this;
         }
 
-        public Builder broadcasts(List<Broadcast> broadcasts) {
+        public Builder withBroadcasts(List<Broadcast> broadcasts) {
             this.broadcasts = broadcasts;
             return this;
         }
 
-        public Builder people(List<Person> people) {
+        public Builder withPeople(List<Person> people) {
             this.people = people;
             return this;
         }

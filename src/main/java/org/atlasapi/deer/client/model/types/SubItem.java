@@ -34,7 +34,7 @@ public class SubItem {
         return new Builder();
     }
 
-    @JsonPOJOBuilder(withPrefix = "")
+    @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
@@ -43,12 +43,12 @@ public class SubItem {
 
         public Builder() { }
 
-        public Builder id(String id) {
+        public Builder withId(String id) {
             this.id = id;
             return this;
         }
 
-        public Builder type(String type) {
+        public Builder withType(String type) {
             this.type = type;
             return this;
         }
