@@ -17,6 +17,7 @@ public class Broadcast {
     private final Integer broadcastDuration;
     private final String broadcastOn;
     private final Channel channel;
+    private final String live;
 
     private Broadcast(Builder builder) {
         this.transmissionStartTime = builder.transmissionStartTime;
@@ -24,6 +25,7 @@ public class Broadcast {
         this.broadcastDuration = builder.broadcastDuration;
         this.broadcastOn = builder.broadcastOn;
         this.channel = builder.channel;
+        this.live = builder.live;
     }
 
     @JsonProperty("transmission_time")
@@ -47,6 +49,9 @@ public class Broadcast {
         return channel;
     }
 
+    public String getLive() {
+        return live;
+    }
 
     public static Builder builder() {
         return new Builder();
@@ -61,6 +66,7 @@ public class Broadcast {
         private Integer broadcastDuration;
         private String broadcastOn;
         private Channel channel;
+        private String live;
 
         public Builder() {}
 
@@ -87,6 +93,11 @@ public class Broadcast {
 
         public Builder withChannel(Channel channel) {
             this.channel = channel;
+            return this;
+        }
+
+        public Builder withLive(String live) {
+            this.live = live;
             return this;
         }
 
