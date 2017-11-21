@@ -17,7 +17,7 @@ public class Broadcast {
     private final Integer broadcastDuration;
     private final String broadcastOn;
     private final Channel channel;
-    private final String live;
+    private final boolean live;
 
     private Broadcast(Builder builder) {
         this.transmissionStartTime = builder.transmissionStartTime;
@@ -49,7 +49,7 @@ public class Broadcast {
         return channel;
     }
 
-    public String getLive() {
+    public boolean getLive() {
         return live;
     }
 
@@ -66,7 +66,7 @@ public class Broadcast {
         private Integer broadcastDuration;
         private String broadcastOn;
         private Channel channel;
-        private String live;
+        private boolean live;
 
         public Builder() {}
 
@@ -96,7 +96,7 @@ public class Broadcast {
             return this;
         }
 
-        public Builder withLive(String live) {
+        public Builder withLive(boolean live) {
             this.live = live;
             return this;
         }
