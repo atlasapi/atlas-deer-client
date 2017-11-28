@@ -16,6 +16,7 @@ public class Person {
     private final String type;
     private final String name;
     private final String role;
+    private final String character;
 
     private Person(Builder builder) {
         this.uri = builder.uri;
@@ -23,6 +24,7 @@ public class Person {
         this.type = builder.type;
         this.role = builder.role;
         this.name = builder.name;
+        this.character = builder.character;
     }
 
     public String getUri() {
@@ -45,6 +47,10 @@ public class Person {
         return name;
     }
 
+    public String getCharacter() {
+        return character;
+    }
+
 
     public static Builder builder() {
         return new Builder();
@@ -59,6 +65,7 @@ public class Person {
         private String type;
         private String role;
         private String name;
+        private String character;
 
         public Builder() { }
 
@@ -84,6 +91,11 @@ public class Person {
 
         public Builder withName(String name) {
             this.name = name;
+            return this;
+        }
+
+        public Builder withCharacter(String character) {
+            this.character = character;
             return this;
         }
 
