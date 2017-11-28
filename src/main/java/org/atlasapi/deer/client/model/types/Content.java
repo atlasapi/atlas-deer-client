@@ -52,6 +52,7 @@ public class Content {
     private final List<SubItemSummary> subItemSummaries;
     private final List<Broadcast> broadcasts;
     private final List<Person> people;
+    private final Integer year;
 
     private Content(Builder builder) {
         this.id = builder.id;
@@ -85,6 +86,7 @@ public class Content {
         this.subItemSummaries = Utils.immutableCopyOfOrEmpty(builder.subItemSummaries);
         this.broadcasts = Utils.immutableCopyOfOrEmpty(builder.broadcasts);
         this.people = Utils.immutableCopyOfOrEmpty(builder.people);
+        this.year = builder.year;
     }
 
     public String getId() {
@@ -211,6 +213,10 @@ public class Content {
         return people;
     }
 
+    public Integer getYear() {
+        return year;
+    }
+
 
     public static Builder builder() {
         return new Builder();
@@ -251,6 +257,7 @@ public class Content {
         private List<SubItemSummary> subItemSummaries;
         private List<Broadcast> broadcasts;
         private List<Person> people;
+        private Integer year;
 
         public Builder() {
         }
@@ -415,6 +422,11 @@ public class Content {
 
         public Builder withPeople(List<Person> people) {
             this.people = people;
+            return this;
+        }
+
+        public Builder withYear(Integer year) {
+            this.year = year;
             return this;
         }
 
