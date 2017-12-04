@@ -1,23 +1,32 @@
 package org.atlasapi.deer.client.model.types;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.common.collect.Ordering;
 
 @JsonDeserialize(builder = Broadcast.Builder.class)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Broadcast {
 
-    private final String transmissionStartTime;
-    private final String transmissionEndTime;
+    private static final Ordering<Broadcast> START_TIME_ORDERING = new BroadcastStartTimeOrdering();
+
+    private final Instant transmissionStartTime;
+    private final Instant transmissionEndTime;
     private final Integer broadcastDuration;
     private final String broadcastOn;
     private final Channel channel;
     private final boolean live;
+    private final Duration transmissionInterval;
 
     private Broadcast(Builder builder) {
         this.transmissionStartTime = builder.transmissionStartTime;
@@ -26,14 +35,16 @@ public class Broadcast {
         this.broadcastOn = builder.broadcastOn;
         this.channel = builder.channel;
         this.live = builder.live;
+        this.transmissionInterval = Duration.between(
+                ZonedDateTime.ofInstant(builder.transmissionStartTime, ZoneId.of("UTC")),
+                ZonedDateTime.ofInstant(builder.transmissionEndTime, ZoneId.of("UTC")));
     }
 
-    @JsonProperty("transmission_time")
-    public String getTransmissionStartTime() {
+    public Instant getTransmissionStartTime() {
         return transmissionStartTime;
     }
 
-    public String getTransmissionEndTime() {
+    public Instant getTransmissionEndTime() {
         return transmissionEndTime;
     }
 
@@ -53,6 +64,18 @@ public class Broadcast {
         return live;
     }
 
+    public static Ordering<Broadcast> startTimeOrdering() {
+        return START_TIME_ORDERING;
+    }
+
+    private static final class BroadcastStartTimeOrdering extends Ordering<Broadcast> {
+
+        @Override
+        public int compare(Broadcast left, Broadcast right) {
+            return left.getTransmissionStartTime().compareTo(right.transmissionStartTime);
+        }
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -61,8 +84,8 @@ public class Broadcast {
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
-        private String transmissionStartTime;
-        private String transmissionEndTime;
+        private Instant transmissionStartTime;
+        private Instant transmissionEndTime;
         private Integer broadcastDuration;
         private String broadcastOn;
         private Channel channel;
@@ -71,12 +94,12 @@ public class Broadcast {
         public Builder() {}
 
         @JsonProperty("transmission_time")
-        public Builder withTransmissionStartTime(String transmissionStartTime) {
+        public Builder withTransmissionStartTime(Instant transmissionStartTime) {
             this.transmissionStartTime = transmissionStartTime;
             return this;
         }
 
-        public Builder withTransmissionEndTime(String transmissionEndTime) {
+        public Builder withTransmissionEndTime(Instant transmissionEndTime) {
             this.transmissionEndTime = transmissionEndTime;
             return this;
         }
