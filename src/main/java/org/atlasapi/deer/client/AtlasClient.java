@@ -3,7 +3,6 @@ package org.atlasapi.deer.client;
 import org.atlasapi.deer.client.http.AtlasHttpClient;
 import org.atlasapi.deer.client.model.ContentResponse;
 import org.atlasapi.deer.client.model.ScheduleResponse;
-import org.atlasapi.deer.client.model.types.Schedule;
 import org.atlasapi.deer.client.query.ContentQuery;
 import org.atlasapi.deer.client.query.Query;
 import org.atlasapi.deer.client.query.ScheduleQuery;
