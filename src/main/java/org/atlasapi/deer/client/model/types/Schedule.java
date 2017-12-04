@@ -3,12 +3,10 @@ package org.atlasapi.deer.client.model.types;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Ordering;
 
@@ -16,14 +14,6 @@ import com.google.common.collect.Ordering;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Schedule {
-
-    public static Function<Schedule, ImmutableList<ItemAndBroadcast>> toEntries() {
-        return TO_ENTRIES;
-    }
-
-    private static final Function<Schedule, ImmutableList<ItemAndBroadcast>> TO_ENTRIES
-            = input -> input.entries;
-
     private final Channel channel;
     private final String source;
     private final ImmutableList<ItemAndBroadcast> entries;
@@ -38,12 +28,10 @@ public class Schedule {
         return channel;
     }
 
-    @JsonProperty("source")
     public String getSource() {
         return source;
     }
 
-    @JsonProperty("entries")
     public List<ItemAndBroadcast> getEntries() {
         return entries;
     }

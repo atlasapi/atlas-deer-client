@@ -1,8 +1,9 @@
 package org.atlasapi.deer.client.model.types;
 
-import java.util.Date;
-
-import com.metabroadcast.common.time.IntervalOrdering;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,8 +12,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.google.common.collect.Ordering;
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
 
 @JsonDeserialize(builder = Broadcast.Builder.class)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -21,13 +20,13 @@ public class Broadcast {
 
     private static final Ordering<Broadcast> START_TIME_ORDERING = new BroadcastStartTimeOrdering();
 
-    private final Date transmissionStartTime;
-    private final Date transmissionEndTime;
+    private final Instant transmissionStartTime;
+    private final Instant transmissionEndTime;
     private final Integer broadcastDuration;
     private final String broadcastOn;
     private final Channel channel;
     private final boolean live;
-    private final Interval transmissionInterval;
+    private final Duration transmissionInterval;
 
     private Broadcast(Builder builder) {
         this.transmissionStartTime = builder.transmissionStartTime;
@@ -36,37 +35,31 @@ public class Broadcast {
         this.broadcastOn = builder.broadcastOn;
         this.channel = builder.channel;
         this.live = builder.live;
-        this.transmissionInterval = new Interval(
-                new DateTime(builder.transmissionStartTime),
-                new DateTime(builder.transmissionEndTime));
+        this.transmissionInterval = Duration.between(
+                ZonedDateTime.ofInstant(builder.transmissionStartTime, ZoneId.of("UTC")),
+                ZonedDateTime.ofInstant(builder.transmissionEndTime, ZoneId.of("UTC")));
     }
 
-    @JsonProperty("transmission_time")
-    public Date getTransmissionStartTime() {
+    public Instant getTransmissionStartTime() {
         return transmissionStartTime;
     }
 
-    @JsonProperty("transmission_end_time")
-    public Date getTransmissionEndTime() {
+    public Instant getTransmissionEndTime() {
         return transmissionEndTime;
     }
 
-    @JsonProperty("broadcast_duration")
     public Integer getBroadcastDuration() {
         return broadcastDuration;
     }
 
-    @JsonProperty("broadcast_on")
     public String getBroadcastOn() {
         return broadcastOn;
     }
 
-    @JsonProperty("channel")
     public Channel getChannel() {
         return channel;
     }
 
-    @JsonProperty("live")
     public boolean getLive() {
         return live;
     }
@@ -79,8 +72,7 @@ public class Broadcast {
 
         @Override
         public int compare(Broadcast left, Broadcast right) {
-            return IntervalOrdering.byStartShortestFirst()
-                    .compare(left.transmissionInterval, right.transmissionInterval);
+            return left.getTransmissionStartTime().compareTo(right.transmissionStartTime);
         }
     }
 
@@ -92,8 +84,8 @@ public class Broadcast {
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
-        private Date transmissionStartTime;
-        private Date transmissionEndTime;
+        private Instant transmissionStartTime;
+        private Instant transmissionEndTime;
         private Integer broadcastDuration;
         private String broadcastOn;
         private Channel channel;
@@ -102,12 +94,12 @@ public class Broadcast {
         public Builder() {}
 
         @JsonProperty("transmission_time")
-        public Builder withTransmissionStartTime(Date transmissionStartTime) {
+        public Builder withTransmissionStartTime(Instant transmissionStartTime) {
             this.transmissionStartTime = transmissionStartTime;
             return this;
         }
 
-        public Builder withTransmissionEndTime(Date transmissionEndTime) {
+        public Builder withTransmissionEndTime(Instant transmissionEndTime) {
             this.transmissionEndTime = transmissionEndTime;
             return this;
         }
