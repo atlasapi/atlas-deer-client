@@ -52,6 +52,10 @@ public class Broadcast {
         return broadcastDuration;
     }
 
+    public Duration getTransmissionInterval() {
+        return transmissionInterval;
+    }
+
     public String getBroadcastOn() {
         return broadcastOn;
     }
