@@ -8,15 +8,6 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.google.common.base.Function;
-import com.google.common.base.Functions;
-import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Maps;
-import com.metabroadcast.common.collect.ImmutableOptionalMap;
-import com.metabroadcast.common.collect.OptionalMap;
-
-import java.util.Map;
 
 @JsonDeserialize(builder = Topic.Builder.class)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -26,6 +17,29 @@ public class Topic extends Described {
     private Type type;
     private String namespace;
     private String value;
+
+    private Topic(Builder builder) {
+        super(builder);
+        this.type = builder.type;
+        this.namespace = builder.namespace;
+        this.value = builder.value;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public String getNamespace() {
+        return namespace;
+    }
+
+    public String getValue() {
+        return value;
+    }
 
     @JsonSerialize(using = ToStringSerializer.class)
     public enum Type {
@@ -47,33 +61,11 @@ public class Topic extends Described {
         }
 
         @JsonCreator
-        public static Type fromString(String str) { return valueOf(str.toUpperCase()); }
+        public static Type fromString(String str) {
+            return valueOf(str.toUpperCase());
+        }
 
     }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public String getNamespace() {
-        return namespace;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    private Topic(Builder builder) {
-        super(builder);
-        this.type = builder.type;
-        this.namespace = builder.namespace;
-        this.value = value;
-    }
-
 
     @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)

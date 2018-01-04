@@ -61,7 +61,9 @@ public class Content extends Described {
         }
 
         @JsonCreator
-        public static Type fromString(String str) { return valueOf(str.toUpperCase()); }
+        public static Type fromString(String str) {
+            return valueOf(str.toUpperCase());
+        }
 
     }
 
@@ -151,7 +153,9 @@ public class Content extends Described {
         return people;
     }
 
-    public List<Tag> getTags() { return tags; }
+    public List<Tag> getTags() {
+        return ImmutableList.copyOf(tags);
+    }
 
     public Integer getYear() {
         return year;

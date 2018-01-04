@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
@@ -71,7 +72,7 @@ public abstract class Described extends Identified{
     }
 
     public List<String> getGenres() {
-        return genres;
+        return ImmutableList.copyOf(genres);
     }
 
     public String getPresentationChannel() {

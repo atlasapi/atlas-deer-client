@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
@@ -27,11 +28,11 @@ public abstract class Identified {
     }
 
     public List<Alias> getAliases() {
-        return aliases;
+        return ImmutableList.copyOf(aliases);
     }
 
     public List<SameAs> getSameAs() {
-        return sameAs;
+        return ImmutableList.copyOf(sameAs);
     }
 
     @JsonPOJOBuilder()
