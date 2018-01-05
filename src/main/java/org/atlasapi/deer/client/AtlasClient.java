@@ -3,9 +3,11 @@ package org.atlasapi.deer.client;
 import org.atlasapi.deer.client.http.AtlasHttpClient;
 import org.atlasapi.deer.client.model.ContentResponse;
 import org.atlasapi.deer.client.model.ScheduleResponse;
+import org.atlasapi.deer.client.model.TopicResponse;
 import org.atlasapi.deer.client.query.ContentQuery;
 import org.atlasapi.deer.client.query.Query;
 import org.atlasapi.deer.client.query.ScheduleQuery;
+import org.atlasapi.deer.client.query.TopicQuery;
 import org.atlasapi.deer.client.uri.AtlasUrlCreator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,6 +47,12 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
         return httpClient.get(url, ScheduleResponse.class);
     }
 
+    //@Override
+    public TopicResponse getTopic(TopicQuery query) {
+        GenericUrl url = getUrl(query, QueryType.Topic);
+        return httpClient.get(url, TopicResponse.class);
+    }
+
     private GenericUrl getUrl(Query query, QueryType type) {
         GenericUrl url;
 
@@ -66,6 +74,12 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
             case Schedule:
                 url = urlCreator.getBuilder()
                         .schedule(query.getId().get())
+                        .addParams(query.getParams())
+                        .build();
+                break;
+            case Topic:
+                url = urlCreator.getBuilder()
+                        .topic()
                         .addParams(query.getParams())
                         .build();
                 break;
@@ -125,7 +139,8 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
 
     private enum QueryType {
         Content,
-        Schedule
+        Schedule,
+        Topic
     }
 
 }

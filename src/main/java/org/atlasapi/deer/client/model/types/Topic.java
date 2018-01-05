@@ -14,13 +14,13 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Topic extends Described {
 
-    private Type type;
+    private Type topicType;
     private String namespace;
     private String value;
 
     private Topic(Builder builder) {
         super(builder);
-        this.type = builder.type;
+        this.topicType = builder.topicType;
         this.namespace = builder.namespace;
         this.value = builder.value;
     }
@@ -30,7 +30,7 @@ public class Topic extends Described {
     }
 
     public Type getType() {
-        return type;
+        return topicType;
     }
 
     public String getNamespace() {
@@ -72,7 +72,7 @@ public class Topic extends Described {
     @JsonIgnoreProperties(ignoreUnknown = true)
     @SuppressWarnings("unchecked")
     public static final class Builder<B extends Builder<B>> extends Described.Builder<B> {
-        private Type type;
+        private Type topicType;
         private String namespace;
         private String value;
 
@@ -80,8 +80,8 @@ public class Topic extends Described {
 
         }
 
-        public B withType(Type val) {
-            type = val;
+        public B withTopicType(Type val) {
+            topicType = val;
             return (B) this;
         }
 

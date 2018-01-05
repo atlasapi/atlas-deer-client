@@ -14,6 +14,7 @@ public class AtlasUrlCreator {
     public static final String API_VERSION = "4";
     public static final String CONTENT_JSON = "content.json";
     public static final String SCHEDULE_JSON = "schedules.json";
+    public static final String TOPIC_JSON = "topics.json";
     public static final String KEY_PARAM = "key";
     public static final String ID_PARAM = "id";
 
@@ -38,6 +39,7 @@ public class AtlasUrlCreator {
         FinalStep content();
         FinalStep content(String contentId);
         FinalStep schedule(String channdlId);
+        FinalStep topic();
     }
 
     public interface FinalStep {
@@ -68,6 +70,11 @@ public class AtlasUrlCreator {
 
         public FinalStep schedule() {
             url.setPathParts(Lists.newArrayList("", API_VERSION, SCHEDULE_JSON));
+            return this;
+        }
+
+        public FinalStep topic() {
+            url.setPathParts(Lists.newArrayList("", API_VERSION, TOPIC_JSON));
             return this;
         }
 
