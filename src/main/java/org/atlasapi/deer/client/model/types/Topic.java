@@ -29,7 +29,7 @@ public class Topic extends Described {
         return new Builder();
     }
 
-    public Type getType() {
+    public Type getTopicType() {
         return topicType;
     }
 
