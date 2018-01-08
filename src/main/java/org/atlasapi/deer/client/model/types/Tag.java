@@ -72,10 +72,14 @@ public class Tag {
         TRANSCRIPTION_SUBTITLES("transcription:subtitles"),
         TRANSCRIPTION_SUBTITLES_REALTIME("transcription:subtitles:realtime");
 
+        private static ImmutableSet<Relationship> ALL = ImmutableSet.copyOf(values());
+
+        public static ImmutableSet<Relationship> all() {
+            return ALL;
+        }
+
         private static final OptionalMap<String, Relationship> INDEX =
                 ImmutableOptionalMap.fromMap(Maps.uniqueIndex(all(), Relationship::key));
-
-        private static ImmutableSet<Relationship> ALL = ImmutableSet.copyOf(values());
 
         private final String key;
 
@@ -90,10 +94,6 @@ public class Tag {
         @Override
         public String toString() {
             return key;
-        }
-
-        public static ImmutableSet<Relationship> all() {
-            return ALL;
         }
 
         @JsonCreator

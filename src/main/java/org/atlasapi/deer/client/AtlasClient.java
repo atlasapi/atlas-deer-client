@@ -47,7 +47,7 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
         return httpClient.get(url, ScheduleResponse.class);
     }
 
-    //@Override
+    @Override
     public TopicResponse getTopic(TopicQuery query) {
         GenericUrl url = getUrl(query, QueryType.Topic);
         return httpClient.get(url, TopicResponse.class);
