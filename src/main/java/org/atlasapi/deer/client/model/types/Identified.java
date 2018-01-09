@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.google.common.collect.ImmutableList;
+import org.atlasapi.deer.client.model.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonDeserialize(builder = Identified.Builder.class)
@@ -19,8 +21,8 @@ public abstract class Identified {
 
     protected Identified(Builder builder) {
         this.id = builder.id;
-        this.aliases = builder.aliases;
-        this.sameAs = builder.sameAs;
+        this.aliases = Utils.immutableCopyOfOrEmpty(builder.aliases);
+        this.sameAs = Utils.immutableCopyOfOrEmpty(builder.sameAs);
     }
 
     public String getId() {
@@ -28,11 +30,11 @@ public abstract class Identified {
     }
 
     public List<Alias> getAliases() {
-        return ImmutableList.copyOf(aliases);
+        return aliases;
     }
 
     public List<SameAs> getSameAs() {
-        return ImmutableList.copyOf(sameAs);
+        return sameAs;
     }
 
     @JsonPOJOBuilder()

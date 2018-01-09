@@ -154,7 +154,7 @@ public class Content extends Described {
     }
 
     public List<Tag> getTags() {
-        return ImmutableList.copyOf(tags);
+        return tags;
     }
 
     public Integer getYear() {

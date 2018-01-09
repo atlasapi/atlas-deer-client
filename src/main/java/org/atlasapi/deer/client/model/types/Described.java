@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.google.common.collect.ImmutableList;
+import org.atlasapi.deer.client.model.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonDeserialize(builder = Described.Builder.class)
@@ -34,7 +36,7 @@ public abstract class Described extends Identified{
         this.longDescription = builder.longDescription;
         this.mediaType = builder.mediaType;
         this.specialization = builder.specialization;
-        this.genres = builder.genres;
+        this.genres = Utils.immutableCopyOfOrEmpty(builder.genres);
         this.source = builder.source;
         this.image = builder.image;
         this.thumbnail = builder.thumbnail;
@@ -72,7 +74,7 @@ public abstract class Described extends Identified{
     }
 
     public List<String> getGenres() {
-        return ImmutableList.copyOf(genres);
+        return genres;
     }
 
     public String getPresentationChannel() {
