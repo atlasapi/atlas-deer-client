@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -304,8 +305,10 @@ public class Content extends Described {
             ) throws IOException {
                 switch (jsonParser.currentToken()) {
                 case START_ARRAY:
+                    if(jsonParser.nextToken() == JsonToken.END_ARRAY) {
+                        return ImmutableList.of();
+                    }
                     ImmutableList.Builder<Series> builder = ImmutableList.builder();
-                    jsonParser.nextToken();
                     builder.addAll(jsonParser.readValuesAs(Series.class));
                     return builder.build();
                 default:
