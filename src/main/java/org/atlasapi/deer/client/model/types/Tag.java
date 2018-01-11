@@ -1,7 +1,6 @@
 package org.atlasapi.deer.client.model.types;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -14,35 +13,28 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.metabroadcast.common.collect.ImmutableOptionalMap;
 import com.metabroadcast.common.collect.OptionalMap;
-import org.atlasapi.media.entity.Publisher;
 
 @JsonDeserialize(builder = Tag.Builder.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Tag {
 
-    private long topicId;
-    private Publisher publisher;
+    private TopicTag topic;
     private Boolean supervised;
     private Float weighting;
     private Relationship relationship;
     private Integer offset;
 
     private Tag(Builder builder) {
-        this.topicId = builder.topicId;
-        this.publisher = builder.publisher;
+        this.topic = builder.topic;
         this.supervised = builder.supervised;
         this.weighting = builder.weighting;
         this.relationship = builder.relationship;
         this.offset = builder.offset;
     }
 
-    public long getTopicId() {
-        return topicId;
-    }
-
-    public Publisher getPublisher() {
-        return publisher;
+    public TopicTag getTopic() {
+        return topic;
     }
 
     public Boolean isSupervised() {
@@ -110,8 +102,7 @@ public class Tag {
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class Builder {
-        private long topicId;
-        private Publisher publisher;
+        private TopicTag topic;
         private Boolean supervised;
         private Float weighting;
         private Relationship relationship;
@@ -121,19 +112,8 @@ public class Tag {
 
         }
 
-        public Builder withTopicId(long val) {
-            topicId = val;
-            return this;
-        }
-
-        @JsonProperty
-        public Builder withPublisher(String val) {
-            return withPublisher(Publisher.fromKey(val).valueOrNull());
-        }
-
-        @JsonIgnore
-        public Builder withPublisher(Publisher val) {
-            publisher = val;
+        public Builder withTopic(TopicTag val) {
+            topic = val;
             return this;
         }
 
@@ -162,5 +142,26 @@ public class Tag {
         }
 
 
+    }
+
+    public static class TopicTag {
+        private final String id;
+        private final String type;
+
+        public TopicTag(
+                @JsonProperty("id") String id,
+                @JsonProperty("type") String type
+        ) {
+           this.id = id;
+           this.type = type;
+        }
+
+        public String getId() {
+            return this.id;
+        }
+
+        public String getType() {
+            return this.type;
+        }
     }
 }
