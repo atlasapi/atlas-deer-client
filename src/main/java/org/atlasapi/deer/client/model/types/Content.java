@@ -28,6 +28,7 @@ public class Content extends Described {
     private final DisplayTitle displayTitle;
     private final Integer episodeNumber;
     private final Integer seriesNumber;
+    private final Integer totalEpisodes;
     private final Boolean blackAndWhite;
     private final List<String> countriesOfOrigin;
     private final List<Restriction> restrictions;
@@ -74,6 +75,7 @@ public class Content extends Described {
         this.displayTitle = builder.displayTitle;
         this.episodeNumber = builder.episodeNumber;
         this.seriesNumber = builder.seriesNumber;
+        this.totalEpisodes = builder.totalEpisodes;
         this.blackAndWhite = builder.blackAndWhite;
         this.countriesOfOrigin = Utils.immutableCopyOfOrEmpty(builder.countriesOfOrigin);
         this.restrictions = Utils.immutableCopyOfOrEmpty(builder.restrictions);
@@ -104,6 +106,10 @@ public class Content extends Described {
 
     public Integer getSeriesNumber() {
         return seriesNumber;
+    }
+
+    public Integer getTotalEpisodes() {
+        return totalEpisodes;
     }
 
     public Boolean getBlackAndWhite() {
@@ -176,6 +182,7 @@ public class Content extends Described {
         private DisplayTitle displayTitle;
         private Integer episodeNumber;
         private Integer seriesNumber;
+        private Integer totalEpisodes;
         private Boolean blackAndWhite;
         private List<String> countriesOfOrigin;
         private List<Restriction> restrictions;
@@ -211,6 +218,11 @@ public class Content extends Described {
 
         public B withSeriesNumber(Integer seriesNumber) {
             this.seriesNumber = seriesNumber;
+            return (B) this;
+        }
+
+        public B withTotalEpisodes(Integer totalEpisodes) {
+            this.totalEpisodes = totalEpisodes;
             return (B) this;
         }
 
