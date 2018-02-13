@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 public class AtlasHttpClient {
 
     private static final Logger log = LoggerFactory.getLogger(AtlasHttpClient.class);
+    private static final int CONNECTION_TIMEOUT_MS = 10 * 1000;
+    private static final int RETRIES = 3;
 
     private final HttpRequestFactory httpRequestFactory;
 
@@ -29,7 +31,11 @@ public class AtlasHttpClient {
     public <T> T get(GenericUrl url, Class<T> responseContentClazz) {
         try {
             log.trace("GET {}", url);
-            HttpResponse response = httpRequestFactory.buildGetRequest(url).execute();
+            HttpResponse response = httpRequestFactory.buildGetRequest(url)
+                    .setConnectTimeout(CONNECTION_TIMEOUT_MS)
+                    .setReadTimeout(CONNECTION_TIMEOUT_MS)
+                    .setNumberOfRetries(RETRIES)
+                    .execute();
             return response.parseAs(responseContentClazz);
         } catch (IOException e) {
             throw new RuntimeException("Failed to execute GET request to " + url, e);
