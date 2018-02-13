@@ -1,9 +1,5 @@
 package org.atlasapi.deer.client.model.types;
 
-import java.util.List;
-
-import org.atlasapi.deer.client.model.Utils;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -21,14 +17,12 @@ public class Topic extends Described {
     private Type topicType;
     private String namespace;
     private String value;
-    private List<Alias> aliases;
 
     private Topic(Builder builder) {
         super(builder);
         this.topicType = builder.topicType;
         this.namespace = builder.namespace;
         this.value = builder.value;
-        this.aliases = Utils.immutableCopyOfOrEmpty(builder.aliases);
     }
 
     public static Builder<?> builder() {
@@ -45,10 +39,6 @@ public class Topic extends Described {
 
     public String getValue() {
         return value;
-    }
-
-    public List<Alias> getAliases() {
-        return aliases;
     }
 
     @JsonSerialize(using = ToStringSerializer.class)
@@ -85,7 +75,6 @@ public class Topic extends Described {
         private Type topicType;
         private String namespace;
         private String value;
-        private List<Alias> aliases;
 
         public Builder() {
 
@@ -103,11 +92,6 @@ public class Topic extends Described {
 
         public B withValue(String val) {
             value = val;
-            return (B) this;
-        }
-
-        public B withAliases(List<Alias> val) {
-            aliases = val;
             return (B) this;
         }
 
