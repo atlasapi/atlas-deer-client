@@ -92,6 +92,29 @@ public class Content extends Described {
         this.year = builder.year;
     }
 
+    public static Builder<?> builder(Content content) {
+        return ((Builder<?>) Described.builder(content))
+                .withType(content.type)
+                .withDisplayTitle(content.displayTitle)
+                .withEpisodeNumber(content.episodeNumber)
+                .withSeriesNumber(content.seriesNumber)
+                .withTotalEpisodes(content.totalEpisodes)
+                .withBlackAndWhite(content.blackAndWhite)
+                .withCountriesOfOrigin(content.countriesOfOrigin)
+                .withRestrictions(content.restrictions)
+                .withCertificates(content.certificates)
+                .withLanguages(content.languages)
+                .withReleaseDates(content.releaseDates)
+                .withContainer(content.container)
+                .withSeries(content.series)
+                .withContent(content.content)
+                .withSubItemSummaries(content.subItemSummaries)
+                .withBroadcasts(content.broadcasts)
+                .withPeople(content.people)
+                .withTags(content.tags)
+                .withYear(content.year);
+    }
+
     public Type getType() {
         return type;
     }

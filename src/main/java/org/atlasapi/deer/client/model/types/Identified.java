@@ -5,10 +5,8 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.google.common.collect.ImmutableList;
 import org.atlasapi.deer.client.model.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @JsonDeserialize(builder = Identified.Builder.class)
@@ -23,6 +21,13 @@ public abstract class Identified {
         this.id = builder.id;
         this.aliases = Utils.immutableCopyOfOrEmpty(builder.aliases);
         this.sameAs = Utils.immutableCopyOfOrEmpty(builder.sameAs);
+    }
+
+    public static Builder<?> builder(Identified identified) {
+        return new Builder<>()
+                .withId(identified.id)
+                .withAliases(identified.aliases)
+                .withSameAs(identified.sameAs);
     }
 
     public String getId() {

@@ -5,10 +5,8 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.google.common.collect.ImmutableList;
 import org.atlasapi.deer.client.model.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @JsonDeserialize(builder = Described.Builder.class)
@@ -43,6 +41,22 @@ public abstract class Described extends Identified{
         this.scheduleOnly = builder.scheduleOnly;
         this.presentationChannel = builder.presentationChannel;
         this.priority = builder.priority;
+    }
+
+    public static Builder<?> builder(Described described) {
+        return ((Builder<?>) Identified.builder(described))
+                .withTitle(described.title)
+                .withDescription(described.description)
+                .withLongDescription(described.longDescription)
+                .withMediaType(described.mediaType)
+                .withSpecialization(described.specialization)
+                .withGenres(described.genres)
+                .withSource(described.source)
+                .withImage(described.image)
+                .withThumbnail(described.thumbnail)
+                .withScheduleOnly(described.scheduleOnly)
+                .withPresentationChannel(described.presentationChannel)
+                .withPriority(described.priority);
     }
 
     public String getMediaType() {
