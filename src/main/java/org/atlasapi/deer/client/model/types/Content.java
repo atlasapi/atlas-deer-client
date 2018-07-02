@@ -92,8 +92,16 @@ public class Content extends Described {
         this.year = builder.year;
     }
 
+    public static Builder<?> builder() {
+        return new Builder();
+    }
+
     public static Builder<?> builder(Content content) {
-        return ((Builder<?>) Described.builder(content))
+        return Content.builder(content, new Builder());
+    }
+
+    public static <B extends Builder<B>> B builder(Content content, B builder) {
+        return Described.builder(content, builder)
                 .withType(content.type)
                 .withDisplayTitle(content.displayTitle)
                 .withEpisodeNumber(content.episodeNumber)
@@ -189,11 +197,6 @@ public class Content extends Described {
 
     public Integer getYear() {
         return year;
-    }
-
-
-    public static Builder<?> builder() {
-        return new Builder();
     }
 
     @JsonPOJOBuilder()

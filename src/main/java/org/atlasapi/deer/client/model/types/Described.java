@@ -43,8 +43,12 @@ public abstract class Described extends Identified{
         this.priority = builder.priority;
     }
 
-    public static Builder<?> builder(Described described) {
-        return ((Builder<?>) Identified.builder(described))
+    protected static Builder<?> builder(Described described) {
+        return builder(described, new Builder());
+    }
+
+    protected static <B extends Builder<B>> B builder(Described described, B builder) {
+        return Identified.builder(described, builder)
                 .withTitle(described.title)
                 .withDescription(described.description)
                 .withLongDescription(described.longDescription)
@@ -170,7 +174,7 @@ public abstract class Described extends Identified{
             return (B) this;
         }
 
-        public B withScheduleOnly(boolean val) {
+        public B withScheduleOnly(Boolean val) {
             scheduleOnly = val;
             return (B) this;
         }

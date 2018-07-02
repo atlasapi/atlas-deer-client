@@ -23,8 +23,12 @@ public abstract class Identified {
         this.sameAs = Utils.immutableCopyOfOrEmpty(builder.sameAs);
     }
 
-    public static Builder<?> builder(Identified identified) {
-        return new Builder<>()
+    protected static Builder<?> builder(Identified identified) {
+        return builder(identified, new Builder());
+    }
+
+    protected static <B extends Builder<B>> B builder(Identified identified, B builder) {
+        return builder
                 .withId(identified.id)
                 .withAliases(identified.aliases)
                 .withSameAs(identified.sameAs);
