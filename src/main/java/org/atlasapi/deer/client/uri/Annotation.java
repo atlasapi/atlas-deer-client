@@ -28,7 +28,8 @@ public enum Annotation {
     AUDIT,
     NON_MERGED,
     CONTENT_DETAIL,
-    TAGS
+    TAGS,
+    MODIFIED_DATES,
     ;
 
     private static final BiMap<String, Annotation> LOOKUP =

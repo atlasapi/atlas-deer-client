@@ -12,7 +12,7 @@ import java.util.List;
 @JsonDeserialize(builder = Described.Builder.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public abstract class Described extends Identified{
+public abstract class Described extends Identified {
 
     private String title;
     private String description;

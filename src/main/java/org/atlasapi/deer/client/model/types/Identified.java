@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import org.atlasapi.deer.client.model.Utils;
 
+import java.time.Instant;
 import java.util.List;
 
 @JsonDeserialize(builder = Identified.Builder.class)
@@ -16,11 +17,13 @@ public abstract class Identified {
     private String id;
     private List<Alias> aliases;
     private List<SameAs> sameAs;
+    private final Instant lastUpdated;
 
     protected Identified(Builder builder) {
         this.id = builder.id;
         this.aliases = Utils.immutableCopyOfOrEmpty(builder.aliases);
         this.sameAs = Utils.immutableCopyOfOrEmpty(builder.sameAs);
+        this.lastUpdated = builder.lastUpdated;
     }
 
     protected static Builder<?> builder(Identified identified) {
@@ -31,7 +34,9 @@ public abstract class Identified {
         return builder
                 .withId(identified.id)
                 .withAliases(identified.aliases)
-                .withSameAs(identified.sameAs);
+                .withSameAs(identified.sameAs)
+                .withLastUpdated(identified.lastUpdated)
+                ;
     }
 
     public String getId() {
@@ -46,6 +51,10 @@ public abstract class Identified {
         return sameAs;
     }
 
+    public Instant getLastUpdated() {
+        return lastUpdated;
+    }
+
     @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -54,6 +63,7 @@ public abstract class Identified {
         private String id;
         private List<Alias> aliases;
         private List<SameAs> sameAs;
+        private Instant lastUpdated;
 
         public B withId(String val) {
             id = val;
@@ -67,6 +77,11 @@ public abstract class Identified {
 
         public B withSameAs(List<SameAs> val) {
             sameAs = val;
+            return (B) this;
+        }
+
+        public B withLastUpdated(Instant lastUpdated) {
+            this.lastUpdated = lastUpdated;
             return (B) this;
         }
     }
