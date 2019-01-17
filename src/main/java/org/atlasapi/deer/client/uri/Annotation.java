@@ -30,6 +30,7 @@ public enum Annotation {
     CONTENT_DETAIL,
     TAGS,
     MODIFIED_DATES,
+    LOCATIONS
     ;
 
     private static final BiMap<String, Annotation> LOOKUP =
