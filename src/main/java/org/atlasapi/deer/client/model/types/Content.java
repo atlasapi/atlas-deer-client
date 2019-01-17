@@ -43,6 +43,7 @@ public class Content extends Described {
     private final List<Person> people;
     private final List<Tag> tags;
     private final Integer year;
+    private final List<Location> locations;
 
     @JsonSerialize(using = ToStringSerializer.class)
     public enum Type {
@@ -90,6 +91,7 @@ public class Content extends Described {
         this.people = Utils.immutableCopyOfOrEmpty(builder.people);
         this.tags = Utils.immutableCopyOfOrEmpty(builder.tags);
         this.year = builder.year;
+        this.locations = Utils.immutableCopyOfOrEmpty(builder.locations);
     }
 
     public static Builder<?> builder() {
@@ -120,7 +122,8 @@ public class Content extends Described {
                 .withBroadcasts(content.broadcasts)
                 .withPeople(content.people)
                 .withTags(content.tags)
-                .withYear(content.year);
+                .withYear(content.year)
+                .withLocations(content.locations);
     }
 
     public Type getType() {
@@ -199,6 +202,10 @@ public class Content extends Described {
         return year;
     }
 
+    public List<Location> getLocations() {
+        return locations;
+    }
+
     @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -223,6 +230,7 @@ public class Content extends Described {
         private List<Person> people;
         private List<Tag> tags;
         private Integer year;
+        private List<Location> locations;
 
         public Builder() {
         }
@@ -328,6 +336,11 @@ public class Content extends Described {
 
         public B withYear(Integer year) {
             this.year = year;
+            return (B) this;
+        }
+
+        public B withLocations(List<Location> locations) {
+            this.locations = locations;
             return (B) this;
         }
 
