@@ -25,6 +25,22 @@ public class Location {
         this.duration = builder.duration;
     }
 
+    public String getUri() {
+        return uri;
+    }
+
+    public Instant getAvailabilityStart() {
+        return availabilityStart;
+    }
+
+    public Instant getAvailabilityEnd() {
+        return availabilityEnd;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
