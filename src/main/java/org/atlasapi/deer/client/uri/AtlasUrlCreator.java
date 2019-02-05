@@ -38,7 +38,7 @@ public class AtlasUrlCreator {
     public interface PathStep {
         FinalStep content();
         FinalStep content(String contentId);
-        FinalStep schedule(String channdlId);
+        FinalStep schedule(String channelId);
         FinalStep topic();
         FinalStep topic(String topicId);
     }
