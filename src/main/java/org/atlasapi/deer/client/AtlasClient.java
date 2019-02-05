@@ -1,5 +1,10 @@
 package org.atlasapi.deer.client;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpHeaders;
+import com.google.api.client.http.HttpTransport;
+import com.google.common.net.HostAndPort;
 import org.atlasapi.deer.client.http.AtlasHttpClient;
 import org.atlasapi.deer.client.model.ContentResponse;
 import org.atlasapi.deer.client.model.ScheduleResponse;
@@ -9,12 +14,6 @@ import org.atlasapi.deer.client.query.Query;
 import org.atlasapi.deer.client.query.ScheduleQuery;
 import org.atlasapi.deer.client.query.TopicQuery;
 import org.atlasapi.deer.client.uri.AtlasUrlCreator;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpHeaders;
-import com.google.api.client.http.HttpTransport;
-import com.google.common.net.HostAndPort;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -78,10 +77,17 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
                         .build();
                 break;
             case Topic:
-                url = urlCreator.getBuilder()
-                        .topic()
-                        .addParams(query.getParams())
-                        .build();
+                if(query.getId().isPresent()) {
+                    url = urlCreator.getBuilder()
+                            .topic(query.getId().get())
+                            .addParams(query.getParams())
+                            .build();
+                } else {
+                    url = urlCreator.getBuilder()
+                            .topic()
+                            .addParams(query.getParams())
+                            .build();
+                }
                 break;
             default:
                 throw new IllegalArgumentException("Unexpected query type: " + type);

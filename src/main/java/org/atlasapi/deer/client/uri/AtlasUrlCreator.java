@@ -1,10 +1,10 @@
 package org.atlasapi.deer.client.uri;
 
-import java.util.Map;
-
 import com.google.api.client.http.GenericUrl;
 import com.google.common.collect.Lists;
 import com.google.common.net.HostAndPort;
+
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -40,6 +40,7 @@ public class AtlasUrlCreator {
         FinalStep content(String contentId);
         FinalStep schedule(String channdlId);
         FinalStep topic();
+        FinalStep topic(String topicId);
     }
 
     public interface FinalStep {
@@ -86,6 +87,11 @@ public class AtlasUrlCreator {
         @Override
         public FinalStep schedule(String channelId) {
             return schedule().addParam(ID_PARAM, channelId);
+        }
+
+        @Override
+        public FinalStep topic(String topicId) {
+            return topic().addParam(ID_PARAM, topicId);
         }
 
         @Override
