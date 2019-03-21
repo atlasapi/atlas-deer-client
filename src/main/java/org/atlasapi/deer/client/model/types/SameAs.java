@@ -14,14 +14,17 @@ public class SameAs {
 
     private final String id;
     private final String source;
-
+    private final String uri;
+    
     @JsonCreator
     public SameAs(
             @JsonProperty("id") String id,
-            @JsonProperty("source") String source
+            @JsonProperty("source") String source,
+            @JsonProperty("uri") String uri
     ) {
         this.id = id;
         this.source = source;
+        this.uri = uri;
     }
 
     public String getId() {
@@ -30,6 +33,10 @@ public class SameAs {
 
     public String getSource() {
         return source;
+    }
+
+    public String getUri() {
+        return uri;
     }
 
     @Override public boolean equals(Object o) {
@@ -49,7 +56,7 @@ public class SameAs {
         if (str == null) {
             this.str = str = getClass().getSimpleName()
                     + "@" + System.identityHashCode(this)
-                    + "{" + id + "|" + source + "}";
+                    + "{" + id + "|" + source + "|" + uri + "}";
         }
         return str;
     }

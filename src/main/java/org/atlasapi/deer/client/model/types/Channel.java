@@ -22,6 +22,7 @@ public class Channel {
     private final Source broadcaster;
     private final List<Alias> aliases;
     private final String uri;
+    private List<SameAs> sameAs;
 
     private Channel(Builder builder) {
         this.id = builder.id;
@@ -31,6 +32,7 @@ public class Channel {
         this.broadcaster = builder.broadcaster;
         this.aliases = Utils.immutableCopyOfOrEmpty(builder.aliases);
         this.uri = builder.uri;
+        this.sameAs = Utils.immutableCopyOfOrEmpty(builder.sameAs);
     }
 
     public String getId() {
@@ -59,6 +61,9 @@ public class Channel {
 
     public String getUri() { return uri; }
 
+    public List<SameAs> getSameAs() {
+        return sameAs;
+    }
 
     public static Builder builder() {
         return new Builder();
@@ -75,6 +80,7 @@ public class Channel {
         private Source broadcaster;
         private List<Alias> aliases;
         private String uri;
+        private List<SameAs> sameAs;
 
         public Builder() { }
 
@@ -110,6 +116,11 @@ public class Channel {
 
         public Builder withUri(String uri) {
             this.uri = uri;
+            return this;
+        }
+
+        public Builder withSameAs(List<SameAs> sameAs) {
+            this.sameAs = sameAs;
             return this;
         }
 
