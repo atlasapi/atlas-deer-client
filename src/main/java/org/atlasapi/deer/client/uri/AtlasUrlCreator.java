@@ -15,6 +15,7 @@ public class AtlasUrlCreator {
     public static final String CONTENT_JSON = "content.json";
     public static final String SCHEDULE_JSON = "schedules.json";
     public static final String TOPIC_JSON = "topics.json";
+    public static final String CHANNEL_JSON = "channels.json";
     public static final String KEY_PARAM = "key";
     public static final String ID_PARAM = "id";
 
@@ -41,6 +42,8 @@ public class AtlasUrlCreator {
         FinalStep schedule(String channelId);
         FinalStep topic();
         FinalStep topic(String topicId);
+        FinalStep channel();
+        FinalStep channel(String channelId);
     }
 
     public interface FinalStep {
@@ -78,6 +81,11 @@ public class AtlasUrlCreator {
             url.setPathParts(Lists.newArrayList("", API_VERSION, TOPIC_JSON));
             return this;
         }
+        
+        public FinalStep channel() {
+            url.setPathParts(Lists.newArrayList("", API_VERSION, CHANNEL_JSON));
+            return this;
+        }
 
         @Override
         public FinalStep content(String contentId) {
@@ -92,6 +100,11 @@ public class AtlasUrlCreator {
         @Override
         public FinalStep topic(String topicId) {
             return topic().addParam(ID_PARAM, topicId);
+        }
+        
+        @Override
+        public FinalStep channel(String channelId) {
+            return channel().addParam(ID_PARAM, channelId);
         }
 
         @Override

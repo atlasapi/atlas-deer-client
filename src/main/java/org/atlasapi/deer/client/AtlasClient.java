@@ -6,9 +6,11 @@ import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpTransport;
 import com.google.common.net.HostAndPort;
 import org.atlasapi.deer.client.http.AtlasHttpClient;
+import org.atlasapi.deer.client.model.ChannelResponse;
 import org.atlasapi.deer.client.model.ContentResponse;
 import org.atlasapi.deer.client.model.ScheduleResponse;
 import org.atlasapi.deer.client.model.TopicResponse;
+import org.atlasapi.deer.client.query.ChannelQuery;
 import org.atlasapi.deer.client.query.ContentQuery;
 import org.atlasapi.deer.client.query.Query;
 import org.atlasapi.deer.client.query.ScheduleQuery;
@@ -51,6 +53,12 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
         GenericUrl url = getUrl(query, QueryType.Topic);
         return httpClient.get(url, TopicResponse.class);
     }
+    
+    @Override
+    public ChannelResponse getChannel(ChannelQuery query) {
+        GenericUrl url = getUrl(query, QueryType.Channel);
+        return httpClient.get(url, ChannelResponse.class);
+    }
 
     private GenericUrl getUrl(Query query, QueryType type) {
         GenericUrl url;
@@ -85,6 +93,19 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
                 } else {
                     url = urlCreator.getBuilder()
                             .topic()
+                            .addParams(query.getParams())
+                            .build();
+                }
+                break;
+            case Channel:
+                if(query.getId().isPresent()) {
+                    url = urlCreator.getBuilder()
+                            .channel(query.getId().get())
+                            .addParams(query.getParams())
+                            .build();
+                } else {
+                    url = urlCreator.getBuilder()
+                            .channel()
                             .addParams(query.getParams())
                             .build();
                 }
@@ -146,7 +167,8 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
     private enum QueryType {
         Content,
         Schedule,
-        Topic
+        Topic,
+        Channel
     }
 
 }
