@@ -32,6 +32,8 @@ public enum Annotation {
     MODIFIED_DATES,
     LOCATIONS,
     CUSTOM_FIELDS,
+    ALL_MERGED_BROADCASTS,
+    ALL_BROADCASTS
     ;
 
     private static final BiMap<String, Annotation> LOOKUP =
