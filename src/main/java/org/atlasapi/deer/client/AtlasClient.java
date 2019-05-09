@@ -6,10 +6,13 @@ import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpTransport;
 import com.google.common.net.HostAndPort;
 import org.atlasapi.deer.client.http.AtlasHttpClient;
+import org.atlasapi.deer.client.model.ChannelGroupResponse;
 import org.atlasapi.deer.client.model.ChannelResponse;
 import org.atlasapi.deer.client.model.ContentResponse;
 import org.atlasapi.deer.client.model.ScheduleResponse;
 import org.atlasapi.deer.client.model.TopicResponse;
+import org.atlasapi.deer.client.model.types.ChannelGroup;
+import org.atlasapi.deer.client.query.ChannelGroupQuery;
 import org.atlasapi.deer.client.query.ChannelQuery;
 import org.atlasapi.deer.client.query.ContentQuery;
 import org.atlasapi.deer.client.query.Query;
@@ -58,6 +61,12 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
     public ChannelResponse getChannel(ChannelQuery query) {
         GenericUrl url = getUrl(query, QueryType.Channel);
         return httpClient.get(url, ChannelResponse.class);
+    }
+
+    @Override
+    public ChannelGroupResponse getChannelGroup(ChannelGroupQuery query) {
+        GenericUrl url = getUrl(query, QueryType.ChannelGroup);
+        return httpClient.get(url, ChannelGroupResponse.class);
     }
 
     private GenericUrl getUrl(Query query, QueryType type) {
@@ -110,6 +119,19 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
                             .build();
                 }
                 break;
+        case ChannelGroup:
+            if(query.getId().isPresent()) {
+                url = urlCreator.getBuilder()
+                        .channelGroup(query.getId().get())
+                        .addParams(query.getParams())
+                        .build();
+            } else {
+                url = urlCreator.getBuilder()
+                        .channelGroup()
+                        .addParams(query.getParams())
+                        .build();
+            }
+            break;
             default:
                 throw new IllegalArgumentException("Unexpected query type: " + type);
         }
@@ -168,7 +190,8 @@ public class AtlasClient implements AtlasReadClient, AtlasWriteClient {
         Content,
         Schedule,
         Topic,
-        Channel
+        Channel,
+        ChannelGroup
     }
 
 }
