@@ -1,9 +1,11 @@
 package org.atlasapi.deer.client;
 
+import org.atlasapi.deer.client.model.ChannelGroupResponse;
 import org.atlasapi.deer.client.model.ChannelResponse;
 import org.atlasapi.deer.client.model.ContentResponse;
 import org.atlasapi.deer.client.model.ScheduleResponse;
 import org.atlasapi.deer.client.model.TopicResponse;
+import org.atlasapi.deer.client.query.ChannelGroupQuery;
 import org.atlasapi.deer.client.query.ChannelQuery;
 import org.atlasapi.deer.client.query.ContentQuery;
 import org.atlasapi.deer.client.query.ScheduleQuery;
@@ -49,4 +51,11 @@ public interface AtlasReadClient {
      * @return response body
      */
     public ChannelResponse getChannel(ChannelQuery query);
+
+    /**
+     * Execute GET on the channel group endpoint
+     * @param query channel group query
+     * @return response body
+     */
+    public ChannelGroupResponse getChannelGroup(ChannelGroupQuery query);
 }
