@@ -1,6 +1,7 @@
 package org.atlasapi.deer.client.model.types;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.atlasapi.deer.client.model.Utils;
 
@@ -67,6 +68,24 @@ public class Channel {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Channel channel = (Channel) o;
+        return Objects.equals(id, channel.id) &&
+                Objects.equals(uri, channel.uri);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, uri);
     }
 
     @JsonPOJOBuilder()
