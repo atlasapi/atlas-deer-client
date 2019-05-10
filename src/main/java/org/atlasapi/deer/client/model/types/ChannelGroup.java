@@ -26,7 +26,7 @@ public class ChannelGroup {
     private final List<Alias> aliases;
     private final List<AvailableCountries> availableCountries;
     private final List<ChannelGroup> regions;
-    private final List<Channel> channels;
+    private final List<ChannelWrapper> channels;
 
     private ChannelGroup(Builder builder) {
         this.id = builder.id;
@@ -76,7 +76,7 @@ public class ChannelGroup {
         return regions;
     }
 
-    public List<Channel> getChannels() {
+    public List<ChannelWrapper> getChannels() {
         return channels;
     }
 
@@ -112,7 +112,7 @@ public class ChannelGroup {
         private List<Alias> aliases;
         private List<AvailableCountries> availableCountries;
         private List<ChannelGroup> regions;
-        private List<Channel> channels;
+        private List<ChannelWrapper> channels;
 
         public Builder() {
         }
@@ -157,7 +157,7 @@ public class ChannelGroup {
             return this;
         }
 
-        public Builder withChannels(List<Channel> channels) {
+        public Builder withChannels(List<ChannelWrapper> channels) {
             this.channels = channels;
             return this;
         }
