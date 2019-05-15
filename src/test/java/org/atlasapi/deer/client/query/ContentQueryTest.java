@@ -112,4 +112,14 @@ public class ContentQueryTest {
                 is("type")
         );
     }
+
+    @Test
+    public void testAddSearchQuery() throws Exception {
+        query.addSearchQuery("alien");
+
+        assertThat(
+                query.getParams().get("q"),
+                is("alien")
+        );
+    }
 }

@@ -19,6 +19,7 @@ public class ContentQuery extends Query {
     public static final String SUB_ITEMS_SUMMARIES_LIMIT_PARAM = "sub_items_summaries.limit";
     public static final String OFFSET_PARAM = "offset";
     public static final String TYPE_PARAM = "type";
+    public static final String Q_PARAM = "q";
 
     private ContentQuery() {
         super();
@@ -97,6 +98,11 @@ public class ContentQuery extends Query {
 
     public ContentQuery addType(String type) {
         params.put(TYPE_PARAM, checkNotNull(type));
+        return this;
+    }
+
+    public ContentQuery addSearchQuery(String searchQuery) {
+        params.put(Q_PARAM, checkNotNull(searchQuery));
         return this;
     }
 }
