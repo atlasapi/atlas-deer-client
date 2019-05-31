@@ -3,28 +3,37 @@ package org.atlasapi.deer.client.model.types;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
+@JsonDeserialize(builder = SameAs.Builder.class)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SameAs {
 
     private final String id;
     private final String source;
-    private final String uri;
-    
+    private String uri;
+
     @JsonCreator
-    public SameAs(
-            @JsonProperty("id") String id,
-            @JsonProperty("source") String source,
-            @JsonProperty("uri") String uri
-    ) {
+    public SameAs(Builder builder) {
+        this.id = builder.id;
+        this.source = builder.source;
+        this.uri = builder.uri;
+    }
+
+    @JsonIgnore
+    public SameAs(String id, String source) {
         this.id = id;
         this.source = source;
-        this.uri = uri;
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     public String getId() {
@@ -59,5 +68,35 @@ public class SameAs {
                     + "{" + id + "|" + source + "|" + uri + "}";
         }
         return str;
+    }
+
+    @JsonPOJOBuilder()
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static final class Builder {
+        private String id;
+        private String source;
+        private String uri;
+
+        public Builder() { }
+
+        public Builder withId(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withSource(String source) {
+            this.source = source;
+            return this;
+        }
+
+        public Builder withUri(String uri) {
+            this.uri = uri;
+            return this;
+        }
+
+        public SameAs build() {
+            return new SameAs(this);
+        }
     }
 }
