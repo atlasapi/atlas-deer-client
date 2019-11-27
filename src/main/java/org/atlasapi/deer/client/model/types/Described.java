@@ -26,6 +26,7 @@ public abstract class Described extends Identified {
     private Boolean scheduleOnly;
     private String presentationChannel;
     private String priority;
+    private Boolean isPublished;
 
     protected Described(Builder builder) {
         super(builder);
@@ -41,6 +42,7 @@ public abstract class Described extends Identified {
         this.scheduleOnly = builder.scheduleOnly;
         this.presentationChannel = builder.presentationChannel;
         this.priority = builder.priority;
+        this.isPublished = builder.isPublished;
     }
 
     protected static Builder<?> builder(Described described) {
@@ -60,7 +62,8 @@ public abstract class Described extends Identified {
                 .withThumbnail(described.thumbnail)
                 .withScheduleOnly(described.scheduleOnly)
                 .withPresentationChannel(described.presentationChannel)
-                .withPriority(described.priority);
+                .withPriority(described.priority)
+                .withIsPublished(described.isPublished);
     }
 
     public String getMediaType() {
@@ -111,6 +114,10 @@ public abstract class Described extends Identified {
         return scheduleOnly;
     }
 
+    public Boolean getIsPublished() {
+        return isPublished;
+    }
+
     @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -128,6 +135,7 @@ public abstract class Described extends Identified {
         private Boolean scheduleOnly;
         private String presentationChannel;
         private String priority;
+        private Boolean isPublished;
 
         public B withTitle(String val) {
             title = val;
@@ -186,6 +194,11 @@ public abstract class Described extends Identified {
 
         public B withPriority(String val) {
             priority = val;
+            return (B) this;
+        }
+
+        public B withIsPublished(Boolean val) {
+            isPublished = val;
             return (B) this;
         }
     }
