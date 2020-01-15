@@ -36,7 +36,8 @@ public enum Annotation {
     ALL_MERGED_BROADCASTS,
     ALL_BROADCASTS,
     CHANNEL_GROUP_INFO,
-    REGIONS
+    REGIONS,
+    AWARDS,
     ;
 
     private static final BiMap<String, Annotation> LOOKUP =
