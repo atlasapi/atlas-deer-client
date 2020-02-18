@@ -1,6 +1,7 @@
 package org.atlasapi.deer.client.model.types;
 
 import java.time.Instant;
+import java.util.Currency;
 
 import com.metabroadcast.common.currency.Price;
 
@@ -17,12 +18,14 @@ public class Pricing {
 
     private final Instant startTime;
     private final Instant endTime;
-    private final Price price;
+    private final Integer price;
+    private final Currency currency;
 
     private Pricing(Builder builder) {
         startTime = builder.startTime;
         endTime = builder.endTime;
         price = builder.price;
+        currency = builder.currency;
     }
 
     public Instant getStartTime() {
@@ -33,8 +36,12 @@ public class Pricing {
         return endTime;
     }
 
-    public Price getPrice() {
+    public Integer getPrice() {
         return price;
+    }
+
+    public Currency getCurrency() {
+        return currency;
     }
 
     public static Builder builder() {
@@ -48,7 +55,8 @@ public class Pricing {
 
         private Instant startTime;
         private Instant endTime;
-        private Price price;
+        private Integer price;
+        private Currency currency;
 
         private Builder() {
         }
@@ -63,8 +71,13 @@ public class Pricing {
             return this;
         }
 
-        public Builder withPrice(Price price) {
+        public Builder withPrice(Integer price) {
             this.price = price;
+            return this;
+        }
+
+        public Builder withCurrency(Currency currency) {
+            this.currency = currency;
             return this;
         }
 
