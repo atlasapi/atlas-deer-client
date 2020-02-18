@@ -31,7 +31,7 @@ public class Location {
 
     private final Instant availabilityStart;
     private final Instant availabilityEnd;
-    private final Set<Country> availableCountries;
+    private final Set<String> availableCountries;
     private final Instant drmPlayableFrom;
     private final Currency currency;
     private final Integer amount;
@@ -153,7 +153,7 @@ public class Location {
         return availabilityEnd;
     }
 
-    public Set<Country> getAvailableCountries() {
+    public Set<String> getAvailableCountries() {
         return availableCountries;
     }
 
@@ -283,7 +283,7 @@ public class Location {
         private Boolean available;
         private Instant availabilityStart;
         private Instant availabilityEnd;
-        private Set<Country> availableCountries;
+        private Set<String> availableCountries;
         private Instant drmPlayableFrom;
         private Currency currency;
         private Integer amount;
@@ -347,7 +347,7 @@ public class Location {
             return this;
         }
 
-        public Builder withAvailableCountries(Set<Country> availableCountries) {
+        public Builder withAvailableCountries(Set<String> availableCountries) {
             this.availableCountries = availableCountries;
             return this;
         }
