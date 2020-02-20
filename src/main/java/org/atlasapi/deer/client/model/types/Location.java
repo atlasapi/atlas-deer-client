@@ -68,8 +68,12 @@ public class Location {
         this.available = builder.available;
         this.duration = builder.duration;
         this.transportIsLive = builder.transportIsLive;
-        this.transportType = builder.transportType;
-        this.transportSubType = builder.transportSubType;
+        this.transportType = (builder.transportType == null)
+                ? null
+                : TransportType.fromString(builder.transportType);
+        this.transportSubType = (builder.transportSubType == null)
+                ? null
+                : TransportSubType.fromString(builder.transportSubType);
         this.embedId = builder.embedId;
         this.embedCode = builder.embedCode;
         this.availabilityStart = builder.availabilityStart;
@@ -86,16 +90,22 @@ public class Location {
         this.bitRate = builder.bitRate;
         this.audioBitRate = builder.audioBitRate;
         this.audioChannels = builder.audioChannels;
-        this.audioCoding = builder.audioCoding;
+        this.audioCoding = (builder.audioCoding == null)
+                ? null
+                : MimeType.fromString(builder.audioCoding);
         this.videoAspectRatio = builder.videoAspectRatio;
         this.videoBitRate = builder.videoBitRate;
-        this.videoCoding = builder.videoCoding;
+        this.videoCoding = (builder.videoCoding == null)
+                ? null
+                : MimeType.fromString(builder.videoCoding);
         this.videoFrameRate = builder.videoFrameRate;
         this.videoHorizontalSize = builder.videoHorizontalSize;
         this.videoProgressiveScan = builder.videoProgressiveScan;
         this.videoVerticalSize = builder.videoVerticalSize;
         this.dataSize = builder.dataSize;
-        this.dataContainerFormat = builder.dataContainerFormat;
+        this.dataContainerFormat = (builder.dataContainerFormat == null)
+                ? null
+                : MimeType.fromString(builder.dataContainerFormat);
         this.source = builder.source;
         this.distributor = builder.distributor;
         this.hasDog = builder.hasDog;
@@ -103,10 +113,6 @@ public class Location {
         this.quality = builder.quality;
         this.qualityDetail = builder.qualityDetail;
         this.versionId = builder.versionId;
-    }
-
-    public static Builder newBuilder() {
-        return new Builder();
     }
 
     public String getUri() {
@@ -295,16 +301,16 @@ public class Location {
         private Integer bitRate;
         private Integer audioBitRate;
         private Integer audioChannels;
-        private MimeType audioCoding;
+        private String audioCoding;
         private String videoAspectRatio;
         private Integer videoBitRate;
-        private MimeType videoCoding;
+        private String videoCoding;
         private Float videoFrameRate;
         private Integer videoHorizontalSize;
         private Boolean videoProgressiveScan;
         private Integer videoVerticalSize;
         private Long dataSize;
-        private MimeType dataContainerFormat;
+        private String dataContainerFormat;
         private String source;
         private String distributor;
         private Boolean hasDog;
@@ -314,8 +320,8 @@ public class Location {
         private String versionId;
         private Integer duration;
         private Boolean transportIsLive;
-        private TransportType transportType;
-        private TransportSubType transportSubType;
+        private String transportType;
+        private String transportSubType;
         private String embedId;
         private String embedCode;
 
@@ -407,7 +413,7 @@ public class Location {
             return this;
         }
 
-        public Builder withAudioCoding(MimeType audioCoding) {
+        public Builder withAudioCoding(String audioCoding) {
             this.audioCoding = audioCoding;
             return this;
         }
@@ -423,7 +429,7 @@ public class Location {
         }
 
         public Builder withVideoCoding(String videoCoding) {
-            this.videoCoding = MimeType.fromString(videoCoding);
+            this.videoCoding = videoCoding;
             return this;
         }
 
@@ -453,7 +459,7 @@ public class Location {
         }
 
         public Builder withDataContainerFormat(String dataContainerFormat) {
-            this.dataContainerFormat = MimeType.fromString(dataContainerFormat);
+            this.dataContainerFormat = dataContainerFormat;
             return this;
         }
 
@@ -503,12 +509,12 @@ public class Location {
         }
 
         public Builder withTransportType(String transportType) {
-            this.transportType = TransportType.fromString(transportType);
+            this.transportType = transportType;
             return this;
         }
 
         public Builder withTransportSubType(String transportSubType) {
-            this.transportSubType = TransportSubType.fromString(transportSubType);
+            this.transportSubType = transportSubType;
             return this;
         }
 
