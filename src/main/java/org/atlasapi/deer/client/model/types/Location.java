@@ -422,8 +422,8 @@ public class Location {
             return this;
         }
 
-        public Builder withVideoCoding(MimeType videoCoding) {
-            this.videoCoding = videoCoding;
+        public Builder withVideoCoding(String videoCoding) {
+            this.videoCoding = MimeType.fromString(videoCoding);
             return this;
         }
 
@@ -452,8 +452,8 @@ public class Location {
             return this;
         }
 
-        public Builder withDataContainerFormat(MimeType dataContainerFormat) {
-            this.dataContainerFormat = dataContainerFormat;
+        public Builder withDataContainerFormat(String dataContainerFormat) {
+            this.dataContainerFormat = MimeType.fromString(dataContainerFormat);
             return this;
         }
 
@@ -502,13 +502,13 @@ public class Location {
             return this;
         }
 
-        public Builder withTransportType(TransportType transportType) {
-            this.transportType = transportType;
+        public Builder withTransportType(String transportType) {
+            this.transportType = TransportType.fromString(transportType);
             return this;
         }
 
-        public Builder withTransportSubType(TransportSubType transportSubType) {
-            this.transportSubType = transportSubType;
+        public Builder withTransportSubType(String transportSubType) {
+            this.transportSubType = TransportSubType.fromString(transportSubType);
             return this;
         }
 
