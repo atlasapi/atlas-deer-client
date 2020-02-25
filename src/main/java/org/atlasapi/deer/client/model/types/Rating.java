@@ -20,7 +20,9 @@ public class Rating {
     private Rating(Builder builder) {
         value = builder.value;
         type = builder.type;
-        publisher = builder.publisher;
+        publisher = (builder.publisher == null)
+                ? null
+                : Publisher.fromKey(builder.publisher.getKey()).requireValue();
     }
 
     public float getValue() {
@@ -46,7 +48,7 @@ public class Rating {
 
         private Float value;
         private String type;
-        private Publisher publisher;
+        private Source publisher;
 
         private Builder() {
         }
@@ -61,7 +63,7 @@ public class Rating {
             return this;
         }
 
-        public Builder withPublisher(Publisher publisher) {
+        public Builder withPublisher(Source publisher) {
             this.publisher = publisher;
             return this;
         }
