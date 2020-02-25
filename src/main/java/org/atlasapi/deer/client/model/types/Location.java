@@ -53,7 +53,7 @@ public class Location {
     private final Integer videoVerticalSize;
     private final Long dataSize;
     private final MimeType dataContainerFormat;
-    private final String source;
+    private final Source source;
     private final String distributor;
     private final Boolean hasDog;
     private final Boolean is3d;
@@ -246,7 +246,7 @@ public class Location {
         return dataContainerFormat;
     }
 
-    public String getSource() {
+    public Source getSource() {
         return source;
     }
 
@@ -310,7 +310,7 @@ public class Location {
         private Integer videoVerticalSize;
         private Long dataSize;
         private String dataContainerFormat;
-        private String source;
+        private Source source;
         private String distributor;
         private Boolean hasDog;
         private Boolean is3d;
@@ -462,7 +462,7 @@ public class Location {
             return this;
         }
 
-        public Builder withSource(String source) {
+        public Builder withSource(Source source) {
             this.source = source;
             return this;
         }
