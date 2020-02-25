@@ -26,8 +26,7 @@ public class Review {
     private final String rating;
     private final DateTime date;
     private final ReviewType reviewType;
-    // source is serialised as the publisher key
-    private final Optional<Publisher> source;
+    private final Publisher source;
 
     private Review(Builder builder) {
         locale = builder.locale;
@@ -68,7 +67,7 @@ public class Review {
         return reviewType;
     }
 
-    public Optional<Publisher> getSource() {
+    public Publisher getSource() {
         return source;
     }
 
@@ -88,7 +87,7 @@ public class Review {
         private String rating;
         private DateTime date;
         private ReviewType reviewType;
-        private Optional<Publisher> source = Optional.empty();
+        private Publisher source;
 
         private Builder() {
         }
@@ -128,7 +127,7 @@ public class Review {
             return this;
         }
 
-        public Builder withSource(Optional<Publisher> source) {
+        public Builder withSource(Publisher source) {
             this.source = source;
             return this;
         }
