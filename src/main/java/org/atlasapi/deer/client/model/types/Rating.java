@@ -13,14 +13,16 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Rating {
 
-    private final float value;
+    private final Float value;
     private final String type;
     private final Publisher publisher;
 
     private Rating(Builder builder) {
         value = builder.value;
         type = builder.type;
-        publisher = builder.publisher;
+        publisher = (builder.publisher == null)
+                ? null
+                : Publisher.fromKey(builder.publisher).requireValue();
     }
 
     public float getValue() {
@@ -44,14 +46,14 @@ public class Rating {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class Builder {
 
-        private float value;
+        private Float value;
         private String type;
-        private Publisher publisher;
+        private String publisher;
 
         private Builder() {
         }
 
-        public Builder withValue(float value) {
+        public Builder withValue(Float value) {
             this.value = value;
             return this;
         }
@@ -61,7 +63,7 @@ public class Rating {
             return this;
         }
 
-        public Builder withPublisher(Publisher publisher) {
+        public Builder withPublisher(String publisher) {
             this.publisher = publisher;
             return this;
         }

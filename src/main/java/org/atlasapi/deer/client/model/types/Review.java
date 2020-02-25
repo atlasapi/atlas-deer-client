@@ -1,7 +1,7 @@
 package org.atlasapi.deer.client.model.types;
 
+import java.time.Instant;
 import java.util.Locale;
-import java.util.Optional;
 
 import javax.annotation.Nullable;
 
@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import org.joda.time.DateTime;
 
 @JsonDeserialize(builder = Review.Builder.class)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -24,19 +23,25 @@ public class Review {
     private final String author;
     private final String authorInitials;
     private final String rating;
-    private final DateTime date;
+    private final Instant date;
     private final ReviewType reviewType;
     private final Publisher source;
 
     private Review(Builder builder) {
-        locale = builder.locale;
+        locale = (builder.locale == null)
+                ? null
+                : Locale.forLanguageTag(builder.locale);
         review = builder.review;
         author = builder.author;
         authorInitials = builder.authorInitials;
         rating = builder.rating;
         date = builder.date;
-        reviewType = builder.reviewType;
-        source = builder.source;
+        reviewType = (builder.reviewType == null)
+                ? null
+                : ReviewType.fromKey(builder.reviewType);
+        source = (builder.source == null)
+                ? null
+                : Publisher.fromKey(builder.source).requireValue();
     }
 
     public Locale getLocale() {
@@ -59,7 +64,7 @@ public class Review {
         return rating;
     }
 
-    public DateTime getDate() {
+    public Instant getDate() {
         return date;
     }
 
@@ -80,19 +85,19 @@ public class Review {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class Builder {
 
-        private Locale locale;
+        private String locale;
         private String review;
         private String author;
         private String authorInitials;
         private String rating;
-        private DateTime date;
-        private ReviewType reviewType;
-        private Publisher source;
+        private Instant date;
+        private String reviewType;
+        private String source;
 
         private Builder() {
         }
 
-        public Builder withLocale(@Nullable Locale locale) {
+        public Builder withLocale(@Nullable String locale) {
             this.locale = locale;
             return this;
         }
@@ -117,17 +122,17 @@ public class Review {
             return this;
         }
 
-        public Builder withDate(@Nullable DateTime date) {
+        public Builder withDate(@Nullable Instant date) {
             this.date = date;
             return this;
         }
 
-        public Builder withReviewType(@Nullable ReviewType reviewType) {
+        public Builder withReviewType(@Nullable String reviewType) {
             this.reviewType = reviewType;
             return this;
         }
 
-        public Builder withSource(Publisher source) {
+        public Builder withSource(String source) {
             this.source = source;
             return this;
         }
