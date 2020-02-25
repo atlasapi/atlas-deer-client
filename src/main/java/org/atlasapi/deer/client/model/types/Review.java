@@ -39,9 +39,7 @@ public class Review {
         reviewType = (builder.reviewType == null)
                 ? null
                 : ReviewType.fromKey(builder.reviewType);
-        source = (builder.source == null)
-                ? null
-                : Publisher.fromKey(builder.source).requireValue();
+        source = builder.source;
     }
 
     public Locale getLocale() {
@@ -92,7 +90,7 @@ public class Review {
         private String rating;
         private Instant date;
         private String reviewType;
-        private String source;
+        private Publisher source;
 
         private Builder() {
         }
@@ -132,7 +130,7 @@ public class Review {
             return this;
         }
 
-        public Builder withSource(String source) {
+        public Builder withSource(Publisher source) {
             this.source = source;
             return this;
         }
