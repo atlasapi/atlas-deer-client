@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import org.atlasapi.deer.client.model.Utils;
 
 @JsonDeserialize(builder = Location.Builder.class)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 public class Location {
 
     private final String uri;
-    private final Set<Alias> aliases;
+    private final List<Alias> aliases;
     private final Boolean available;
     private final Integer duration;
     private final Boolean transportIsLive;
@@ -30,12 +31,12 @@ public class Location {
 
     private final Instant availabilityStart;
     private final Instant availabilityEnd;
-    private final Set<String> availableCountries;
+    private final List<String> availableCountries;
     private final Instant drmPlayableFrom;
     private final Currency currency;
     private final Integer amount;
     private final String revenueContract;
-    private final Set<String> subscriptionPackages;
+    private final List<String> subscriptionPackages;
     private final List<Pricing> pricing;
 
     private final Boolean containsAdvertising;
@@ -118,7 +119,7 @@ public class Location {
         return uri;
     }
 
-    public Set<Alias> getAliases() {
+    public List<Alias> getAliases() {
         return aliases;
     }
 
@@ -158,7 +159,7 @@ public class Location {
         return availabilityEnd;
     }
 
-    public Set<String> getAvailableCountries() {
+    public List<String> getAvailableCountries() {
         return availableCountries;
     }
 
@@ -178,7 +179,7 @@ public class Location {
         return revenueContract;
     }
 
-    public Set<String> getSubscriptionPackages() {
+    public List<String> getSubscriptionPackages() {
         return subscriptionPackages;
     }
 
@@ -284,16 +285,16 @@ public class Location {
     public static class Builder {
 
         private String uri;
-        private Set<Alias> aliases;
+        private List<Alias> aliases;
         private Boolean available;
         private Instant availabilityStart;
         private Instant availabilityEnd;
-        private Set<String> availableCountries;
+        private List<String> availableCountries;
         private Instant drmPlayableFrom;
         private Currency currency;
         private Integer amount;
         private String revenueContract;
-        private Set<String> subscriptionPackages;
+        private List<String> subscriptionPackages;
         private List<Pricing> pricing;
         private Boolean containsAdvertising;
         private Integer advertisingDuration;
@@ -332,7 +333,7 @@ public class Location {
             return this;
         }
 
-        public Builder withAliases(Set<Alias> aliases) {
+        public Builder withAliases(List<Alias> aliases) {
             this.aliases = aliases;
             return this;
         }
@@ -352,7 +353,7 @@ public class Location {
             return this;
         }
 
-        public Builder withAvailableCountries(Set<String> availableCountries) {
+        public Builder withAvailableCountries(List<String> availableCountries) {
             this.availableCountries = availableCountries;
             return this;
         }
@@ -377,7 +378,7 @@ public class Location {
             return this;
         }
 
-        public Builder withSubscriptionPackages(Set<String> subscriptionPackages) {
+        public Builder withSubscriptionPackages(List<String> subscriptionPackages) {
             this.subscriptionPackages = subscriptionPackages;
             return this;
         }
