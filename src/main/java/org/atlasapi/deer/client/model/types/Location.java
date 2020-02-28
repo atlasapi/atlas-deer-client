@@ -63,7 +63,7 @@ public class Location {
 
     private Location(Builder builder) {
         this.uri = builder.uri;
-        this.aliases = builder.aliases;
+        this.aliases = Utils.immutableCopyOfOrEmpty(builder.aliases);
         this.available = builder.available;
         this.duration = builder.duration;
         this.transportIsLive = builder.transportIsLive;
@@ -77,13 +77,13 @@ public class Location {
         this.embedCode = builder.embedCode;
         this.availabilityStart = builder.availabilityStart;
         this.availabilityEnd = builder.availabilityEnd;
-        this.availableCountries = builder.availableCountries;
+        this.availableCountries =  Utils.immutableCopyOfOrEmpty(builder.availableCountries);
         this.drmPlayableFrom = builder.drmPlayableFrom;
         this.currency = builder.currency;
         this.amount = builder.amount;
         this.revenueContract = builder.revenueContract;
-        this.subscriptionPackages = builder.subscriptionPackages;
-        this.pricing = builder.pricing;
+        this.subscriptionPackages = Utils.immutableCopyOfOrEmpty(builder.subscriptionPackages);
+        this.pricing = Utils.immutableCopyOfOrEmpty(builder.pricing);
         this.containsAdvertising = builder.containsAdvertising;
         this.advertisingDuration = builder.advertisingDuration;
         this.bitRate = builder.bitRate;
