@@ -44,6 +44,9 @@ public class Content extends Described {
     private final List<Tag> tags;
     private final Integer year;
     private final List<Location> locations;
+    private final List<Award> awards;
+    private final List<Review> reviews;
+    private final List<Rating> ratings;
 
     @JsonSerialize(using = ToStringSerializer.class)
     public enum Type {
@@ -92,6 +95,9 @@ public class Content extends Described {
         this.tags = Utils.immutableCopyOfOrEmpty(builder.tags);
         this.year = builder.year;
         this.locations = Utils.immutableCopyOfOrEmpty(builder.locations);
+        this.awards = Utils.immutableCopyOfOrEmpty(builder.awards);
+        this.ratings = Utils.immutableCopyOfOrEmpty(builder.ratings);
+        this.reviews = Utils.immutableCopyOfOrEmpty(builder.reviews);
     }
 
     public static Builder<?> builder() {
@@ -123,7 +129,10 @@ public class Content extends Described {
                 .withPeople(content.people)
                 .withTags(content.tags)
                 .withYear(content.year)
-                .withLocations(content.locations);
+                .withLocations(content.locations)
+                .withAwards(content.awards)
+                .withRatings(content.ratings)
+                .withReviews(content.reviews);
     }
 
     public Type getType() {
@@ -206,6 +215,18 @@ public class Content extends Described {
         return locations;
     }
 
+    public List<Award> getAwards() {
+        return awards;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
     @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -231,6 +252,9 @@ public class Content extends Described {
         private List<Tag> tags;
         private Integer year;
         private List<Location> locations;
+        private List<Award> awards;
+        private List<Review> reviews;
+        private List<Rating> ratings;
 
         public Builder() {
         }
@@ -341,6 +365,21 @@ public class Content extends Described {
 
         public B withLocations(List<Location> locations) {
             this.locations = locations;
+            return (B) this;
+        }
+
+        public B withAwards(List<Award> awards) {
+            this.awards = awards;
+            return (B) this;
+        }
+
+        public B withReviews(List<Review> reviews) {
+            this.reviews = reviews;
+            return (B) this;
+        }
+
+        public B withRatings(List<Rating> ratings) {
+            this.ratings = ratings;
             return (B) this;
         }
 

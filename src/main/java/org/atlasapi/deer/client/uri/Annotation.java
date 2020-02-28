@@ -38,6 +38,8 @@ public enum Annotation {
     CHANNEL_GROUP_INFO,
     REGIONS,
     AWARDS,
+    REVIEWS,
+    RATINGS,
     ;
 
     private static final BiMap<String, Annotation> LOOKUP =
