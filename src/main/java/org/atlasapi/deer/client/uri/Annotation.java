@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public enum Annotation {
     ID,
+    REP_ID,
     IS_PUBLISHED,
     EXTENDED_ID,
     DESCRIPTION,

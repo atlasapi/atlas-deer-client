@@ -23,6 +23,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public abstract class Identified {
     private String id;
+    private String repId;
     private List<Alias> aliases;
     private List<SameAs> sameAs;
     private final Instant lastUpdated;
@@ -30,6 +31,7 @@ public abstract class Identified {
 
     protected Identified(Builder builder) {
         this.id = builder.id;
+        this.repId = builder.repId;
         this.aliases = Utils.immutableCopyOfOrEmpty(builder.aliases);
         this.sameAs = Utils.immutableCopyOfOrEmpty(builder.sameAs);
         this.lastUpdated = builder.lastUpdated;
@@ -43,6 +45,7 @@ public abstract class Identified {
     protected static <B extends Builder<B>> B builder(Identified identified, B builder) {
         return builder
                 .withId(identified.id)
+                .withRepId(identified.repId)
                 .withAliases(identified.aliases)
                 .withSameAs(identified.sameAs)
                 .withLastUpdated(identified.lastUpdated)
@@ -52,6 +55,10 @@ public abstract class Identified {
 
     public String getId() {
         return id;
+    }
+
+    public String getRepId() {
+        return repId;
     }
 
     public List<Alias> getAliases() {
@@ -100,6 +107,7 @@ public abstract class Identified {
     @SuppressWarnings("unchecked")
     public static class Builder<B extends Builder<B>> {
         private String id;
+        private String repId;
         private List<Alias> aliases;
         private List<SameAs> sameAs;
         private Instant lastUpdated;
@@ -107,6 +115,11 @@ public abstract class Identified {
 
         public B withId(String val) {
             id = val;
+            return (B) this;
+        }
+
+        protected B withRepId(String val) {
+            repId = val;
             return (B) this;
         }
 

@@ -2,10 +2,14 @@ package org.atlasapi.deer.client;
 
 import org.atlasapi.deer.client.http.AtlasHttpClient;
 import org.atlasapi.deer.client.model.ContentResponse;
+import org.atlasapi.deer.client.model.types.Content;
 import org.atlasapi.deer.client.query.ContentQuery;
 import org.atlasapi.deer.client.uri.AtlasUrlCreator;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.net.HostAndPort;
 import org.junit.Before;
@@ -16,6 +20,18 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.atlasapi.deer.client.uri.Annotation.ALL_MERGED_BROADCASTS;
+import static org.atlasapi.deer.client.uri.Annotation.BROADCASTS;
+import static org.atlasapi.deer.client.uri.Annotation.CUSTOM_FIELDS;
+import static org.atlasapi.deer.client.uri.Annotation.EXTENDED_DESCRIPTION;
+import static org.atlasapi.deer.client.uri.Annotation.ID;
+import static org.atlasapi.deer.client.uri.Annotation.IS_PUBLISHED;
+import static org.atlasapi.deer.client.uri.Annotation.LOCATIONS;
+import static org.atlasapi.deer.client.uri.Annotation.MODIFIED_DATES;
+import static org.atlasapi.deer.client.uri.Annotation.NON_MERGED;
+import static org.atlasapi.deer.client.uri.Annotation.PEOPLE;
+import static org.atlasapi.deer.client.uri.Annotation.REP_ID;
+import static org.atlasapi.deer.client.uri.Annotation.TAGS;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
