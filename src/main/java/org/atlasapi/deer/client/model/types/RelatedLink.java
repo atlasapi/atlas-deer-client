@@ -2,11 +2,14 @@ package org.atlasapi.deer.client.model.types;
 
 import javax.annotation.Nullable;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 @JsonDeserialize(builder = RelatedLink.Builder.class)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -76,6 +79,7 @@ public class RelatedLink {
         return thumbnail;
     }
 
+    @JsonSerialize(using = ToStringSerializer.class)
     public enum LinkType {
         FACEBOOK,
         TWITTER,
@@ -85,6 +89,18 @@ public class RelatedLink {
         VOD,
         UNKNOWN,
         ;
+
+
+        private final String str = name().toLowerCase();
+
+        @Override
+        public String toString() {
+            return str;
+        }
+
+        @JsonCreator
+        public static LinkType fromString(String str) { return valueOf(str.toUpperCase()); }
+
     }
 
     @JsonPOJOBuilder()
