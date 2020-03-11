@@ -16,7 +16,7 @@ import java.util.Set;
 public abstract class Described extends Identified {
 
     private String title;
-    private Set<LocalizedTitle> titles;
+    private Set<LocalizedTitle> localizedTitles;
     private String description;
     private String longDescription;
     private String mediaType;
@@ -34,7 +34,7 @@ public abstract class Described extends Identified {
     protected Described(Builder builder) {
         super(builder);
         this.title = builder.title;
-        this.titles = Utils.immutableCopyOfOrEmpty(builder.titles);
+        this.localizedTitles = Utils.immutableCopyOfOrEmpty(builder.localizedTitles);
         this.description = builder.description;
         this.longDescription = builder.longDescription;
         this.mediaType = builder.mediaType;
@@ -57,7 +57,7 @@ public abstract class Described extends Identified {
     protected static <B extends Builder<B>> B builder(Described described, B builder) {
         return Identified.builder(described, builder)
                 .withTitle(described.title)
-                .withTitles(described.titles)
+                .withLocalizedTitles(described.localizedTitles)
                 .withDescription(described.description)
                 .withLongDescription(described.longDescription)
                 .withMediaType(described.mediaType)
@@ -89,8 +89,8 @@ public abstract class Described extends Identified {
         return title;
     }
 
-    public Set<LocalizedTitle> getTitles() {
-        return titles;
+    public Set<LocalizedTitle> getLocalizedTitles() {
+        return localizedTitles;
     }
 
     public String getDescription() {
@@ -140,7 +140,7 @@ public abstract class Described extends Identified {
     public static class Builder<B extends Builder<B>> extends Identified.Builder<B> {
 
         private String title;
-        private Set<LocalizedTitle> titles;
+        private Set<LocalizedTitle> localizedTitles;
         private String description;
         private String longDescription;
         private String mediaType;
@@ -160,8 +160,8 @@ public abstract class Described extends Identified {
             return (B) this;
         }
 
-        public B withTitles(Set<LocalizedTitle> val) {
-            titles = val;
+        public B withLocalizedTitles(Set<LocalizedTitle> val) {
+            localizedTitles = val;
             return (B) this;
         }
 
