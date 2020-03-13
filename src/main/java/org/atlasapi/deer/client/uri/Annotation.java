@@ -41,6 +41,8 @@ public enum Annotation {
     AWARDS,
     REVIEWS,
     RATINGS,
+    LOCALIZED_TITLES,
+    RELATED_LINKS,
     ;
 
     private static final BiMap<String, Annotation> LOOKUP =
