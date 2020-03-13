@@ -37,7 +37,7 @@ public class RelatedLink {
         thumbnail = builder.thumbnail;
     }
 
-    public static Builder newBuilder() {
+    public static Builder builder() {
         return new Builder();
     }
 
