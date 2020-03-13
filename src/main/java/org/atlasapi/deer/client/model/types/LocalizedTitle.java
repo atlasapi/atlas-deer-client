@@ -11,24 +11,24 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LocalizedTitle extends Localized {
 
-    private String title;
+    private String value;
 
     private LocalizedTitle(Builder builder) {
         super(builder);
-        title = builder.title;
+        value = builder.value;
     }
 
     public static Builder<?> builder(LocalizedTitle localizedTitle) {
         return builder(localizedTitle, new Builder());
     }
 
-    public String getTitle() {
-        return title;
+    public String getValue() {
+        return value;
     }
 
     protected static <B extends Builder<B>> B builder (LocalizedTitle localizedTitle, B builder) {
         return Localized.builder(localizedTitle, builder)
-                .withTitle(localizedTitle.title);
+                .withValue(localizedTitle.value);
     }
 
     @JsonPOJOBuilder()
@@ -36,13 +36,13 @@ public class LocalizedTitle extends Localized {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class Builder<B extends Builder<B>> extends Localized.Builder<B> {
 
-        private String title;
+        private String value;
 
         private Builder() {
         }
 
-        public B withTitle(String title) {
-            this.title = title;
+        public B withValue(String value) {
+            this.value = value;
             return (B) this;
         }
 
