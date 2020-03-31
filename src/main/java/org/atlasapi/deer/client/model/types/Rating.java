@@ -1,7 +1,5 @@
 package org.atlasapi.deer.client.model.types;
 
-import org.atlasapi.media.entity.Publisher;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

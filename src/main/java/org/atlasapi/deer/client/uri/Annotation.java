@@ -43,6 +43,8 @@ public enum Annotation {
     RATINGS,
     LOCALIZED_TITLES,
     RELATED_LINKS,
+    NO_CHANNEL_INFO,
+    LOCATIONS_PROVIDER
     ;
 
     private static final BiMap<String, Annotation> LOOKUP =
