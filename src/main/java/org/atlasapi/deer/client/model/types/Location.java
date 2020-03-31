@@ -28,7 +28,6 @@ public class Location {
     private final TransportSubType transportSubType;
     private final String embedId;
     private final String embedCode;
-    private final Provider provider;
 
     private final Instant availabilityStart;
     private final Instant availabilityEnd;
@@ -77,7 +76,6 @@ public class Location {
                 : TransportSubType.fromString(builder.transportSubType);
         this.embedId = builder.embedId;
         this.embedCode = builder.embedCode;
-        this.provider = builder.provider;
         this.availabilityStart = builder.availabilityStart;
         this.availabilityEnd = builder.availabilityEnd;
         this.availableCountries =  Utils.immutableCopyOfOrEmpty(builder.availableCountries);
@@ -151,10 +149,6 @@ public class Location {
 
     public String getEmbedCode() {
         return embedCode;
-    }
-
-    public Provider getProvider() {
-        return provider;
     }
 
     public Instant getAvailabilityStart() {
@@ -330,7 +324,6 @@ public class Location {
         private String transportSubType;
         private String embedId;
         private String embedCode;
-        private Provider provider;
 
         public Builder() {
         }
@@ -532,11 +525,6 @@ public class Location {
 
         public Builder withEmbedCode(String embedCode) {
             this.embedCode = embedCode;
-            return this;
-        }
-
-        public Builder withProvider(Provider provider) {
-            this.provider = provider;
             return this;
         }
 
