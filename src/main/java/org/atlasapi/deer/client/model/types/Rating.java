@@ -14,11 +14,13 @@ public class Rating {
     private final Float value;
     private final String type;
     private final Source source;
+    private final Long numberOfVotes;
 
     private Rating(Builder builder) {
         value = builder.value;
         type = builder.type;
         source = builder.source;
+        numberOfVotes = builder.numberOfVotes;
     }
 
     public Float getValue() {
@@ -33,6 +35,10 @@ public class Rating {
         return source;
     }
 
+    public Long getNumberOfVotes() {
+        return numberOfVotes;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -45,6 +51,7 @@ public class Rating {
         private Float value;
         private String type;
         private Source source;
+        private Long numberOfVotes;
 
         private Builder() {
         }
@@ -61,6 +68,11 @@ public class Rating {
 
         public Builder withSource(Source source) {
             this.source = source;
+            return this;
+        }
+
+        public Builder withNumberOfVotes(Long numberOfVotes) {
+            this.numberOfVotes = numberOfVotes;
             return this;
         }
 
