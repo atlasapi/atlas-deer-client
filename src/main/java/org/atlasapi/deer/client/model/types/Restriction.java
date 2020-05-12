@@ -13,7 +13,7 @@ public class Restriction {
 
     private final String authority;
     private final String rating;
-    private final String minimumAge;
+    private final Integer minimumAge;
     private final String message;
 
     private Restriction(Builder builder) {
@@ -31,7 +31,7 @@ public class Restriction {
         return rating;
     }
 
-    public String getMinimumAge() {
+    public Integer getMinimumAge() {
         return minimumAge;
     }
 
@@ -50,7 +50,7 @@ public class Restriction {
     public static class Builder {
         private String authority;
         private String rating;
-        private String minimumAge;
+        private Integer minimumAge;
         private String message;
 
         public Builder() { }
@@ -65,7 +65,7 @@ public class Restriction {
             return this;
         }
 
-        public Builder withMinimumAge(String minimumAge) {
+        public Builder withMinimumAge(Integer minimumAge) {
             this.minimumAge = minimumAge;
             return this;
         }
