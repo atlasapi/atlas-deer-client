@@ -1,6 +1,7 @@
 package org.atlasapi.deer.client.model.types;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -65,6 +66,7 @@ public class Restriction {
             return this;
         }
 
+        @JsonProperty("minimumAge")
         public Builder withMinimumAge(Integer minimumAge) {
             this.minimumAge = minimumAge;
             return this;
