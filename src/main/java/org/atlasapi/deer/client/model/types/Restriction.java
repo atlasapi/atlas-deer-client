@@ -51,7 +51,7 @@ public class Restriction {
     public static class Builder {
         private String authority;
         private String rating;
-        private Integer minimumAge;
+        @JsonProperty("minimumAge") private Integer minimumAge;
         private String message;
 
         public Builder() { }
@@ -66,7 +66,6 @@ public class Restriction {
             return this;
         }
 
-        @JsonProperty("minimumAge")
         public Builder withMinimumAge(Integer minimumAge) {
             this.minimumAge = minimumAge;
             return this;
