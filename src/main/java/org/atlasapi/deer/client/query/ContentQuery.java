@@ -24,7 +24,15 @@ public class ContentQuery extends Query {
     private ContentQuery() {
         super();
     }
-    
+
+    private ContentQuery(ContentQuery contentQuery) {
+        super(contentQuery);
+    }
+
+    public static ContentQuery from(ContentQuery contentQuery) {
+        return new ContentQuery(contentQuery);
+    }
+
     private ContentQuery(String id) {
         super(id);
     }
