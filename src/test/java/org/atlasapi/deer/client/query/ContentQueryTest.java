@@ -9,6 +9,8 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -129,8 +131,11 @@ public class ContentQueryTest {
 
         ContentQuery clone = ContentQuery.from(query);
 
-        assertTrue(query != clone);
-        assertTrue(query.equals(clone));
+        assertEquals(query.getId(), clone.getId());
+        assertEquals(query.getParams(), clone.getParams());
+
+        assertNotSame(query, clone);
+        assertNotSame(query.getParams(), clone.getParams());
 
         clone.addAnnotations(Annotation.NON_MERGED);
 
@@ -140,7 +145,5 @@ public class ContentQueryTest {
         );
 
         assertTrue(query.getParams().isEmpty());
-        assertEquals(query.getId(), clone.getId());
-        assertFalse(query.equals(clone));
     }
 }

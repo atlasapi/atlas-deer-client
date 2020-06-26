@@ -51,22 +51,4 @@ public abstract class Query {
     public Map<String, String> getParams() {
         return params;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Query query = (Query) o;
-        return Objects.equals(getId(), query.getId()) &&
-               Objects.equals(getParams(), query.getParams());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getParams());
-    }
 }
