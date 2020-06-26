@@ -3,6 +3,7 @@ package org.atlasapi.deer.client.query;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -52,26 +53,20 @@ public abstract class Query {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result
-                 + ((id == null) ? 0 : id.hashCode())
-                 + ((params == null) ? 0 : params.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Query query = (Query) o;
+        return Objects.equals(getId(), query.getId()) &&
+               Objects.equals(getParams(), query.getParams());
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        } else if (obj == null) {
-            return false;
-        } else if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Query other = (Query) obj;
-        return this.getId().equals(other.getId())
-               && this.getParams().equals(other.getParams());
+    public int hashCode() {
+        return Objects.hash(getId(), getParams());
     }
 }
