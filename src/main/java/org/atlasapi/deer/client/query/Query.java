@@ -21,6 +21,11 @@ public abstract class Query {
         this.params = new HashMap<>();
     }
 
+    public Query(Query query) {
+        this.id = query.id;
+        this.params = new HashMap<>(query.params);
+    }
+
     public Query(String id) {
         this.id = Optional.of(checkNotNull(id));
         this.params = new HashMap<>();
