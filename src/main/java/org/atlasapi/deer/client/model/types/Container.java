@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 public class Container {
 
     private final String id;
-    private final String type;
+    private final Content.Type type;
     private final String title;
     private final String description;
 
@@ -27,7 +27,7 @@ public class Container {
         return id;
     }
 
-    public String getType() {
+    public Content.Type getType() {
         return type;
     }
 
@@ -49,7 +49,7 @@ public class Container {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Builder {
         private String id;
-        private String type;
+        private Content.Type type;
         private String title;
         private String description;
 
@@ -60,7 +60,7 @@ public class Container {
             return this;
         }
 
-        public Builder withType(String type) {
+        public Builder withType(Content.Type type) {
             this.type = type;
             return this;
         }
