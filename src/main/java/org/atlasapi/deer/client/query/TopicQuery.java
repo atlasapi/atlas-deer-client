@@ -12,6 +12,8 @@ public class TopicQuery extends Query {
     public static final String NAMESPACE_PARAM = "aliases.namespace";
     public static final String VALUE_PARAM = "aliases.value";
     public static final String TOPIC_TYPE_PARAM = "topic_type";
+    public static final String LIMIT_PARAM = "limit";
+    public static final String OFFSET_PARAM = "offset";
 
     private TopicQuery() {
         super();
@@ -71,6 +73,16 @@ public class TopicQuery extends Query {
 
     public TopicQuery addTopicType(String topicType) {
         params.put(TOPIC_TYPE_PARAM, checkNotNull(topicType));
+        return this;
+    }
+
+    public TopicQuery addLimit(Integer limit) {
+        params.put(LIMIT_PARAM, checkNotNull(limit).toString());
+        return this;
+    }
+
+    public TopicQuery addOffset(Integer offset) {
+        params.put(OFFSET_PARAM, checkNotNull(offset).toString());
         return this;
     }
 }

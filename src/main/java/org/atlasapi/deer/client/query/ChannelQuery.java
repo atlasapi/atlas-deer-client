@@ -11,6 +11,9 @@ import java.util.stream.Stream;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ChannelQuery extends Query {
+
+    public static final String LIMIT_PARAM = "limit";
+    public static final String OFFSET_PARAM = "offset";
     
     public static final String ALIASES_NAMESPACE_PARAM = "aliases.namespace";
     public static final String ALIASES_VALUE_PARAM = "aliases.value";
@@ -74,6 +77,16 @@ public class ChannelQuery extends Query {
 
     public ChannelQuery addSource(String source) {
         params.put(SOURCE_PARAM, checkNotNull(source));
+        return this;
+    }
+
+    public ChannelQuery addLimit(Integer limit) {
+        params.put(LIMIT_PARAM, checkNotNull(limit).toString());
+        return this;
+    }
+
+    public ChannelQuery addOffset(Integer offset) {
+        params.put(OFFSET_PARAM, checkNotNull(offset).toString());
         return this;
     }
 }
