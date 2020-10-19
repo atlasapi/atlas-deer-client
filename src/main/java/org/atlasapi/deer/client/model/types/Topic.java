@@ -51,6 +51,7 @@ public class Topic extends Described {
         PRODUCT,
         WORK,
         GENRE,
+        LABEL,
         UNKNOWN;
 
         private final String str = name().toLowerCase();
