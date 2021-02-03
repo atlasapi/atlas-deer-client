@@ -87,6 +87,7 @@ public class RelatedLink {
         SIMULCAST,
         ARTICLE,
         VOD,
+        LIVESTREAM,
         UNKNOWN,
         ;
 
