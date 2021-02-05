@@ -25,8 +25,17 @@ public class Broadcast {
     private final Integer broadcastDuration;
     private final String broadcastOn;
     private final Channel channel;
-    private final boolean live;
+    private final Boolean live;
     private final Duration transmissionInterval;
+    private final Boolean premiere;
+    private final Boolean continuation;
+    private final Boolean repeat;
+    private final Boolean is3d;
+    private final Boolean highDefinition;
+    private final Boolean widescreen;
+    private final Boolean subtitled;
+    private final Boolean signed;
+    private final Boolean audioDescribed;
 
     private Broadcast(Builder builder) {
         this.transmissionStartTime = builder.transmissionStartTime;
@@ -38,6 +47,15 @@ public class Broadcast {
         this.transmissionInterval = Duration.between(
                 ZonedDateTime.ofInstant(builder.transmissionStartTime, ZoneId.of("UTC")),
                 ZonedDateTime.ofInstant(builder.transmissionEndTime, ZoneId.of("UTC")));
+        this.premiere = builder.premiere;
+        this.continuation = builder.continuation;
+        this.repeat = builder.repeat;
+        this.is3d = builder.is3d;
+        this.highDefinition = builder.highDefinition;
+        this.widescreen = builder.widescreen;
+        this.subtitled = builder.subtitled;
+        this.signed = builder.signed;
+        this.audioDescribed = builder.audioDescribed;
     }
 
     public Instant getTransmissionStartTime() {
@@ -64,8 +82,44 @@ public class Broadcast {
         return channel;
     }
 
-    public boolean getLive() {
+    public Boolean getLive() {
         return live;
+    }
+
+    public Boolean getPremiere() {
+        return premiere;
+    }
+
+    public Boolean getContinuation() {
+        return continuation;
+    }
+
+    public Boolean getRepeat() {
+        return repeat;
+    }
+
+    public Boolean getIs3d() {
+        return is3d;
+    }
+
+    public Boolean getHighDefinition() {
+        return highDefinition;
+    }
+
+    public Boolean getWidescreen() {
+        return widescreen;
+    }
+
+    public Boolean getSubtitled() {
+        return subtitled;
+    }
+
+    public Boolean getSigned() {
+        return signed;
+    }
+
+    public Boolean getAudioDescribed() {
+        return audioDescribed;
     }
 
     public static Ordering<Broadcast> startTimeOrdering() {
@@ -93,7 +147,16 @@ public class Broadcast {
         private Integer broadcastDuration;
         private String broadcastOn;
         private Channel channel;
-        private boolean live;
+        private Boolean live;
+        private Boolean premiere;
+        private Boolean continuation;
+        private Boolean repeat;
+        private Boolean is3d;
+        private Boolean highDefinition;
+        private Boolean widescreen;
+        private Boolean subtitled;
+        private Boolean signed;
+        private Boolean audioDescribed;
 
         public Builder() {}
 
@@ -123,8 +186,53 @@ public class Broadcast {
             return this;
         }
 
-        public Builder withLive(boolean live) {
+        public Builder withLive(Boolean live) {
             this.live = live;
+            return this;
+        }
+
+        public Builder withPremiere(Boolean premiere) {
+            this.premiere = premiere;
+            return this;
+        }
+
+        public Builder withContinuation(Boolean continuation) {
+            this.continuation = continuation;
+            return this;
+        }
+
+        public Builder withRepeat(Boolean repeat) {
+            this.repeat = repeat;
+            return this;
+        }
+
+        public Builder withIs3d(Boolean is3d) {
+            this.is3d = is3d;
+            return this;
+        }
+
+        public Builder withHighDefinition(Boolean highDefinition) {
+            this.highDefinition = highDefinition;
+            return this;
+        }
+
+        public Builder withWidescreen(Boolean widescreen) {
+            this.widescreen = widescreen;
+            return this;
+        }
+
+        public Builder withSubtitled(Boolean subtitled) {
+            this.subtitled = subtitled;
+            return this;
+        }
+
+        public Builder withSigned(Boolean signed) {
+            this.signed = signed;
+            return this;
+        }
+
+        public Builder withAudioDescribed(Boolean audioDescribed) {
+            this.audioDescribed = audioDescribed;
             return this;
         }
 
