@@ -18,6 +18,8 @@ public abstract class Described extends Identified {
     private String title;
     private Set<LocalizedTitle> localizedTitles;
     private String description;
+    private String shortDescription;
+    private String mediumDescription;
     private String longDescription;
     private String mediaType;
     private String specialization;
@@ -36,6 +38,8 @@ public abstract class Described extends Identified {
         this.title = builder.title;
         this.localizedTitles = Utils.immutableCopyOfOrEmpty(builder.localizedTitles);
         this.description = builder.description;
+        this.shortDescription = builder.shortDescription;
+        this.mediumDescription = builder.mediumDescription;
         this.longDescription = builder.longDescription;
         this.mediaType = builder.mediaType;
         this.specialization = builder.specialization;
@@ -59,6 +63,8 @@ public abstract class Described extends Identified {
                 .withTitle(described.title)
                 .withLocalizedTitles(described.localizedTitles)
                 .withDescription(described.description)
+                .withShortDescription(described.shortDescription)
+                .withMediumDescription(described.mediumDescription)
                 .withLongDescription(described.longDescription)
                 .withMediaType(described.mediaType)
                 .withSpecialization(described.specialization)
@@ -95,6 +101,14 @@ public abstract class Described extends Identified {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public String getMediumDescription() {
+        return mediumDescription;
     }
 
     public String getImage() {
@@ -142,6 +156,8 @@ public abstract class Described extends Identified {
         private String title;
         private Set<LocalizedTitle> localizedTitles;
         private String description;
+        private String shortDescription;
+        private String mediumDescription;
         private String longDescription;
         private String mediaType;
         private String specialization;
@@ -167,6 +183,16 @@ public abstract class Described extends Identified {
 
         public B withDescription(String val) {
             description = val;
+            return (B) this;
+        }
+
+        public B withShortDescription(String val) {
+            shortDescription = val;
+            return (B) this;
+        }
+
+        public B withMediumDescription(String val) {
+            mediumDescription = val;
             return (B) this;
         }
 
