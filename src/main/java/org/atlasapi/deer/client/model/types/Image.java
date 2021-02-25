@@ -44,10 +44,57 @@ public class Image {
         source = builder.source;
     }
 
+    public String getUri() {
+        return uri;
+    }
+
+    public MimeType getMimeType() {
+        return mimeType;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public String getAspectRatio() {
+        return aspectRatio;
+    }
+
+    public Instant getAvailabilityStart() {
+        return availabilityStart;
+    }
+
+    public Instant getAvailabilityEnd() {
+        return availabilityEnd;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public Boolean getHasTitleArt() {
+        return hasTitleArt;
+    }
+
+    public Source getSource() {
+        return source;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
-
 
     @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
