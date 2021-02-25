@@ -46,7 +46,8 @@ public enum Annotation {
     NO_CHANNEL_INFO,
     BROADCAST_CHANNEL,
     LOCATION_PROVIDERS,
-    LCN_SHARING
+    LCN_SHARING,
+    IMAGES,
     ;
 
     private static final BiMap<String, Annotation> LOOKUP =

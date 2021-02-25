@@ -26,6 +26,7 @@ public abstract class Described extends Identified {
     private List<String> genres;
     private Source source;
     private String image;
+    private List<Image> images;
     private String thumbnail;
     private Boolean scheduleOnly;
     private String presentationChannel;
@@ -46,6 +47,7 @@ public abstract class Described extends Identified {
         this.genres = Utils.immutableCopyOfOrEmpty(builder.genres);
         this.source = builder.source;
         this.image = builder.image;
+        this.images = Utils.immutableCopyOfOrEmpty(builder.images);
         this.thumbnail = builder.thumbnail;
         this.scheduleOnly = builder.scheduleOnly;
         this.presentationChannel = builder.presentationChannel;
@@ -115,6 +117,10 @@ public abstract class Described extends Identified {
         return image;
     }
 
+    public List<Image> getImages() {
+        return images;
+    }
+
     public String getThumbnail() {
         return thumbnail;
     }
@@ -164,6 +170,7 @@ public abstract class Described extends Identified {
         private List<String> genres;
         private Source source;
         private String image;
+        private List<Image> images;
         private String thumbnail;
         private Boolean scheduleOnly;
         private String presentationChannel;
@@ -223,6 +230,11 @@ public abstract class Described extends Identified {
 
         public B withImage(String val) {
             image = val;
+            return (B) this;
+        }
+
+        public B withImages(List<Image> val) {
+            images = val;
             return (B) this;
         }
 
