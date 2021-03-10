@@ -47,6 +47,7 @@ public class Content extends Described {
     private final List<Award> awards;
     private final List<Review> reviews;
     private final List<Rating> ratings;
+    private final Integer duration;
 
     @JsonSerialize(using = ToStringSerializer.class)
     public enum Type {
@@ -98,6 +99,7 @@ public class Content extends Described {
         this.awards = Utils.immutableCopyOfOrEmpty(builder.awards);
         this.ratings = Utils.immutableCopyOfOrEmpty(builder.ratings);
         this.reviews = Utils.immutableCopyOfOrEmpty(builder.reviews);
+        this.duration = builder.duration;
     }
 
     public static Builder<?> builder() {
@@ -132,7 +134,9 @@ public class Content extends Described {
                 .withLocations(content.locations)
                 .withAwards(content.awards)
                 .withRatings(content.ratings)
-                .withReviews(content.reviews);
+                .withReviews(content.reviews)
+                .withDuration(content.duration)
+                ;
     }
 
     public Type getType() {
@@ -227,6 +231,10 @@ public class Content extends Described {
         return ratings;
     }
 
+    public Integer getDuration() {
+        return duration;
+    }
+
     @JsonPOJOBuilder()
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -255,6 +263,7 @@ public class Content extends Described {
         private List<Award> awards;
         private List<Review> reviews;
         private List<Rating> ratings;
+        private Integer duration;
 
         public Builder() {
         }
@@ -380,6 +389,11 @@ public class Content extends Described {
 
         public B withRatings(List<Rating> ratings) {
             this.ratings = ratings;
+            return (B) this;
+        }
+
+        public B withDuration(Integer duration) {
+            this.duration = duration;
             return (B) this;
         }
 
