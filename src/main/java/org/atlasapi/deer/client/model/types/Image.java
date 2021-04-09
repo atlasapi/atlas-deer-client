@@ -1,5 +1,6 @@
 package org.atlasapi.deer.client.model.types;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -48,8 +49,14 @@ public class Image {
         return uri;
     }
 
+    @JsonIgnore
     public MimeType getMimeType() {
         return mimeType;
+    }
+
+    @JsonProperty("mime_type")
+    public String getMimeTypeAsString() {
+        return mimeType.toString();
     }
 
     public String getType() {
